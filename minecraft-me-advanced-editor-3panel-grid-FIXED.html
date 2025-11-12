@@ -4007,7 +4007,47 @@ document.addEventListener('fullscreenchange', function() {
         renderer.setSize(container.clientWidth, container.clientHeight);
       }
     });
+<button id="fullscreen-button" onclick="toggleFullScreen()">
+        Toggle Fullscreen
+    </button>
+    <script>
+        /**
+         * Toggles the full-screen mode for the entire HTML document.
+         * ... (Paste the entire toggleFullScreen function here) ...
+         */
+        function toggleFullScreen() {
+            var docEl = document.documentElement; 
+            
+            var isFullScreen = document.fullscreenElement || 
+                               document.mozFullScreenElement || 
+                               document.webkitFullscreenElement || 
+                               document.msFullscreenElement; 
 
+            if (isFullScreen) {
+                // ... (Exit Fullscreen Code) ...
+                var exitFullScreen = document.exitFullscreen || 
+                                     document.mozCancelFullScreen ||
+                                     document.webkitExitFullscreen ||
+                                     document.msExitFullscreen;
+                
+                if (exitFullScreen) {
+                    exitFullScreen.call(document);
+                }
+            } else {
+                // ... (Request Fullscreen Code) ...
+                var requestFullScreen = docEl.requestFullscreen ||
+                                        docEl.mozRequestFullScreen || 
+                                        docEl.webkitRequestFullscreen || 
+                                        docEl.msRequestFullscreen;
+
+                if (requestFullScreen) {
+                    requestFullScreen.call(docEl);
+                }
+            }
+        }
+    </script>
+
+</body> </html>
 
     initColorGrids();
     initThreeJS();
