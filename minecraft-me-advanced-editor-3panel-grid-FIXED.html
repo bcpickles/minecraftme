@@ -6,6 +6,7 @@
   <title>Minecraft Avatar Creator</title>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <style>
     html, body {
       box-sizing: border-box;
@@ -1124,9 +1125,37 @@
       </div>
      </div>
      <div class="actions-container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;"><button class="banner-btn" id="undo-btn" disabled>↶ Undo</button> <button class="banner-btn" id="redo-btn" disabled>Redo ↷</button>
-      </div><button class="action-button primary-btn" id="download-btn"> 💾 <span id="download-text">Download Skins (All Versions)</span> </button>
-     </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+    <button class="banner-btn" id="undo-btn" disabled>↶ Undo</button> 
+    <button class="banner-btn" id="redo-btn" disabled>Redo ↷</button>
+  </div>
+  
+  <div style="background: #edf2f7; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+    <div style="font-size: 0.9em; color: #2d3748; font-weight: 600; margin-bottom: 10px; text-align: center;">
+      📁 My Project
+    </div>
+    
+    <input type="file" id="upload-skin" accept="image/png" style="display: none;">
+    <button class="action-button secondary-btn" id="open-design-btn" style="margin-bottom: 10px;">
+      📂 <span id="open-text">Open My Design</span>
+    </button>
+    
+    <button class="action-button tertiary-btn" id="save-draft-btn" style="margin-bottom: 10px;">
+      💾 <span id="save-text">Save My Draft</span>
+    </button>
+    
+    <div style="font-size: 0.75em; color: #718096; text-align: center; margin-top: 8px; line-height: 1.4;">
+      💡 Save your work often so you don't lose it!
+    </div>
+  </div>
+  
+  <button class="action-button primary-btn" id="download-btn">
+    🎮 <span id="download-text">Download for Minecraft</span>
+  </button>
+  <div style="font-size: 0.75em; color: #718096; text-align: center; margin-top: 8px; line-height: 1.4;">
+    ✨ This creates a file you can use in Minecraft Education!
+  </div>
+</div>
     </div>
    </main>
    <div class="editor-overlay" id="editor-overlay">
@@ -1315,7 +1344,9 @@
       en: {
         title: "🎮 MINECRAFT ME! 🎮",
         instructions: "Create your unique Minecraft character!",
-        downloadText: "Download Skins (All Versions)",
+        downloadText: "Download for Minecraft",
+        openText: "Open My Design",
+        saveText: "Save My Draft",
         randomize: "🎲 Randomize Avatar",
         undo: "↶ Undo",
         redo: "Redo ↷",
@@ -1389,10 +1420,12 @@
         openEditor: "🎨 Open Advanced Editor",
         editorDescription: "Click the button below to open the full-screen advanced editor with live preview!"
       },
-      es: {
+    es: {
         title: "🎮 ¡MINECRAFT YO! 🎮",
         instructions: "¡Crea tu personaje único de Minecraft!",
-        downloadText: "Descargar Skins (Todas las Versiones)",
+        downloadText: "Descargar para Minecraft",
+        openText: "Abrir Mi Diseño",
+        saveText: "Guardar Mi Borrador",
         randomize: "🎲 Aleatorizar Avatar",
         undo: "↶ Deshacer",
         redo: "Rehacer ↷",
@@ -1486,6 +1519,8 @@
       document.getElementById('app-title').textContent = t.title;
       document.getElementById('instructions').textContent = t.instructions;
       document.getElementById('download-text').textContent = t.downloadText;
+      document.getElementById('open-text').textContent = t.openText;
+      document.getElementById('save-text').textContent = t.saveText;
       document.getElementById('randomize-btn').innerHTML = t.randomize;
       document.getElementById('undo-btn').textContent = t.undo;
       document.getElementById('redo-btn').textContent = t.redo;
@@ -1597,6 +1632,45 @@
           }
         }
       });
+     // Open My Design - Upload PNG
+document.getElementById('open-design-btn').addEventListener('click', function() {
+  document.getElementById('upload-skin').click();
+});
+
+document.getElementById('upload-skin').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    const img = new Image();
+    img.onload = function() {
+      if (img.width === 64 && img.height === 64) {
+        skinContext.clearRect(0, 0, 64, 64);
+        skinContext.drawImage(img, 0, 0);
+        skinTexture.needsUpdate = true;
+        speak('Design loaded successfully');
+        saveToHistory();
+      } else {
+        alert('Please upload a 64x64 pixel Minecraft skin PNG file.');
+        speak('Invalid file size. Please use a 64 by 64 pixel image.');
+      }
+    };
+    img.src = event.target.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+// Save My Draft - Download PNG
+document.getElementById('save-draft-btn').addEventListener('click', function() {
+  const link = document.createElement('a');
+  const timestamp = new Date().toISOString().slice(0, 10);
+  link.download = `my-minecraft-skin-draft-${timestamp}.png`;
+  link.href = skinCanvas.toDataURL('image/png');
+  link.click();
+  speak('Draft saved to your computer');
+});
     }
 
 
@@ -3804,16 +3878,79 @@ document.getElementById('clear-face').addEventListener('click', function() {
     });
 
 
-    document.getElementById('download-btn').addEventListener('click', function() {
-      // Simple PNG download - works reliably in all browsers
-      const link = document.createElement('a');
-      const timestamp = new Date().toISOString().slice(0, 10);
-      link.download = `minecraft-skin-${timestamp}.png`;
-      link.href = skinCanvas.toDataURL('image/png');
-      link.click();
-      
-      speak('Skin downloaded');
-    });
+   document.getElementById('download-btn').addEventListener('click', async function() {
+  try {
+    if (!window.JSZip) {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      document.head.appendChild(script);
+      await new Promise(resolve => script.onload = resolve);
+    }
+
+    const zip = new JSZip();
+    const timestamp = new Date().toISOString().slice(0, 10);
+    const skinName = `MyMinecraftSkin_${timestamp}`;
+    
+    const skinDataUrl = skinCanvas.toDataURL('image/png');
+    const skinBase64 = skinDataUrl.split(',')[1];
+    
+    const manifest = {
+      "format_version": 2,
+      "header": {
+        "name": skinName,
+        "description": "My custom Minecraft skin created with Minecraft Me!",
+        "uuid": generateUUID(),
+        "version": [1, 0, 0],
+        "min_engine_version": [1, 13, 0]
+      },
+      "modules": [
+        {
+          "type": "skin_pack",
+          "uuid": generateUUID(),
+          "version": [1, 0, 0]
+        }
+      ]
+    };
+    
+    const skinsJson = {
+      "skins": [
+        {
+          "localization_name": skinName,
+          "geometry": "geometry.humanoid.custom",
+          "texture": "skin.png",
+          "type": "free"
+        }
+      ],
+      "serialize_name": skinName,
+      "localization_name": skinName
+    };
+    
+    const langFile = `skinpack.${skinName}=${skinName}\n` +
+                    `skin.${skinName}.${skinName}=My Custom Skin`;
+    
+    zip.file("manifest.json", JSON.stringify(manifest, null, 2));
+    zip.file("skins.json", JSON.stringify(skinsJson, null, 2));
+    zip.file("texts/en_US.lang", langFile);
+    zip.file("skin.png", skinBase64, {base64: true});
+    
+    const blob = await zip.generateAsync({type: "blob"});
+    const link = document.createElement('a');
+    link.download = `${skinName}.mcpack`;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    URL.revokeObjectURL(link.href);
+    
+    speak('Minecraft pack downloaded! You can now import it into Minecraft Education.');
+  } catch (error) {
+    console.error('Error creating mcpack:', error);
+    const link = document.createElement('a');
+    const timestamp = new Date().toISOString().slice(0, 10);
+    link.download = `minecraft-skin-${timestamp}.png`;
+    link.href = skinCanvas.toDataURL('image/png');
+    link.click();
+    speak('Skin downloaded as PNG');
+  }
+});
     
     function generateUUID() {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
