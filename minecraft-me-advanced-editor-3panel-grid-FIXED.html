@@ -1355,6 +1355,7 @@
         redo: "Redo ↷",
         languageToggle: "🌐 Español",
         ttsToggle: "🔊 Text-to-Speech",
+        fullscreenToggle: "🖥️ Fullscreen",
         tabIdentity: "IDENTITY",
         tabClothing: "CLOTHING",
         tabDecals: "DECALS",
@@ -1434,6 +1435,7 @@
         redo: "Rehacer ↷",
         languageToggle: "🌐 English",
         ttsToggle: "🔊 Texto a Voz",
+        fullscreenToggle: "🖥️ Pantalla Completa",
         tabIdentity: "IDENTIDAD",
         tabClothing: "ROPA",
         tabDecals: "CALCOMANÍAS",
@@ -1529,6 +1531,8 @@
       document.getElementById('redo-btn').textContent = t.redo;
       document.getElementById('language-toggle').textContent = t.languageToggle;
       document.getElementById('tts-toggle').textContent = t.ttsToggle;
+      document.getElementById('fullscreen-toggle').textContent = t.fullscreenToggle;
+
       
       document.querySelector('[data-tab="identity"]').textContent = t.tabIdentity;
       document.querySelector('[data-tab="clothing"]').textContent = t.tabClothing;
@@ -3652,6 +3656,37 @@ document.getElementById('clear-face').addEventListener('click', function() {
         }
       }
     });
+
+
+   document.getElementById('fullscreen-toggle').addEventListener('click', function() {
+  if (!document.fullscreenElement) {
+    // Enter fullscreen
+    document.documentElement.requestFullscreen().then(() => {
+      this.classList.add('active');
+      const t = translations[currentLanguage];
+      speak(currentLanguage === 'en' ? 'Fullscreen mode activated' : 'Modo de pantalla completa activado');
+    }).catch(err => {
+      console.log('Error attempting to enable fullscreen:', err);
+    });
+  } else {
+    // Exit fullscreen
+    document.exitFullscreen().then(() => {
+      this.classList.remove('active');
+      const t = translations[currentLanguage];
+      speak(currentLanguage === 'en' ? 'Fullscreen mode deactivated' : 'Modo de pantalla completa desactivado');
+    });
+  }
+});
+
+// Update button state when user exits fullscreen with ESC key
+document.addEventListener('fullscreenchange', function() {
+  const fullscreenBtn = document.getElementById('fullscreen-toggle');
+  if (!document.fullscreenElement) {
+    fullscreenBtn.classList.remove('active');
+  } else {
+    fullscreenBtn.classList.add('active');
+  }
+});
 
 
     document.getElementById('open-editor-btn').addEventListener('click', function() {
