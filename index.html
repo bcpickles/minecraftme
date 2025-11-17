@@ -1080,6 +1080,7 @@
         🧵 Patterns
        </div>
        <div class="button-group">
+        <button class="option-btn" data-pattern="none">⬜ No Pattern</button>
         <button class="option-btn" data-pattern="checkers" title="Checkerboard pattern" aria-label="Checkerboard pattern">🏁 Checkers</button>
         <button class="option-btn" data-pattern="hstripes" title="Horizontal stripes" aria-label="Horizontal stripes">➖ H-Stripes</button>
         <button class="option-btn" data-pattern="vstripes" title="Vertical stripes" aria-label="Vertical stripes">〰️ V-Stripes</button>
@@ -1103,6 +1104,7 @@
         ✨ Sticker Library
        </div>
        <div class="sticker-grid">
+        <button class="sticker-btn" data-sticker="none" style="background: #f7fafc; border: 2px dashed #cbd5e0;">❌</button>
         <button class="sticker-btn" data-sticker="heart" title="Heart" aria-label="Heart">❤️</button>
         <button class="sticker-btn" data-sticker="smiley" title="Smiley face" aria-label="Smiley face">😊</button>
         <button class="sticker-btn" data-sticker="ghost" title="Ghost" aria-label="Ghost">👻</button>
@@ -3901,33 +3903,45 @@ document.addEventListener('fullscreenchange', function() {
     });
 
 
-    document.querySelectorAll('[data-pattern]').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('[data-pattern]').forEach(b => b.classList.remove('selected'));
-        
-        if (avatarState.pattern === this.dataset.pattern) {
-          avatarState.pattern = null;
-        } else {
-          this.classList.add('selected');
-          avatarState.pattern = this.dataset.pattern;
-          speak(this.textContent);
-        }
-        
-        updatePreview();
-        saveToHistory();
-      });
-    });
+   document.querySelectorAll('[data-pattern]').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-pattern]').forEach(b => b.classList.remove('selected'));
+    
+    const patternType = this.dataset.pattern;
+    
+    if (patternType === 'none') {
+      avatarState.pattern = null;
+      this.classList.add('selected');
+      speak('Pattern removed');
+    } else if (avatarState.pattern === patternType) {
+      avatarState.pattern = null;
+      speak('Pattern removed');
+    } else {
+      this.classList.add('selected');
+      avatarState.pattern = patternType;
+      speak(this.textContent);
+    }
+    
+    updatePreview();
+    saveToHistory();
+  });
+});
 
 
-    document.querySelectorAll('.sticker-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const emoji = this.dataset.sticker;
-        avatarState.currentSticker = { emoji: this.textContent };
-        speak('Sticker added');
-        updatePreview();
-        saveToHistory();
-      });
-    });
+   document.querySelectorAll('.sticker-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const stickerType = this.dataset.sticker;
+    if (stickerType === 'none') {
+      avatarState.currentSticker = null;
+      speak('Sticker removed');
+    } else {
+      avatarState.currentSticker = { emoji: this.textContent };
+      speak('Sticker added');
+    }
+    updatePreview();
+    saveToHistory();
+  });
+});
 
 
     document.getElementById('randomize-btn').addEventListener('click', function() {
