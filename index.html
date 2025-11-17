@@ -1134,16 +1134,26 @@
      <div class="preview-container">
       <div id="preview-canvas"></div>
       <div style="text-align: center; margin-top: 8px; color: #4a5568; font-weight: 600;">
-       👀 Your Avatar
-      </div>
-      <div style="text-align: center; margin-top: 3%; color: #718096;">
-       <p style="margin: 0; font-size: 0.9em;">Drag to rotate • Scroll to zoom</p>
-      </div>
+ 👀 Your Avatar
+</div>
+<div style="text-align: center; margin-top: 3%; color: #718096;">
+ <p style="margin: 0; font-size: 0.9em;">Drag to rotate • Scroll to zoom</p>
+</div>
+
+<div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
+  <button class="banner-btn" id="zoom-out-btn" title="Zoom Out">🔍➖</button>
+  <button class="banner-btn" id="reset-view-btn" title="Reset View">🔄</button>
+  <button class="banner-btn" id="zoom-in-btn" title="Zoom In">🔍➕</button>
+</div>
+
+<button class="banner-btn" id="rotate-left-btn" title="Rotate Left" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">⬅️</button>
+<button class="banner-btn" id="rotate-right-btn" title="Rotate Right" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">➡️</button>
      </div>
      <div class="actions-container">
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
     <button class="banner-btn" id="undo-btn" disabled>↶ Undo</button> 
     <button class="banner-btn" id="redo-btn" disabled>Redo ↷</button>
+   
   </div>
   
   <div style="background: #edf2f7; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
@@ -1546,6 +1556,39 @@
       document.getElementById('randomize-btn').innerHTML = t.randomize;
       document.getElementById('undo-btn').textContent = t.undo;
       document.getElementById('redo-btn').textContent = t.redo;
+     // Preview control buttons
+document.getElementById('rotate-left-btn').addEventListener('click', function() {
+  if (skinMesh) {
+    skinMesh.rotation.y -= 0.3;
+  }
+});
+
+document.getElementById('rotate-right-btn').addEventListener('click', function() {
+  if (skinMesh) {
+    skinMesh.rotation.y += 0.3;
+  }
+});
+
+document.getElementById('zoom-in-btn').addEventListener('click', function() {
+  if (camera) {
+    camera.position.z = Math.max(25, camera.position.z - 3);
+  }
+});
+
+document.getElementById('zoom-out-btn').addEventListener('click', function() {
+  if (camera) {
+    camera.position.z = Math.min(50, camera.position.z + 3);
+  }
+});
+
+document.getElementById('reset-view-btn').addEventListener('click', function() {
+  if (camera) {
+    camera.position.z = 35;
+  }
+  if (skinMesh) {
+    skinMesh.rotation.y = 0;
+  }
+});
       document.getElementById('language-toggle').textContent = t.languageToggle;
       document.getElementById('tts-toggle').textContent = t.ttsToggle;
       document.getElementById('fullscreen-toggle').textContent = t.fullscreenToggle;
