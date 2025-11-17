@@ -1131,13 +1131,19 @@
      </div>
     </div>
     <div class="right-panel">
-     <div class="preview-container">
-      <div id="preview-canvas"></div>
-      <div style="text-align: center; margin-top: 8px; color: #4a5568; font-weight: 600;">
- 👀 Your Avatar
-</div>
-<div style="text-align: center; margin-top: 3%; color: #718096;">
- <p style="margin: 0; font-size: 0.9em;">Drag to rotate • Scroll to zoom</p>
+     <div class="preview-container" style="position: relative;">
+  <button class="banner-btn" id="rotate-left-btn" title="Rotate Left" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">⬅️</button>
+  
+  <div id="preview-canvas"></div>
+  
+  <button class="banner-btn" id="rotate-right-btn" title="Rotate Right" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">➡️</button>
+  
+  <div style="text-align: center; margin-top: 8px; color: #4a5568; font-weight: 600;">
+   👀 Your Avatar
+  </div>
+  <div style="text-align: center; margin-top: 3%; color: #718096;">
+   <p style="margin: 0; font-size: 0.9em;">Drag to rotate • Scroll to zoom</p>
+  </div>
 </div>
 
 <div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
