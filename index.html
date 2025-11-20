@@ -1161,10 +1161,28 @@
    
   </div>
   
-  <div style="background: #edf2f7; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
-    <div style="font-size: 0.9em; color: #2d3748; font-weight: 600; margin-bottom: 10px; text-align: center;">
-      📁 My Project
+ <div style="background: #edf2f7; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+  <div style="font-size: 0.9em; color: #2d3748; font-weight: 600; margin-bottom: 10px; text-align: center;">
+    📁 My Project
+  </div>
+  
+  <div style="margin-bottom: 12px;">
+    <label style="font-size: 0.85em; color: #4a5568; display: block; margin-bottom: 5px; font-weight: 600;">
+      ✏️ Skin Name
+    </label>
+    <input 
+      type="text" 
+      id="skin-name-input" 
+      placeholder="Enter a name for your skin" 
+      maxlength="30"
+      style="width: 100%; padding: 10px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 0.9em; font-family: inherit;"
+    />
+    <div style="font-size: 0.7em; color: #718096; margin-top: 5px; line-height: 1.3;">
+      ⚠️ Don't use your real name or personal info!
     </div>
+  </div>
+  
+  <input type="file" id="upload-skin" accept="image/png" style="display: none;">
     
     <input type="file" id="upload-skin" accept="image/png" style="display: none;">
     <button class="action-button secondary-btn" id="open-design-btn" style="margin-bottom: 10px;">
@@ -1367,6 +1385,41 @@
       pattern: null
     };
 
+   // Profanity filter
+const bannedWords = [
+  'damn', 'hell', 'crap', 'stupid', 'idiot', 'dumb', 'butt', 'poop',
+  'fart', 'pee', 'hate', 'kill', 'die', 'shut up', 'dumb',
+  // Add more as needed - keep it age-appropriate for K-5
+];
+
+function containsProfanity(text) {
+  const lowerText = text.toLowerCase();
+  return bannedWords.some(word => lowerText.includes(word));
+}
+
+function getSkinName() {
+  const nameInput = document.getElementById('skin-name-input');
+  let skinName = nameInput.value.trim();
+  
+  // Check if name is empty
+  if (!skinName) {
+    alert('Please enter a name for your skin!');
+    nameInput.focus();
+    return null;
+  }
+  
+  // Check for profanity
+  if (containsProfanity(skinName)) {
+    alert('Please use appropriate language in your skin name.');
+    nameInput.focus();
+    return null;
+  }
+  
+  // Clean the name for filename use (remove special characters)
+  skinName = skinName.replace(/[^a-zA-Z0-9_-]/g, '_');
+  
+  return skinName;
+}
 
     let historyStack = [];
     let historyIndex = -1;
@@ -1734,16 +1787,19 @@ document.getElementById('upload-skin').addEventListener('change', function(e) {
   e.target.value = '';
 });
 
+
+     
 // Save My Draft - Download PNG
 document.getElementById('save-draft-btn').addEventListener('click', function() {
+  const skinName = getSkinName();
+  if (!skinName) return; // Don't save if name is invalid
+  
   const link = document.createElement('a');
-  const timestamp = new Date().toISOString().slice(0, 10);
-  link.download = `my-minecraft-skin-draft-${timestamp}.png`;
+  link.download = `${skinName}-draft.png`;
   link.href = skinCanvas.toDataURL('image/png');
   link.click();
   speak('Draft saved to your computer');
 });
-    }
 
 
     let editorCanvas, editorContext;
@@ -4003,8 +4059,8 @@ document.addEventListener('fullscreenchange', function() {
     }
 
     const zip = new JSZip();
-    const timestamp = new Date().toISOString().slice(0, 10);
-    const skinName = `MyMinecraftSkin_${timestamp}`;
+    const skinName = getSkinName();
+if (!skinName) return; // Don't download if name is invalid
     
     const skinDataUrl = skinCanvas.toDataURL('image/png');
     const skinBase64 = skinDataUrl.split(',')[1];
