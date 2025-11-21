@@ -1791,6 +1791,8 @@ document.getElementById('upload-skin').addEventListener('change', function(e) {
 document.getElementById('save-draft-btn').addEventListener('click', function() {
   const skinName = getSkinName();
   if (!skinName) return; // Don't save if name is invalid
+
+  const skinDataUrl = skinCanvas.toDataURL('image/png');
   
   const link = document.createElement('a');
   link.download = `${skinName}-draft.png`;
