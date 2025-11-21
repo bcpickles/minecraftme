@@ -1787,9 +1787,11 @@ document.getElementById('upload-skin').addEventListener('change', function(e) {
 
 // Save My Draft - Download PNG
 document.getElementById('save-draft-btn').addEventListener('click', function() {
+  const skinName = getSkinName();
+  if (!skinName) return; // Don't save if name is invalid
+  
   const link = document.createElement('a');
-  const timestamp = new Date().toISOString().slice(0, 10);
-  link.download = `my-minecraft-skin-draft-${timestamp}.png`;
+  link.download = `${skinName}-draft.png`;
   link.href = skinCanvas.toDataURL('image/png');
   link.click();
   speak('Draft saved to your computer');
