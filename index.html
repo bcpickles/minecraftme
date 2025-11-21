@@ -3744,18 +3744,18 @@ document.getElementById('clear-face').addEventListener('click', function() {
 
 
     document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const targetTab = this.dataset.tab;
-        
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        
-        document.querySelectorAll('.tab-content').forEach(content => {
-          content.classList.remove('active');
-        });
-        document.getElementById(`${targetTab}-tab`).classList.add('active');
-      });
+  btn.addEventListener('click', function() {
+    const targetTab = this.dataset.tab;
+    
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
     });
+    document.getElementById(targetTab + '-tab').classList.add('active');
+  });
+});
 
 
     document.getElementById('undo-btn').addEventListener('click', undo);
