@@ -2604,68 +2604,84 @@ function hexToRgb(hex) {
       }
     }
 
-
-    function drawHair(ctx, palette) {
-      if (avatarState.hairStyle === 'none') return;
-      
-      // Apply texture-based shading pattern
-      const texturePattern = getHairTexturePattern(avatarState.hairTexture);
-      
-      drawBodyPartWithTexture(ctx, 8, 0, 8, 8, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 24, 8, 8, 8, palette, texturePattern);
-      
-      if (avatarState.bangsStyle === 'short') {
-        drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
-      } else if (avatarState.bangsStyle === 'long') {
-        drawBodyPartWithTexture(ctx, 8, 8, 8, 4, palette, texturePattern);
-      } else if (avatarState.bangsStyle === 'layered') {
-        drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 8, 10, 2, 2, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 14, 10, 2, 2, palette, texturePattern);
-      } else if (avatarState.bangsStyle === 'asymmetric') {
-        drawBodyPartWithTexture(ctx, 8, 8, 8, 1, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 8, 9, 7, 1, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 8, 10, 6, 1, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 8, 11, 5, 1, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 8, 12, 4, 1, palette, texturePattern);
-      }
-      
-      let bangsRows = 0;
-      if (avatarState.bangsStyle === 'short') bangsRows = 2;
-      else if (avatarState.bangsStyle === 'long') bangsRows = 4;
-      else if (avatarState.bangsStyle === 'layered') bangsRows = 4;
-      else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
-      
-      if (avatarState.hairStyle === 'long') {
-        drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
-      } else {
-        drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
-        if (bangsRows > 0) {
-          drawBodyPartWithTexture(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
-        }
-        
-        drawBodyPartWithTexture(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
-        if (bangsRows > 0) {
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
-        }
-      }
-      
-      if (avatarState.hairStyle === 'long') {
-        drawBodyPartWithTexture(ctx, 32, 20, 8, 10, palette, texturePattern);
-      }
+function drawHair(ctx, palette) {
+  if (avatarState.hairStyle === 'none') return;
+  
+  // Apply texture-based shading pattern
+  const texturePattern = getHairTexturePattern(avatarState.hairTexture);
+  
+  drawBodyPartWithTexture(ctx, 8, 0, 8, 8, palette, texturePattern);
+  drawBodyPartWithTexture(ctx, 24, 8, 8, 8, palette, texturePattern);
+  
+  if (avatarState.bangsStyle === 'short') {
+    drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
+  } else if (avatarState.bangsStyle === 'long') {
+    drawBodyPartWithTexture(ctx, 8, 8, 8, 4, palette, texturePattern);
+  } else if (avatarState.bangsStyle === 'layered') {
+    drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 10, 2, 2, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 14, 10, 2, 2, palette, texturePattern);
+  } else if (avatarState.bangsStyle === 'asymmetric') {
+    drawBodyPartWithTexture(ctx, 8, 8, 8, 1, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 9, 7, 1, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 10, 6, 1, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 11, 5, 1, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 12, 4, 1, palette, texturePattern);
+  }
+  
+  let bangsRows = 0;
+  if (avatarState.bangsStyle === 'short') bangsRows = 2;
+  else if (avatarState.bangsStyle === 'long') bangsRows = 4;
+  else if (avatarState.bangsStyle === 'layered') bangsRows = 4;
+  else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
+  
+  if (avatarState.hairStyle === 'long') {
+    // LEFT SIDE - needs to be flipped
+    drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, 8, palette, texturePattern);
+    // RIGHT SIDE - needs to be flipped
+    drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, 8, palette, texturePattern);
+  } else {
+    // LEFT SIDE - needs to be flipped
+    drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
+    if (bangsRows > 0) {
+      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 1, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 2, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 3, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 4, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 5, 8, 1, palette, texturePattern);
     }
+    
+    // RIGHT SIDE - needs to be flipped
+    drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
+    if (bangsRows > 0) {
+      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 1, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 2, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 3, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 4, 8, 1, palette, texturePattern);
+      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 5, 8, 1, palette, texturePattern);
+    }
+  }
+  
+  if (avatarState.hairStyle === 'long') {
+    drawBodyPartWithTexture(ctx, 32, 20, 8, 10, palette, texturePattern);
+  }
+}
+    
 
+   function drawBodyPartWithTextureFlipped(ctx, x, y, w, h, palette, texturePattern) {
+  // Draw the texture flipped horizontally
+  for (let py = 0; py < h; py++) {
+    for (let px = 0; px < w; px++) {
+      // Flip the x coordinate
+      const flippedPx = w - 1 - px;
+      const shade = texturePattern(flippedPx, py);
+      ctx.fillStyle = palette[shade];
+      ctx.fillRect(x + px, y + py, 1, 1);
+    }
+  }
+}
 
     function getHairTexturePattern(texture) {
       if (texture === 'curly') {
