@@ -2639,28 +2639,24 @@ function drawHair(ctx, palette) {
     drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
     drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
   } else {
-    // LEFT SIDE - reversed taper (narrow at front, wider at back)
     drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
     if (bangsRows > 0) {
-      // Start narrow at bottom (front of head) and get wider going up (back of head)
-      drawBodyPartWithTexture(ctx, 6, 8 + bangsRows, 2, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 5, 8 + bangsRows + 1, 3, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 4, 8 + bangsRows + 2, 4, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 3, 8 + bangsRows + 3, 5, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 2, 8 + bangsRows + 4, 6, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 1, 8 + bangsRows + 5, 7, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
     }
     
-    // RIGHT SIDE - reversed taper (narrow at front, wider at back)
     drawBodyPartWithTexture(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
     if (bangsRows > 0) {
-      // Start narrow at bottom (front of head) and get wider going up (back of head)
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 2, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 1, 3, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 2, 4, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 3, 5, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 4, 6, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 5, 7, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
     }
   }
   
@@ -2668,7 +2664,6 @@ function drawHair(ctx, palette) {
     drawBodyPartWithTexture(ctx, 32, 20, 8, 10, palette, texturePattern);
   }
 }
-
    
 
     function getHairTexturePattern(texture) {
