@@ -4058,8 +4058,8 @@ document.addEventListener('fullscreenchange', function() {
     }
 
     const zip = new JSZip();
-    const timestamp = new Date().toISOString().slice(0, 10);
-    const skinName = `MyMinecraftSkin_${timestamp}`;
+    const skinName = getSkinName();
+if (!skinName) return; // Don't download if name is invalid
     
     const skinDataUrl = skinCanvas.toDataURL('image/png');
     const skinBase64 = skinDataUrl.split(',')[1];
