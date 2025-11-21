@@ -2636,31 +2636,31 @@ function drawHair(ctx, palette) {
   else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
   
   if (avatarState.hairStyle === 'long') {
-    // LEFT SIDE - needs to be flipped
-    drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, 8, palette, texturePattern);
-    // RIGHT SIDE - needs to be flipped
-    drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, 8, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
   } else {
-    // LEFT SIDE - test
-drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
+    // LEFT SIDE - draw hair at top, taper from back to front
+    drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
     if (bangsRows > 0) {
-      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 1, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 2, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 3, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 4, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 5, 8, 1, palette, texturePattern);
+      // Taper from RIGHT (back of head) going narrower
+      drawBodyPartWithTexture(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
     }
     
-    // RIGHT SIDE - needs to be flipped
-    drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
+    // RIGHT SIDE - draw hair at top, taper from back to front
+    drawBodyPartWithTexture(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
     if (bangsRows > 0) {
-      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 1, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 2, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 3, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 4, 8, 1, palette, texturePattern);
-      drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 5, 8, 1, palette, texturePattern);
+      // Taper from LEFT (back of head) going narrower
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
     }
   }
   
