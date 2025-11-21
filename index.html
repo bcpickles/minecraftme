@@ -1817,7 +1817,7 @@ document.getElementById('save-draft-btn').addEventListener('click', function() {
     let faceCanvas, faceContext;
     let editorHistoryStack = [];
     let editorHistoryIndex = -1;
-    const MAX_EDITOR_HISTORY = 50;
+    const MAX_EDITOR_HISTORY = 15;
 
 
     const bodyPartFaces = {
@@ -3191,16 +3191,22 @@ function hexToRgb(hex) {
       editorCanvas.addEventListener('mouseleave', stopDrawing);
       
       document.getElementById('body-part-select').addEventListener('change', function(e) {
-        saveCurrentFace();
-        currentBodyPart = e.target.value;
-        loadCurrentFace();
-      });
+  saveCurrentFace();
+  currentBodyPart = e.target.value;
+  // Clear editor history to save memory
+  editorHistoryStack = [];
+  editorHistoryIndex = -1;
+  loadCurrentFace();
+});
       
       document.getElementById('face-select').addEventListener('change', function(e) {
-        saveCurrentFace();
-        currentFace = e.target.value;
-        loadCurrentFace();
-      });
+  saveCurrentFace();
+  currentFace = e.target.value;
+  // Clear editor history to save memory
+  editorHistoryStack = [];
+  editorHistoryIndex = -1;
+  loadCurrentFace();
+});
       
       document.querySelectorAll('[data-tool]').forEach(btn => {
         btn.addEventListener('click', function() {
