@@ -2665,18 +2665,7 @@ function drawHair(ctx, palette) {
   }
 }
 
-   function drawBodyPartWithTextureFlipped(ctx, x, y, w, h, palette, texturePattern) {
-  // Draw the texture flipped horizontally
-  for (let py = 0; py < h; py++) {
-    for (let px = 0; px < w; px++) {
-      // Flip the x coordinate
-      const flippedPx = w - 1 - px;
-      const shade = texturePattern(flippedPx, py);
-      ctx.fillStyle = palette[shade];
-      ctx.fillRect(x + px, y + py, 1, 1);
-    }
-  }
-}
+   
 
     function getHairTexturePattern(texture) {
       if (texture === 'curly') {
