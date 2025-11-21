@@ -2213,41 +2213,47 @@ document.getElementById('save-draft-btn').addEventListener('click', function() {
     }
 
 
-    function setHeadUVs(geometry) {
-      const uvs = geometry.attributes.uv.array;
-      
-      uvs[0] = 0/64; uvs[1] = 1 - 8/64;
-      uvs[2] = 8/64; uvs[3] = 1 - 8/64;
-      uvs[4] = 0/64; uvs[5] = 1 - 16/64;
-      uvs[6] = 8/64; uvs[7] = 1 - 16/64;
-      
-      uvs[8] = 16/64; uvs[9] = 1 - 8/64;
-      uvs[10] = 24/64; uvs[11] = 1 - 8/64;
-      uvs[12] = 16/64; uvs[13] = 1 - 16/64;
-      uvs[14] = 24/64; uvs[15] = 1 - 16/64;
-      
-      uvs[16] = 8/64; uvs[17] = 1 - 0/64;
-      uvs[18] = 16/64; uvs[19] = 1 - 0/64;
-      uvs[20] = 8/64; uvs[21] = 1 - 8/64;
-      uvs[22] = 16/64; uvs[23] = 1 - 8/64;
-      
-      uvs[24] = 16/64; uvs[25] = 1 - 0/64;
-      uvs[26] = 24/64; uvs[27] = 1 - 0/64;
-      uvs[28] = 16/64; uvs[29] = 1 - 8/64;
-      uvs[30] = 24/64; uvs[31] = 1 - 8/64;
-      
-      uvs[32] = 8/64; uvs[33] = 1 - 8/64;
-      uvs[34] = 16/64; uvs[35] = 1 - 8/64;
-      uvs[36] = 8/64; uvs[37] = 1 - 16/64;
-      uvs[38] = 16/64; uvs[39] = 1 - 16/64;
-      
-      uvs[40] = 24/64; uvs[41] = 1 - 8/64;
-      uvs[42] = 32/64; uvs[43] = 1 - 8/64;
-      uvs[44] = 24/64; uvs[45] = 1 - 16/64;
-      uvs[46] = 32/64; uvs[47] = 1 - 16/64;
-      
-      geometry.attributes.uv.needsUpdate = true;
-    }
+ function setHeadUVs(geometry) {
+  const uvs = geometry.attributes.uv.array;
+  
+  // Right face - FLIP HORIZONTALLY (swap u coordinates)
+  uvs[0] = 8/64; uvs[1] = 1 - 8/64;   // was 0/64
+  uvs[2] = 0/64; uvs[3] = 1 - 8/64;   // was 8/64
+  uvs[4] = 8/64; uvs[5] = 1 - 16/64;  // was 0/64
+  uvs[6] = 0/64; uvs[7] = 1 - 16/64;  // was 8/64
+  
+  // Left face - FLIP HORIZONTALLY (swap u coordinates)
+  uvs[8] = 24/64; uvs[9] = 1 - 8/64;   // was 16/64
+  uvs[10] = 16/64; uvs[11] = 1 - 8/64; // was 24/64
+  uvs[12] = 24/64; uvs[13] = 1 - 16/64; // was 16/64
+  uvs[14] = 16/64; uvs[15] = 1 - 16/64; // was 24/64
+  
+  // Top face - unchanged
+  uvs[16] = 8/64; uvs[17] = 1 - 0/64;
+  uvs[18] = 16/64; uvs[19] = 1 - 0/64;
+  uvs[20] = 8/64; uvs[21] = 1 - 8/64;
+  uvs[22] = 16/64; uvs[23] = 1 - 8/64;
+  
+  // Bottom face - unchanged
+  uvs[24] = 16/64; uvs[25] = 1 - 0/64;
+  uvs[26] = 24/64; uvs[27] = 1 - 0/64;
+  uvs[28] = 16/64; uvs[29] = 1 - 8/64;
+  uvs[30] = 24/64; uvs[31] = 1 - 8/64;
+  
+  // Front face - unchanged
+  uvs[32] = 8/64; uvs[33] = 1 - 8/64;
+  uvs[34] = 16/64; uvs[35] = 1 - 8/64;
+  uvs[36] = 8/64; uvs[37] = 1 - 16/64;
+  uvs[38] = 16/64; uvs[39] = 1 - 16/64;
+  
+  // Back face - unchanged
+  uvs[40] = 24/64; uvs[41] = 1 - 8/64;
+  uvs[42] = 32/64; uvs[43] = 1 - 8/64;
+  uvs[44] = 24/64; uvs[45] = 1 - 16/64;
+  uvs[46] = 32/64; uvs[47] = 1 - 16/64;
+  
+  geometry.attributes.uv.needsUpdate = true;
+}
 
 
     function animate() {
