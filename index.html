@@ -4025,16 +4025,16 @@ document.addEventListener('fullscreenchange', function() {
       avatarState.bottomStyle = ['jeans', 'shorts', 'cargo', 'joggers'][Math.floor(Math.random() * 4)];
       avatarState.footwear = ['sneakers', 'boots', 'converse', 'dress'][Math.floor(Math.random() * 4)];
       
-      document.querySelectorAll('.option-btn, .color-swatch').forEach(btn => btn.classList.remove('selected'));
-      document.querySelector(`[data-model="${avatarState.modelType}"]`).classList.add('selected');
-      document.querySelector(`[data-facestyle="${avatarState.faceStyle}"]`).classList.add('selected');
-      document.querySelector(`[data-hairstyle="${avatarState.hairStyle}"]`).classList.add('selected');
-      document.querySelector(`[data-bangs="${avatarState.bangsStyle}"]`).classList.add('selected');
-      document.querySelector(`[data-hairtexture="${avatarState.hairTexture}"]`).classList.add('selected');
-      document.querySelector(`[data-expression="${avatarState.expression}"]`).classList.add('selected');
-      document.querySelector(`[data-top="${avatarState.topStyle}"]`).classList.add('selected');
-      document.querySelector(`[data-bottom="${avatarState.bottomStyle}"]`).classList.add('selected');
-      document.querySelector(`[data-footwear="${avatarState.footwear}"]`).classList.add('selected');
+     document.querySelectorAll('.option-btn, .color-swatch').forEach(btn => btn.classList.remove('selected'));
+document.querySelector('[data-model="' + avatarState.modelType + '"]').classList.add('selected');
+document.querySelector('[data-facestyle="' + avatarState.faceStyle + '"]').classList.add('selected');
+document.querySelector('[data-hairstyle="' + avatarState.hairStyle + '"]').classList.add('selected');
+document.querySelector('[data-bangs="' + avatarState.bangsStyle + '"]').classList.add('selected');
+document.querySelector('[data-hairtexture="' + avatarState.hairTexture + '"]').classList.add('selected');
+document.querySelector('[data-expression="' + avatarState.expression + '"]').classList.add('selected');
+document.querySelector('[data-top="' + avatarState.topStyle + '"]').classList.add('selected');
+document.querySelector('[data-bottom="' + avatarState.bottomStyle + '"]').classList.add('selected');
+document.querySelector('[data-footwear="' + avatarState.footwear + '"]').classList.add('selected');
       
       if (avatarState.hasBlush) {
         document.getElementById('blush-toggle').classList.add('active');
