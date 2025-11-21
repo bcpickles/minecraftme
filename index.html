@@ -2641,8 +2641,8 @@ function drawHair(ctx, palette) {
     // RIGHT SIDE - needs to be flipped
     drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, 8, palette, texturePattern);
   } else {
-    // LEFT SIDE - needs to be flipped
-    drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
+    // LEFT SIDE - test
+drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
     if (bangsRows > 0) {
       drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows, 8, 1, palette, texturePattern);
       drawBodyPartWithTextureFlipped(ctx, 0, 8 + bangsRows + 1, 8, 1, palette, texturePattern);
