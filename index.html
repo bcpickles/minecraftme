@@ -1128,45 +1128,85 @@
        <div class="section-title">
         🎨 Advanced Pixel Editor
        </div>
-       <p style="font-size: 0.85em; color: #718096; margin-bottom: 15px;">Click the button below to open the full-screen advanced editor with live preview!</p>
-       <button class="action-button secondary-btn" id="open-editor-btn"> 🎨 <span id="open-editor-text">Open Advanced Editor</span> </button>
+       <p style="font-size: 0.85em; color: #718096; margin-bottom: 15px;">Click the button below to open the full-screen advanced editor with live preview!</p><button class="action-button secondary-btn" id="open-editor-btn"> 🎨 Open Advanced Editor </button>
       </div>
      </div>
     </div>
     <div class="right-panel">
-     <div class="preview-container">
-      <canvas id="preview-canvas"></canvas>
-     </div>
+     <div class="preview-container" style="position: relative;">
+  <button class="banner-btn" id="rotate-left-btn" title="Rotate Left" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">⬅️</button>
+  
+  <div id="preview-canvas"></div>
+  
+  <button class="banner-btn" id="rotate-right-btn" title="Rotate Right" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;">➡️</button>
+  
+  <div style="text-align: center; margin-top: 8px; color: #4a5568; font-weight: 600;">
+   👀 Your Avatar
+  </div>
+  <div style="text-align: center; margin-top: 3%; color: #718096;">
+   <p style="margin: 0; font-size: 0.9em;">Drag to rotate • Scroll to zoom</p>
+  </div>
+</div>
+
+<div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
+  <button class="banner-btn" id="zoom-out-btn" title="Zoom Out">🔍➖</button>
+  <button class="banner-btn" id="reset-view-btn" title="Reset View">🔄</button>
+  <button class="banner-btn" id="zoom-in-btn" title="Zoom In">🔍➕</button>
+</div>
+     
      <div class="actions-container">
-      <h1>🔠 Final Touches & Export</h1>
-      <div style="text-align: center; margin-bottom: 15px;">
-       <label for="skin-name" style="font-weight: 600; color: #2d3748; display: block; margin-bottom: 5px; font-size: 0.9em;">Avatar Name for Export:</label>
-       <input type="text" id="skin-name" placeholder="Enter name (e.g., Cool_Gamer_Skin)" style="width: 80%; max-width: 300px; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1em; text-align: center;">
-       <div style="font-size: 0.75em; color: #e53e3e; text-align: center; margin-top: 4px; line-height: 1.4;">
-        ⚠️ Don't use your real name or personal info!
-       </div>
-      </div>
-      <input type="file" id="upload-skin" accept="image/png" style="display: none;">
-      <button class="action-button secondary-btn" id="open-design-btn" style="margin-bottom: 10px;">
-       📂 <span id="open-text">Open My Design</span>
-      </button>
-      <button class="action-button tertiary-btn" id="save-draft-btn" style="margin-bottom: 10px;">
-       💾 <span id="save-text">Save My Draft</span>
-      </button>
-      <div style="font-size: 0.75em; color: #718096; text-align: center; margin-top: 8px; line-height: 1.4;">
-       💡 Save your work often so you don't lose it!
-      </div>
-     </div>
-     <button class="action-button primary-btn" id="download-btn">
-      🎮 <span id="download-text">Download for Minecraft</span>
-     </button>
-     <div style="font-size: 0.75em; color: #718096; text-align: center; margin-top: 8px; line-height: 1.4;">
-      ✨ This creates a file you can use in Minecraft Education!
-     </div>
-     <div style="text-align: center; padding: 15px 20px; font-size: 0.75em; color: #a0aec0;">
-      <p style="margin: 0 0 5px 0;">This is an unofficial fan-made tool.</p>
-      <p style="margin: 0;">Minecraft is a trademark of Mojang Synergies AB. The creator of this tool is not affiliated with or endorsed by Mojang or Microsoft.</p>
-     </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+    <button class="banner-btn" id="undo-btn" disabled>↶ Undo</button> 
+    <button class="banner-btn" id="redo-btn" disabled>Redo ↷</button>
+   
+  </div>
+  
+ <div style="background: #edf2f7; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+  <div style="font-size: 0.9em; color: #2d3748; font-weight: 600; margin-bottom: 10px; text-align: center;">
+    📁 My Project
+  </div>
+  
+  <div style="margin-bottom: 12px;">
+    <label style="font-size: 0.85em; color: #4a5568; display: block; margin-bottom: 5px; font-weight: 600;">
+      ✏️ Skin Name
+    </label>
+    <input 
+      type="text" 
+      id="skin-name-input" 
+      placeholder="Enter a name for your skin" 
+      maxlength="30"
+      style="width: 100%; padding: 10px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 0.9em; font-family: inherit;"
+    />
+    <div style="font-size: 0.7em; color: #718096; margin-top: 5px; line-height: 1.3;">
+      ⚠️ Don't use your real name or personal info!
+    </div>
+  </div>
+  
+  <input type="file" id="upload-skin" accept="image/png" style="display: none;">
+    <button class="action-button secondary-btn" id="open-design-btn" style="margin-bottom: 10px;">
+      📂 <span id="open-text">Open My Design</span>
+    </button>
+    
+    <button class="action-button tertiary-btn" id="save-draft-btn" style="margin-bottom: 10px;">
+      💾 <span id="save-text">Save My Draft</span>
+    </button>
+    
+    <div style="font-size: 0.75em; color: #718096; text-align: center; margin-top: 8px; line-height: 1.4;">
+      💡 Save your work often so you don't lose it!
+    </div>
+  </div>
+  
+  <button class="action-button primary-btn" id="download-btn">
+    🎮 <span id="download-text">Download for Minecraft</span>
+  </button>
+  <div style="font-size: 0.75em; color: #718096; text-align: center; margin-top: 8px; line-height: 1.4;">
+    ✨ This creates a file you can use in Minecraft Education!
+  </div>
+      <div style="text-align: center; padding: 15px 20px; font-size: 0.75em; color: #a0aec0;">
+    <p style="margin: 0 0 5px 0;">This is an unofficial fan-made tool.</p>
+    <p style="margin: 0;">Minecraft is a trademark of Mojang Synergies AB. The creator of this tool is not affiliated with or endorsed by Mojang or Microsoft.</p>
+</div>
+</div>
     </div>
    </main>
    <div class="editor-overlay" id="editor-overlay">
@@ -1178,53 +1218,32 @@
       <div class="editor-section-title">
        🎯 Body Part
       </div>
-      <div class="editor-tool-group">
-       <label for="body-part-select" class="editor-tool-label">Select Part to Edit</label>
-       <select id="body-part-select" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #4a5568; background: #2d3748; color: white;">
-        <optgroup label="Head">
-         <option value="head">Head</option>
-         <option value="face">Face</option>
-         <option value="hat">Hat (Overlay)</option>
-        </optgroup>
-        <optgroup label="Body">
-         <option value="body">Body</option>
-         <option value="leftArm">Left Arm</option>
-         <option value="rightArm">Right Arm</option>
-         <option value="leftLeg">Left Leg</option>
-         <option value="rightLeg">Right Leg</option>
-        </optgroup>
-       </select>
+      <div class="editor-tool-group"><label class="editor-tool-label">Select Part</label> <select id="body-part-select" style="width: 100%; padding: 10px; border-radius: 8px; background: #2d3748; color: white; border: 2px solid #4a5568; font-size: 0.9em;"> <option value="head">🧑 Head</option> <option value="torso">👕 Torso</option> <option value="right-arm">💪 Right Arm</option> <option value="left-arm">🤚 Left Arm</option> <option value="right-leg">🦵 Right Leg</option> <option value="left-leg">🦿 Left Leg</option> </select>
       </div>
-      <div class="editor-tool-group" id="face-select-group">
-       <label for="face-select" class="editor-tool-label">Select Face to Edit</label>
-       <select id="face-select" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #4a5568; background: #2d3748; color: white;">
-        <option value="front">Front (Face)</option>
-        <option value="back">Back</option>
-        <option value="top">Top</option>
-        <option value="bottom">Bottom</option>
-        <option value="left">Left</option>
-        <option value="right">Right</option>
-       </select>
+      <div class="editor-tool-group"><label class="editor-tool-label">Select Face</label> <select id="face-select" style="width: 100%; padding: 10px; border-radius: 8px; background: #2d3748; color: white; border: 2px solid #4a5568; font-size: 0.9em;"> <option value="front">👁️ Front</option> <option value="back">🔙 Back</option> <option value="left">⬅️ Left</option> <option value="right">➡️ Right</option> <option value="top">⬆️ Top</option> <option value="bottom">⬇️ Bottom</option> </select>
       </div>
-      <div class="editor-section-title" style="margin-top: 30px;">
+      <div class="editor-section-title">
        🛠️ Tools
       </div>
       <div class="editor-tool-group">
-       <label class="editor-tool-label">Drawing Tools</label>
-       <div class="editor-tools">
-        <button class="tool-btn active" data-tool="pen" id="pen-tool" title="Pen Tool (P)" aria-label="Pen Tool">✒️ Pen</button>
-        <button class="tool-btn" data-tool="eraser" id="eraser-tool" title="Eraser Tool (E)" aria-label="Eraser Tool">🧼 Eraser</button>
-        <button class="tool-btn" data-tool="dropper" id="dropper-tool" title="Color Picker (I)" aria-label="Color Picker Tool">💧 Dropper</button>
-        <button class="tool-btn" data-tool="fill" id="fill-tool" title="Fill Color (G)" aria-label="Fill Color">🪣 Fill</button>
+       <label class="editor-tool-label">Drawing Tool</label>
+       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <button class="tool-btn active" data-tool="brush" title="Brush - draw solid color" aria-label="Brush - draw solid color">🖌️ Brush</button>
+        <button class="tool-btn" data-tool="eraser" title="Eraser - remove color" aria-label="Eraser - remove color">⬜ Eraser</button>
+        <button class="tool-btn" data-tool="noise" title="Noise - draw with color variation for texture" aria-label="Noise - draw with color variation for texture">✨ Noise</button>
+        <button class="tool-btn" data-tool="eyedropper" title="Picker - grab a color from the skin" aria-label="Picker - grab a color from the skin">💧 Picker</button>
+        <button class="tool-btn" data-tool="fill" title="Fill - fill an area with color" aria-label="Fill - fill an area with color">🪣 Fill</button>
        </div>
       </div>
       <div class="editor-tool-group"><label class="editor-tool-label">Brush Color</label>
        <div class="color-picker-wrapper" style="width: 100%;"><input type="color" id="brush-color" value="#000000" style="width: 100%; height: 50px;">
        </div>
       </div>
-      <div class="editor-tool-group">
+                  <div class="editor-tool-group">
        <label class="editor-tool-label">Favorite Colors</label>
-       <p style="color: #a0aec0; font-size: 0.8em; margin-top: 0; margin-bottom: 8px;"> Tap a square to use a color. Tap a square, then “Save Brush Color” to store your current color there. </p>
+       <p style="color: #a0aec0; font-size: 0.8em; margin-top: 0; margin-bottom: 8px;">
+        Tap a square to use a color. Tap a square, then “Save Brush Color” to store your current color there.
+       </p>
        <div class="palette-row" id="palette-row">
         <button class="palette-swatch" data-index="0" aria-label="Favorite color 1" title="Favorite color 1"></button>
         <button class="palette-swatch" data-index="1" aria-label="Favorite color 2" title="Favorite color 2"></button>
@@ -1232,150 +1251,55 @@
         <button class="palette-swatch" data-index="3" aria-label="Favorite color 4" title="Favorite color 4"></button>
         <button class="palette-swatch" data-index="4" aria-label="Favorite color 5" title="Favorite color 5"></button>
        </div>
-       <button class="tool-btn" id="save-palette-color" style="margin-top: 8px;"> ⭐ Save Brush Color </button>
+       <button class="tool-btn" id="save-palette-color" style="margin-top: 8px;">
+        ⭐ Save Brush Color
+       </button>
       </div>
       <div class="editor-tool-group"><label class="editor-tool-label">Quick Actions</label>
        <div style="display: flex; flex-direction: column; gap: 8px;">
-        <button class="tool-btn" id="auto-shade">🌓 Shade Helper</button>
-        <button class="tool-btn" id="clear-face">🗑️ Clear Face</button>
-        <div style="display: flex; gap: 8px;">
-         <button class="tool-btn" id="editor-undo-btn" disabled>↩️ Undo</button>
-         <button class="tool-btn" id="editor-redo-btn" disabled>↪️ Redo</button>
+        <button class="tool-btn" id="auto-shade">🌓 Shade Helper (Off)</button>
+        <div id="shade-helper-swatches" style="display: none; gap: 4px; flex-wrap: wrap; margin-top: 4px;">
+         <button type="button" class="tool-btn shade-swatch" data-shade="shadow" aria-label="Shadow shade" title="Shadow shade" style="flex: 1; min-width: 0; padding: 8px;"></button>
+         <button type="button" class="tool-btn shade-swatch" data-shade="base" aria-label="Base color" title="Base color" style="flex: 1; min-width: 0; padding: 8px;"></button>
+         <button type="button" class="tool-btn shade-swatch" data-shade="highlight" aria-label="Highlight shade" title="Highlight shade" style="flex: 1; min-width: 0; padding: 8px;"></button>
+         <button type="button" class="tool-btn shade-swatch" data-shade="accent" aria-label="Accent shade" title="Accent shade" style="flex: 1; min-width: 0; padding: 8px;"></button>
         </div>
+        <button class="tool-btn" id="clear-face">🧹 Clear This Face</button>
+        <button class="tool-btn" id="reset-edits">↶ Reset to Current</button>
        </div>
       </div>
      </div>
      <div class="editor-canvas-panel">
-      <div class="editor-container">
-       <div class="canvas-wrapper">
-        <canvas id="pixel-editor-canvas" class="pixel-canvas"></canvas>
-       </div>
-       <p style="color: #a0aec0; font-size: 0.85em; margin-top: 15px;">Use the left panel to change color, and the 3D preview on the right to see your changes!</p>
+      <div style="text-align: center; margin-bottom: 15px;">
+       <h3 style="color: white; margin: 0; font-size: 1.2em;" id="current-face-label">Head - Front Face</h3>
+       <p style="color: #a0aec0; margin: 5px 0 0 0; font-size: 0.85em;" id="face-dimensions">8x8 pixels</p>
       </div>
+      <div class="editor-canvas-wrapper">
+       <canvas id="pixel-editor" class="pixel-canvas" width="64" height="64"></canvas>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+       <button class="action-button secondary-btn" id="editor-undo-btn"> ↶ Undo </button>
+       <button class="action-button secondary-btn" id="editor-redo-btn"> Redo ↷ </button>
+      </div>
+      <p style="color: #a0aec0; margin-top: 15px; font-size: 0.9em; text-align: center;">Click and drag to draw • Use tools from the left panel</p>
      </div>
      <div class="editor-preview-panel">
       <div class="editor-section-title">
-       👀 Live Preview
+       👁️ Live Preview
       </div>
-      <div id="editor-preview-3d" class="editor-preview-3d"></div>
+      <div class="editor-preview-3d" id="editor-preview-3d"></div>
       <div class="editor-actions">
-       <button class="action-button primary-btn" id="editor-apply-btn"> ✅ Apply & Close</button>
-       <p style="color: #a0aec0; font-size: 0.8em; text-align: center; margin-top: 0; margin-bottom: 5px;"> Applying will update the main avatar and save your history. </p>
+       <p style="color: #a0aec0; font-size: 0.85em; text-align: center; margin: 10px 0 0 0;">Changes are applied in real-time to the preview above</p>
       </div>
      </div>
     </div>
    </div>
   </div>
   <script>
-    const skinCanvas = document.createElement('canvas');
-    skinCanvas.width = 64;
-    skinCanvas.height = 64;
-    const skinContext = skinCanvas.getContext('2d');
-    const editorCanvas = document.getElementById('pixel-editor-canvas');
-    const editorContext = editorCanvas.getContext('2d');
-    const previewCanvas = document.getElementById('preview-canvas');
-    const previewContext = previewCanvas.getContext('2d');
-
-    let ttsEnabled = false;
-    let currentLanguage = 'en';
-
-    let skinTexture;
-    let scene, camera, renderer, skinMesh;
-    let isDragging = false;
-    let currentTool = 'pen';
-    let currentBodyPart = 'head';
-    let currentFace = 'front';
-    let editorHistoryStack = [];
-    let editorHistoryIndex = -1;
-    let bodyPartFaces = {}; // Stores canvas data for each body part face
-    let palette = ['#FFFFFF', '#000000', '#FF0000', '#00FF00', '#0000FF'];
-
-    // Placeholder data for initial canvas for pixel editor
-    const FACE_MAP = {
-      head: {
-        front: { x: 8, y: 8, w: 8, h: 8 },
-        back: { x: 24, y: 8, w: 8, h: 8 },
-        top: { x: 8, y: 0, w: 8, h: 8 },
-        bottom: { x: 16, y: 0, w: 8, h: 8 },
-        left: { x: 0, y: 8, w: 8, h: 8 },
-        right: { x: 16, y: 8, w: 8, h: 8 },
-      },
-      body: {
-        front: { x: 20, y: 20, w: 8, h: 12 },
-        back: { x: 32, y: 20, w: 8, h: 12 },
-        top: { x: 20, y: 16, w: 8, h: 4 },
-        bottom: { x: 28, y: 16, w: 8, h: 4 },
-        left: { x: 16, y: 20, w: 4, h: 12 },
-        right: { x: 28, y: 20, w: 4, h: 12 },
-      },
-      // Arms and Legs follow a 4x12 structure (or 3x12 for slim)
-      rightArm: {
-        front: { x: 44, y: 20, w: 4, h: 12 },
-        back: { x: 52, y: 20, w: 4, h: 12 },
-        top: { x: 44, y: 16, w: 4, h: 4 },
-        bottom: { x: 48, y: 16, w: 4, h: 4 },
-        left: { x: 40, y: 20, w: 4, h: 12 },
-        right: { x: 48, y: 20, w: 4, h: 12 },
-      },
-      leftArm: {
-        front: { x: 36, y: 52, w: 4, h: 12 },
-        back: { x: 44, y: 52, w: 4, h: 12 },
-        top: { x: 36, y: 48, w: 4, h: 4 },
-        bottom: { x: 40, y: 48, w: 4, h: 4 },
-        left: { x: 32, y: 52, w: 4, h: 12 },
-        right: { x: 40, y: 52, w: 4, h: 12 },
-      },
-      rightLeg: {
-        front: { x: 4, y: 20, w: 4, h: 12 },
-        back: { x: 12, y: 20, w: 4, h: 12 },
-        top: { x: 4, y: 16, w: 4, h: 4 },
-        bottom: { x: 8, y: 16, w: 4, h: 4 },
-        left: { x: 0, y: 20, w: 4, h: 12 },
-        right: { x: 8, y: 20, w: 4, h: 12 },
-      },
-      leftLeg: {
-        front: { x: 20, y: 52, w: 4, h: 12 },
-        back: { x: 28, y: 52, w: 4, h: 12 },
-        top: { x: 20, y: 48, w: 4, h: 4 },
-        bottom: { x: 24, y: 48, w: 4, h: 4 },
-        left: { x: 16, y: 52, w: 4, h: 12 },
-        right: { x: 24, y: 52, w: 4, h: 12 },
-      },
-    };
-
     const defaultConfig = {
-      modelType: 'standard', // 'standard' or 'slim'
-      faceStyle: 'classic', // 'classic' or 'anime'
-      skinTone: '#F1C27D',
-      hairColor: '#3B2E2E',
-      hairStyle: 'short', // 'short', 'long', 'none'
-      bangsStyle: 'short', // 'short', 'long', 'layered', 'asymmetric'
-      hairTexture: 'straight', // 'straight', 'wavy', 'curly'
-      eyeColor: '#4169E1',
-      hasBlush: false,
-      expression: 'smile', // 'smile', 'happy', 'neutral', 'surprised'
-      hasGlasses: false,
-      glassesColor: '#000000',
-      topStyle: 'tshirt',
-      topColor: '#3B82F6',
-      bottomStyle: 'jeans',
-      bottomColor: '#1E3A8A',
-      footwear: 'sneakers',
-      footwearColor: '#FFFFFF',
-      pattern: null, // null, 'checkers', 'hstripes', 'vstripes', 'dots', 'plaid', 'camo'
-      patternColor1: '#FFFFFF',
-      patternColor2: '#000000',
-      currentSticker: null, // { emoji: '❤️' }
-      history: [],
-      historyIndex: -1,
-      name: 'Minecraft Me Skin',
-      title: "Minecraft Me! Skin Generator",
-      downloadText: "Download for Minecraft Skins (All Versions)",
-      openText: "Open My Design",
-      saveText: "Save My Draft",
-      randomize: "🎲 Randomize Avatar",
-      undo: "Undo",
-      redo: "Redo",
+      app_title: "🎮 MINECRAFT ME! 🎮",
+      instructions: "Create your unique Minecraft character!",
+      download_text: "Download Skins (All Versions)",
       primary_color: "#48bb78",
       secondary_color: "#4299e1",
       accent_color: "#ed8936",
@@ -1383,1196 +1307,124 @@
       text_color: "#2d3748"
     };
 
+
     let config = { ...defaultConfig };
-    let avatarState = { ...defaultConfig };
+
 
     const skinTones = [
-      '#FFE0BD', '#FAD7B6', '#E5CACA', '#F1C27D', '#C68642', '#B78D67',
-      '#D4AA78', '#B88B5E', '#8D5524', '#5F3A2A', '#452719', '#3B2219'
+      '#FFE0BD', '#FAD7B6', '#E5CACA', '#F1C27D',
+      '#C68642', '#B78D67', '#D4AA78', '#B88B5E',
+      '#8D5524', '#5F3A2A', '#452719', '#3B2219'
     ];
+
 
     const hairColors = [
-      '#1C1C1C', '#3B2E2E', '#5C4033', '#8B4513', '#D2691E', '#F4A460',
-      '#FFD700', '#FF6347', '#9370DB', '#4169E1', '#00CED1', '#32CD32'
+      '#1C1C1C', '#3B2E2E', '#5C4033', '#8B4513',
+      '#D2691E', '#F4A460', '#FFD700', '#FF6347',
+      '#9370DB', '#4169E1', '#00CED1', '#32CD32'
     ];
+
 
     const topColors = [
-      '#FF0000', '#FFA500', '#FFFF00', '#00FF00', '#0000FF', '#800080',
-      '#FFC0CB', '#8B4513', '#000000', '#FFFFFF', '#808080', '#00FFFF'
+      '#FF0000', '#FFA500', '#FFFF00', '#00FF00',
+      '#0000FF', '#800080', '#FFC0CB', '#8B4513',
+      '#000000', '#FFFFFF', '#808080', '#00FFFF'
     ];
+
 
     const bottomColors = [
-      '#1E3A8A', '#3B82F6', '#60A5FA', '#1F2937', '#374151', '#6B7280',
-      '#000000', '#4299E1', '#48BB78', '#ED8936', '#E53E3E', '#9370DB'
+      '#1E3A8A', '#3B82F6', '#60A5FA', '#1F2937',
+      '#374151', '#6B7280', '#000000', '#422006',
+      '#78350F', '#92400E', '#D97706', '#FBBF24'
     ];
+
 
     const footwearColors = [
-      '#FFFFFF', '#000000', '#6B7280', '#E53E3E', '#38A169', '#3182CE',
-      '#D69E2E', '#972667', '#00FFFF', '#FF00FF', '#FFA500', '#FFC0CB'
-    ];
-
-    const glassesColors = [
-      '#000000', '#FFFFFF', '#4A5568', '#E53E3E', '#4299E1', '#38A169',
-      '#FFD700', '#800080'
+      '#000000', '#FFFFFF', '#8B4513', '#1F2937',
+      '#FF0000', '#0000FF', '#00FF00', '#FFFF00',
+      '#FF1493', '#00CED1', '#FF6347', '#9370DB'
     ];
 
 
-    function getSkinName() {
-      const input = document.getElementById('skin-name').value.trim();
-      return input || 'Minecraft_Me_Skin';
-    }
+    const eyeColors = {
+      brown: '#8B4513',
+      darkbrown: '#3B2E2E',
+      blue: '#4169E1',
+      green: '#228B22',
+      hazel: '#8E7618',
+      gray: '#708090',
+      teal: '#00CED1',
+      purple: '#9370DB'
+    };
+
+
+    let avatarState = {
+      modelType: 'standard',
+      faceStyle: 'classic',
+      skinTone: skinTones[0],
+      hairColor: hairColors[0],
+      hairStyle: 'short',
+      bangsStyle: 'short',
+      hairTexture: 'straight',
+      eyeColor: 'brown',
+      topColor: topColors[0],
+      bottomColor: bottomColors[0],
+      footwearColor: footwearColors[0],
+      patternColor1: topColors[1],
+      patternColor2: topColors[3],
+      hasBlush: false,
+      expression: 'smile',
+      hasGlasses: false,
+      glassesColor: '#000000',
+      topStyle: 'tshirt',
+      bottomStyle: 'jeans',
+      footwear: 'sneakers',
+      currentSticker: null,
+      pattern: null
+    };
+
+   // Profanity filter
+const bannedWords = [
+  'damn', 'hell', 'crap', 'stupid', 'idiot', 'dumb', 'butt', 'poop',
+  'fart', 'pee', 'hate', 'kill', 'die', 'shutup', 'shut up', 'retard', 'fuck', 'sex',
+  // Add more as needed - keep it age-appropriate for K-5
+];
+
+function containsProfanity(text) {
+  const lowerText = text.toLowerCase();
+  return bannedWords.some(word => lowerText.includes(word));
+}
+
+function getSkinName() {
+  const nameInput = document.getElementById('skin-name-input');
+  let skinName = nameInput.value.trim();
+  
+  // Check if name is empty
+  if (!skinName) {
+    alert('Please enter a name for your skin!');
+    nameInput.focus();
+    return null;
+  }
+  
+  // Check for profanity
+  if (containsProfanity(skinName)) {
+    alert('Please use appropriate language in your skin name.');
+    nameInput.focus();
+    return null;
+  }
+  
+  // Clean the name for filename use (remove special characters)
+  skinName = skinName.replace(/[^a-zA-Z0-9_-]/g, '_');
+  
+  return skinName;
+}
+
+    let historyStack = [];
+    let historyIndex = -1;
+    const MAX_HISTORY = 50;
+    let currentLanguage = 'en';
+    let ttsEnabled = false;
 
-    function generateUUID() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
-    }
-
-    // --- History Functions ---
-
-    function saveToHistory() {
-      const dataUrl = skinCanvas.toDataURL();
-      const newState = {
-        ...avatarState,
-        skinDataUrl: dataUrl,
-        name: getSkinName(),
-        config: JSON.parse(JSON.stringify(config))
-      };
-
-      // Clear redo history
-      avatarState.history.splice(avatarState.historyIndex + 1);
-      avatarState.history.push(newState);
-      avatarState.historyIndex = avatarState.history.length - 1;
-
-      if (avatarState.history.length > 50) {
-        avatarState.history.shift();
-        avatarState.historyIndex--;
-      }
-    }
-
-    function applyHistory(index) {
-      if (index >= 0 && index < avatarState.history.length) {
-        const historyItem = avatarState.history[index];
-
-        // Restore state
-        Object.assign(avatarState, { ...historyItem });
-
-        // Restore name
-        document.getElementById('skin-name').value = historyItem.name;
-
-        // Restore skin canvas from data URL
-        const img = new Image();
-        img.onload = () => {
-          skinContext.clearRect(0, 0, 64, 64);
-          skinContext.drawImage(img, 0, 0);
-          updatePreview(false); // Update 3D model without saving to history
-          updateUIFromState();
-        };
-        img.src = historyItem.skinDataUrl;
-
-        avatarState.historyIndex = index;
-        updateHistoryButtons();
-      }
-    }
-
-    function undo() {
-      if (avatarState.historyIndex > 0) {
-        applyHistory(avatarState.historyIndex - 1);
-        speak(translations[currentLanguage].undo + ' done');
-      }
-    }
-
-    function redo() {
-      if (avatarState.historyIndex < avatarState.history.length - 1) {
-        applyHistory(avatarState.historyIndex + 1);
-        speak(translations[currentLanguage].redo + ' done');
-      }
-    }
-
-    function updateHistoryButtons() {
-      const undoBtn = document.getElementById('undo-btn');
-      const redoBtn = document.getElementById('redo-btn');
-
-      if (undoBtn) {
-        undoBtn.disabled = avatarState.historyIndex <= 0;
-      }
-      if (redoBtn) {
-        redoBtn.disabled = avatarState.historyIndex >= avatarState.history.length - 1;
-      }
-    }
-
-    // --- Color Utility Functions ---
-
-    function hexToRgb(hex) {
-      const bigint = parseInt(hex.slice(1), 16);
-      const r = (bigint >> 16) & 255;
-      const g = (bigint >> 8) & 255;
-      const b = bigint & 255;
-      return { r, g, b };
-    }
-
-    function rgbToHsl(r, g, b) {
-      r /= 255;
-      g /= 255;
-      b /= 255;
-      const max = Math.max(r, g, b),
-        min = Math.min(r, g, b);
-      let h, s, l = (max + min) / 2;
-
-      if (max === min) {
-        h = s = 0; // achromatic
-      } else {
-        const d = max - min;
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-        switch (max) {
-          case r:
-            h = (g - b) / d + (g < b ? 6 : 0);
-            break;
-          case g:
-            h = (b - r) / d + 2;
-            break;
-          case b:
-            h = (r - g) / d + 4;
-            break;
-        }
-        h /= 6;
-      }
-
-      return { h, s, l };
-    }
-
-    function hslToRgb(h, s, l) {
-      let r, g, b;
-
-      if (s === 0) {
-        r = g = b = l; // achromatic
-      } else {
-        const hue2rgb = (p, q, t) => {
-          if (t < 0) t += 1;
-          if (t > 1) t -= 1;
-          if (t < 1 / 6) return p + (q - p) * 6 * t;
-          if (t < 1 / 2) return q;
-          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-          return p;
-        };
-        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-        const p = 2 * l - q;
-        r = hue2rgb(p, q, h + 1 / 3);
-        g = hue2rgb(p, q, h);
-        b = hue2rgb(p, q, h - 1 / 3);
-      }
-      return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
-    }
-
-    // Create a color with slight variation in lightness for noise/texture effect
-    function getNoiseColor(baseColor) {
-      const rgb = hexToRgb(baseColor);
-      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-      const noise = (Math.random() - 0.5) * 0.05; // +/- 5% lightness
-      let l = Math.max(0, Math.min(1, hsl.l + noise));
-      if (l > 0.8) l = Math.max(0, l - 0.01); // Subtle darkening for very light colors
-      if (l < 0.2) l = Math.min(1, l + 0.01); // Subtle lightening for very dark colors
-      const newRgb = hslToRgb(hsl.h, hsl.s, l);
-
-      // Convert back to hex
-      return `#${((1 << 24) + (newRgb.r << 16) + (newRgb.g << 8) + newRgb.b).toString(16).slice(1).toUpperCase()}`;
-    }
-
-    function getPalette(baseColor) {
-      const rgb = hexToRgb(baseColor);
-      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-
-      const color = baseColor;
-      const highlightRgb = hslToRgb(hsl.h, hsl.s, Math.min(1, hsl.l + 0.15));
-      const shadowRgb = hslToRgb(hsl.h, hsl.s, Math.max(0, hsl.l - 0.15));
-      const accentRgb = hslToRgb((hsl.h + 0.5) % 1, Math.min(1, hsl.s + 0.1), hsl.l);
-
-      const toHex = (r, g, b) => `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
-
-      return {
-        color: color,
-        highlight: toHex(highlightRgb.r, highlightRgb.g, highlightRgb.b),
-        shadow: toHex(shadowRgb.r, shadowRgb.g, shadowRgb.b),
-        accent: toHex(accentRgb.r, accentRgb.g, accentRgb.b),
-      };
-    }
-
-    // --- Drawing Utility Functions ---
-
-    function drawBodyPart(ctx, x, y, w, h, palette) {
-      for (let px = 0; px < w; px++) {
-        for (let py = 0; py < h; py++) {
-          const seed = (px * 13 + py * 7) % 100;
-
-          // Apply slight noise for a pixelated texture feel
-          if (seed < 85) {
-            ctx.fillStyle = palette.color;
-          } else if (seed < 95) {
-            ctx.fillStyle = palette.highlight;
-          } else {
-            ctx.fillStyle = palette.shadow;
-          }
-
-          // Apply general shading (simulated light from top-left)
-          if (py === 0) { // Top edge shadow
-            if (palette.color !== palette.shadow) ctx.fillStyle = palette.shadow;
-          }
-          if (px === 0) { // Left edge highlight
-            if (palette.color !== palette.highlight) ctx.fillStyle = palette.highlight;
-          }
-          if (px === w - 1) { // Right edge shadow
-            if (palette.color !== palette.shadow) ctx.fillStyle = palette.shadow;
-          }
-          if (py === h - 1) { // Bottom edge shadow
-            if (palette.color !== palette.shadow) ctx.fillStyle = palette.shadow;
-          }
-
-          ctx.fillRect(x + px, y + py, 1, 1);
-        }
-      }
-    }
-
-    function getPatternPixel(x, y, pattern) {
-      const color1 = avatarState.patternColor1;
-      const color2 = avatarState.patternColor2;
-
-      switch (pattern) {
-        case 'checkers':
-          return (Math.floor(x / 2) + Math.floor(y / 2)) % 2 === 0 ? color1 : color2;
-        case 'hstripes':
-          return Math.floor(y / 2) % 2 === 0 ? color1 : color2;
-        case 'vstripes':
-          return Math.floor(x / 2) % 2 === 0 ? color1 : color2;
-        case 'dots':
-          return (x % 4 === 1 && y % 4 === 1) || (x % 4 === 3 && y % 4 === 3) ? color2 : color1;
-        case 'plaid':
-          if (y % 4 === 0 || y % 4 === 1) {
-            return x % 4 === 0 || x % 4 === 1 ? color1 : color2;
-          } else {
-            return x % 4 === 0 || x % 4 === 1 ? color2 : color1;
-          }
-        case 'camo':
-          const seeds = [(x * 17 + y * 23) % 100, (x * 13 + y * 19) % 100];
-          if (seeds[0] < 30) return color1;
-          if (seeds[1] < 30) return color2;
-          return avatarState.topColor;
-        default:
-          return color1;
-      }
-    }
-
-    function drawBodyPartWithPattern(ctx, x, y, w, h, palette) {
-      const pattern = avatarState.pattern;
-      if (!pattern) {
-        drawBodyPart(ctx, x, y, w, h, palette);
-        return;
-      }
-
-      for (let px = 0; px < w; px++) {
-        for (let py = 0; py < h; py++) {
-          let baseColor = getPatternPixel(x + px, y + py, pattern);
-
-          // Get palette for the determined color
-          let currentPalette = getPalette(baseColor);
-
-          // Apply slight noise for a pixelated texture feel
-          const seed = (px * 13 + py * 7) % 100;
-          if (seed < 85) {
-            ctx.fillStyle = currentPalette.color;
-          } else if (seed < 95) {
-            ctx.fillStyle = currentPalette.highlight;
-          } else {
-            ctx.fillStyle = currentPalette.shadow;
-          }
-
-          // Apply general shading (simulated light from top-left)
-          if (py === 0) { // Top edge shadow
-            if (currentPalette.color !== currentPalette.shadow) ctx.fillStyle = currentPalette.shadow;
-          }
-          if (px === 0) { // Left edge highlight
-            if (currentPalette.color !== currentPalette.highlight) ctx.fillStyle = currentPalette.highlight;
-          }
-          if (px === w - 1) { // Right edge shadow
-            if (currentPalette.color !== currentPalette.shadow) ctx.fillStyle = currentPalette.shadow;
-          }
-          if (py === h - 1) { // Bottom edge shadow
-            if (currentPalette.color !== currentPalette.shadow) ctx.fillStyle = currentPalette.shadow;
-          }
-
-          ctx.fillRect(x + px, y + py, 1, 1);
-        }
-      }
-    }
-
-
-    function drawEyes(ctx, x, y, palette) {
-      if (avatarState.faceStyle === 'classic') {
-        // Classic Minecraft eyes: 2x2 black pixels, 1 pixel apart
-        ctx.fillStyle = '#000000';
-        ctx.fillRect(x + 2, y + 4, 1, 1);
-        ctx.fillRect(x + 5, y + 4, 1, 1);
-
-        // Eyeball color
-        ctx.fillStyle = avatarState.eyeColor;
-        ctx.fillRect(x + 2, y + 5, 1, 1);
-        ctx.fillRect(x + 5, y + 5, 1, 1);
-
-        // Highlight
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(x + 2, y + 5, 1, 1);
-      } else if (avatarState.faceStyle === 'anime') {
-        // Anime style: larger, more detailed eyes
-        // Eye shape
-        ctx.fillStyle = palette.shadow;
-        ctx.fillRect(x + 1, y + 3, 2, 1);
-        ctx.fillRect(x + 5, y + 3, 2, 1);
-        ctx.fillRect(x + 1, y + 6, 2, 1);
-        ctx.fillRect(x + 5, y + 6, 2, 1);
-
-        // Sclera (white)
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(x + 1, y + 4, 2, 2);
-        ctx.fillRect(x + 5, y + 4, 2, 2);
-
-        // Iris (eye color)
-        ctx.fillStyle = avatarState.eyeColor;
-        ctx.fillRect(x + 2, y + 5, 1, 1);
-        ctx.fillRect(x + 6, y + 5, 1, 1);
-
-        // Pupil (black)
-        ctx.fillStyle = '#000000';
-        ctx.fillRect(x + 2, y + 5, 1, 1);
-        ctx.fillRect(x + 6, y + 5, 1, 1);
-
-        // Top line for eyes
-        ctx.fillStyle = '#000000';
-        ctx.fillRect(x + 1, y + 4, 2, 1);
-        ctx.fillRect(x + 5, y + 4, 2, 1);
-      }
-    }
-
-
-    function drawFace(ctx, palette) {
-      const { x, y, w, h } = FACE_MAP.head.front;
-
-      // Draw base face color (front of head)
-      drawBodyPart(ctx, x, y, w, h, palette);
-
-      // --- Facial Features ---
-
-      // 1. Mouth/Expression
-      ctx.fillStyle = '#000000';
-      if (avatarState.expression === 'smile') {
-        ctx.fillRect(x + 3, y + 7, 2, 1);
-      } else if (avatarState.expression === 'happy') {
-        ctx.fillRect(x + 3, y + 7, 2, 1);
-        ctx.fillRect(x + 2, y + 6, 1, 1);
-        ctx.fillRect(x + 5, y + 6, 1, 1);
-      } else if (avatarState.expression === 'neutral') {
-        ctx.fillRect(x + 3, y + 7, 2, 1);
-      } else if (avatarState.expression === 'surprised') {
-        ctx.fillRect(x + 3, y + 7, 2, 1);
-        ctx.fillRect(x + 3, y + 6, 2, 1);
-      }
-
-      // 2. Eyes
-      drawEyes(ctx, x, y, palette);
-
-      // 3. Blush
-      if (avatarState.hasBlush) {
-        const blushColor = getPalette('#FFC0CB').shadow;
-        ctx.fillStyle = blushColor;
-        ctx.fillRect(x + 1, y + 6, 1, 1);
-        ctx.fillRect(x + 6, y + 6, 1, 1);
-      }
-
-      // 4. Glasses (Overlay)
-      if (avatarState.hasGlasses) {
-        ctx.fillStyle = avatarState.glassesColor;
-        // Bridge
-        ctx.fillRect(x + 3, y + 5, 2, 1);
-        // Frames
-        ctx.fillRect(x + 1, y + 4, 1, 3);
-        ctx.fillRect(x + 6, y + 4, 1, 3);
-        ctx.fillRect(x + 1, y + 4, 2, 1);
-        ctx.fillRect(x + 5, y + 4, 2, 1);
-        ctx.fillRect(x + 1, y + 6, 2, 1);
-        ctx.fillRect(x + 5, y + 6, 2, 1);
-      }
-
-      // 5. Hairline (To blend with hair, usually darker shade of skin)
-      ctx.fillStyle = palette.shadow;
-      ctx.fillRect(x, y, w, 1);
-    }
-
-    function getHairTexturePattern(texture) {
-      if (texture === 'curly') {
-        // Curly: tight clusters, more variation
-        return (px, py) => {
-          const clusterX = Math.floor(px / 2);
-          const clusterY = Math.floor(py / 2);
-          const seed = (clusterX * 17 + clusterY * 23 + px * 3 + py * 5) % 100;
-          if (seed < 25) return 'shadow';
-          if (seed < 40) return 'highlight';
-          return 'color';
-        };
-      } else if (texture === 'wavy') {
-        // Wavy: horizontal striations
-        return (px, py) => {
-          const seed = (py * 3) % 100;
-          if (seed < 20) return 'highlight';
-          if (seed > 80) return 'shadow';
-          return 'color';
-        };
-      } else {
-        // Straight: standard noise
-        return (px, py) => {
-          const seed = (px * 13 + py * 7) % 100;
-          if (seed < 85) return 'color';
-          if (seed < 95) return 'highlight';
-          return 'shadow';
-        };
-      }
-    }
-
-    function drawBodyPartWithTexture(ctx, x, y, w, h, palette, texturePattern) {
-      for (let px = 0; px < w; px++) {
-        for (let py = 0; py < h; py++) {
-          const colorKey = texturePattern(px, py);
-          ctx.fillStyle = palette[colorKey];
-          ctx.fillRect(x + px, y + py, 1, 1);
-        }
-      }
-    }
-
-
-    function drawHair(ctx, palette) {
-      if (avatarState.hairStyle === 'none') return;
-
-      // Apply texture-based shading pattern
-      const texturePattern = getHairTexturePattern(avatarState.hairTexture);
-
-      // Top of head (8x8 at 8, 0)
-      drawBodyPartWithTexture(ctx, 8, 0, 8, 8, palette, texturePattern);
-      // Back of head (8x8 at 24, 8)
-      drawBodyPartWithTexture(ctx, 24, 8, 8, 8, palette, texturePattern);
-
-      // --- Bangs (Front of Head Overlay) ---
-      if (avatarState.bangsStyle === 'short') {
-        // 8x2
-        drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
-      } else if (avatarState.bangsStyle === 'long') {
-        // 8x4
-        drawBodyPartWithTexture(ctx, 8, 8, 8, 4, palette, texturePattern);
-      } else if (avatarState.bangsStyle === 'layered') {
-        // 8x2 base
-        drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
-        // 2x2 fringe bits
-        drawBodyPartWithTexture(ctx, 8, 10, 2, 2, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 14, 10, 2, 2, palette, texturePattern);
-      } else if (avatarState.bangsStyle === 'asymmetric') {
-        // 8x3 base, then one side dips
-        drawBodyPartWithTexture(ctx, 8, 8, 8, 3, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 8, 11, 4, 1, palette, texturePattern);
-      }
-
-      // --- Sides of Head ---
-      // Left side (8x8 at 0, 8)
-      drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
-      // Right side (8x8 at 16, 8)
-      drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
-
-      // --- Long Hair (Back Overlay) ---
-      if (avatarState.hairStyle === 'long') {
-        // Back of Torso area (8x10 at 32, 20)
-        drawBodyPartWithTexture(ctx, 32, 20, 8, 10, palette, texturePattern);
-      }
-    }
-
-    function drawClothing(ctx) {
-      const topPalette = getPalette(avatarState.topColor);
-      const bottomPalette = getPalette(avatarState.bottomColor);
-      const footwearPalette = getPalette(avatarState.footwearColor);
-
-      const armWidth = avatarState.modelType === 'slim' ? 3 : 4;
-
-      // 1. TORSO (8x12 at 20, 20) - Top Layer (Top and Body Sides)
-      drawBodyPartWithPattern(ctx, 20, 20, 8, 12, topPalette); // Front
-      drawBodyPartWithPattern(ctx, 32, 20, 8, 12, topPalette); // Back
-      drawBodyPartWithPattern(ctx, 16, 20, 4, 12, topPalette); // Left Side
-      drawBodyPartWithPattern(ctx, 28, 20, 4, 12, topPalette); // Right Side
-      drawBodyPartWithPattern(ctx, 20, 16, 8, 4, topPalette); // Top
-      drawBodyPartWithPattern(ctx, 28, 16, 8, 4, topPalette); // Bottom (will be covered by pants, but draw for completeness)
-
-      // 2. ARMS (4x12 or 3x12) - Top Layer
-      // Right Arm
-      drawBodyPartWithPattern(ctx, 44, 20, armWidth, 12, topPalette); // Front
-      drawBodyPartWithPattern(ctx, 52, 20, armWidth, 12, topPalette); // Back
-      drawBodyPartWithPattern(ctx, 40, 20, armWidth, 12, topPalette); // Left Side
-      drawBodyPartWithPattern(ctx, 48, 20, armWidth, 12, topPalette); // Right Side
-      drawBodyPartWithPattern(ctx, 44, 16, armWidth, 4, topPalette); // Top
-      drawBodyPartWithPattern(ctx, 48, 16, armWidth, 4, topPalette); // Bottom (wrist)
-
-      // Left Arm
-      drawBodyPartWithPattern(ctx, 36, 52, armWidth, 12, topPalette); // Front
-      drawBodyPartWithPattern(ctx, 44, 52, armWidth, 12, topPalette); // Back
-      drawBodyPartWithPattern(ctx, 32, 52, armWidth, 12, topPalette); // Left Side
-      drawBodyPartWithPattern(ctx, 40, 52, armWidth, 12, topPalette); // Right Side
-      drawBodyPartWithPattern(ctx, 36, 48, armWidth, 4, topPalette); // Top
-      drawBodyPartWithPattern(ctx, 40, 48, armWidth, 4, topPalette); // Bottom (wrist)
-
-      // Apply Top Style Overrides
-      if (avatarState.topStyle === 'tank') {
-        // Remove sleeves: draw skin over the arm sides and top/bottom
-        const skinPalette = getPalette(avatarState.skinTone);
-
-        // Right Arm Sides (40, 20) and (48, 20) for 4x12
-        drawBodyPart(ctx, 40, 20, armWidth, 12, skinPalette);
-        drawBodyPart(ctx, 48, 20, armWidth, 12, skinPalette);
-        drawBodyPart(ctx, 44, 16, armWidth, 4, skinPalette); // Top
-        drawBodyPart(ctx, 48, 16, armWidth, 4, skinPalette); // Bottom (wrist)
-
-        // Left Arm Sides (32, 52) and (40, 52) for 4x12
-        drawBodyPart(ctx, 32, 52, armWidth, 12, skinPalette);
-        drawBodyPart(ctx, 40, 52, armWidth, 12, skinPalette);
-        drawBodyPart(ctx, 36, 48, armWidth, 4, skinPalette); // Top
-        drawBodyPart(ctx, 40, 48, armWidth, 4, skinPalette); // Bottom (wrist)
-
-        // Draw skin under the torso armpits (minimal coverage)
-        drawBodyPart(ctx, 16, 20, 1, 4, skinPalette);
-        drawBodyPart(ctx, 27, 20, 1, 4, skinPalette);
-      }
-      // Hoodie, Polo, etc. can have extra layers drawn here if needed (e.g., hood layer)
-
-      // 3. LEGS (4x12) - Bottoms Layer (Legs)
-      const legStart = avatarState.bottomStyle === 'shorts' ? 24 : 28; // Start point for leg color (shorts or full length)
-
-      // Right Leg
-      drawBodyPartWithPattern(ctx, 4, legStart, 4, 16 - legStart, bottomPalette); // Front
-      drawBodyPartWithPattern(ctx, 12, legStart, 4, 16 - legStart, bottomPalette); // Back
-      drawBodyPartWithPattern(ctx, 0, legStart, 4, 16 - legStart, bottomPalette); // Left Side
-      drawBodyPartWithPattern(ctx, 8, legStart, 4, 16 - legStart, bottomPalette); // Right Side
-      drawBodyPartWithPattern(ctx, 4, 20, 4, 4, bottomPalette); // Top
-      drawBodyPartWithPattern(ctx, 8, 20, 4, 4, bottomPalette); // Bottom
-
-      // Left Leg
-      drawBodyPartWithPattern(ctx, 20, legStart, 4, 16 - legStart, bottomPalette); // Front
-      drawBodyPartWithPattern(ctx, 28, legStart, 4, 16 - legStart, bottomPalette); // Back
-      drawBodyPartWithPattern(ctx, 16, legStart, 4, 16 - legStart, bottomPalette); // Left Side
-      drawBodyPartWithPattern(ctx, 24, legStart, 4, 16 - legStart, bottomPalette); // Right Side
-      drawBodyPartWithPattern(ctx, 20, 48, 4, 4, bottomPalette); // Top
-      drawBodyPartWithPattern(ctx, 24, 48, 4, 4, bottomPalette); // Bottom
-
-
-      // Apply Bottom Style Overrides
-      if (avatarState.bottomStyle === 'jeans') {
-        // Subtle pockets/seams can be drawn here
-      } else if (avatarState.bottomStyle === 'shorts') {
-        // Draw skin color on the lower legs
-        const skinPalette = getPalette(avatarState.skinTone);
-
-        // Right Leg (Lower) - starts at y=28 (8 pixels of leg)
-        drawBodyPart(ctx, 4, 28, 4, 8, skinPalette);
-        drawBodyPart(ctx, 12, 28, 4, 8, skinPalette);
-        drawBodyPart(ctx, 0, 28, 4, 8, skinPalette);
-        drawBodyPart(ctx, 8, 28, 4, 8, skinPalette);
-
-        // Left Leg (Lower)
-        drawBodyPart(ctx, 20, 56, 4, 8, skinPalette);
-        drawBodyPart(ctx, 28, 56, 4, 8, skinPalette);
-        drawBodyPart(ctx, 16, 56, 4, 8, skinPalette);
-        drawBodyPart(ctx, 24, 56, 4, 8, skinPalette);
-      }
-
-      // 4. FOOTWEAR (Boots, sneakers, etc.) - Final Layer on bottom of legs
-      // Footwear is 4 pixels high (from y=28 to y=32 for Right Leg, or y=60 to y=64 for Left Leg)
-      const footY = avatarState.modelType === 'slim' ? 28 : 28;
-
-      // Right Leg (lower 4 pixels)
-      drawBodyPart(ctx, 4, footY, 4, 4, footwearPalette); // Front
-      drawBodyPart(ctx, 12, footY, 4, 4, footwearPalette); // Back
-      drawBodyPart(ctx, 0, footY, 4, 4, footwearPalette); // Left Side
-      drawBodyPart(ctx, 8, footY, 4, 4, footwearPalette); // Right Side
-      drawBodyPart(ctx, 4, 16, 4, 4, footwearPalette); // Top (Right Leg Top - 4, 16 to 7, 19)
-
-      // Left Leg (lower 4 pixels - y=60 to y=64)
-      drawBodyPart(ctx, 20, 60, 4, 4, footwearPalette); // Front
-      drawBodyPart(ctx, 28, 60, 4, 4, footwearPalette); // Back
-      drawBodyPart(ctx, 16, 60, 4, 4, footwearPalette); // Left Side
-      drawBodyPart(ctx, 24, 60, 4, 4, footwearPalette); // Right Side
-      drawBodyPart(ctx, 20, 48, 4, 4, footwearPalette); // Top (Left Leg Top - 20, 48 to 23, 51)
-
-      if (avatarState.footwear === 'boots') {
-        // Draw boots higher (8 pixels high)
-        drawBodyPart(ctx, 4, footY - 4, 4, 8, footwearPalette);
-        drawBodyPart(ctx, 12, footY - 4, 4, 8, footwearPalette);
-        drawBodyPart(ctx, 0, footY - 4, 4, 8, footwearPalette);
-        drawBodyPart(ctx, 8, footY - 4, 4, 8, footwearPalette);
-        drawBodyPart(ctx, 20, 56, 4, 8, footwearPalette);
-        drawBodyPart(ctx, 28, 56, 4, 8, footwearPalette);
-        drawBodyPart(ctx, 16, 56, 4, 8, footwearPalette);
-        drawBodyPart(ctx, 24, 56, 4, 8, footwearPalette);
-      } else if (avatarState.footwear === 'converse') {
-        // Draw high tops (just an extra pixel of height)
-        drawBodyPart(ctx, 4, footY - 1, 4, 5, footwearPalette);
-        drawBodyPart(ctx, 12, footY - 1, 4, 5, footwearPalette);
-        drawBodyPart(ctx, 0, footY - 1, 4, 5, footwearPalette);
-        drawBodyPart(ctx, 8, footY - 1, 4, 5, footwearPalette);
-        drawBodyPart(ctx, 20, 59, 4, 5, footwearPalette);
-        drawBodyPart(ctx, 28, 59, 4, 5, footwearPalette);
-        drawBodyPart(ctx, 16, 59, 4, 5, footwearPalette);
-        drawBodyPart(ctx, 24, 59, 4, 5, footwearPalette);
-      }
-    }
-
-
-    function drawSticker(ctx, emoji, x, y) {
-      // Use the emoji as text, rendered onto the canvas
-      ctx.save();
-      ctx.font = '10px Arial'; // Simplified font size for 8x12 area
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = '#000000';
-      ctx.fillText(emoji, x + 4, y + 6); // Centered on a standard 8x12 body part
-      ctx.restore();
-    }
-
-    function drawDecals(ctx) {
-      if (!avatarState.currentSticker) return;
-
-      const { x, y } = FACE_MAP.body.front; // Front of Torso (20, 20, 8, 12)
-      drawSticker(ctx, avatarState.currentSticker.emoji, x, y);
-    }
-
-    function generateSkin(saveHistory = true) {
-      skinContext.clearRect(0, 0, 64, 64);
-
-      const skinPalette = getPalette(avatarState.skinTone);
-      const hairPalette = getPalette(avatarState.hairColor);
-
-      // 1. Draw all base skin tones (including head top/bottom and face sides)
-      drawBodyPart(skinContext, 0, 8, 8, 8, skinPalette); // Head Left
-      drawBodyPart(skinContext, 8, 8, 8, 8, skinPalette); // Head Front
-      drawBodyPart(skinContext, 16, 8, 8, 8, skinPalette); // Head Right
-      drawBodyPart(skinContext, 24, 8, 8, 8, skinPalette); // Head Back
-      drawBodyPart(skinContext, 8, 0, 8, 8, skinPalette); // Head Top
-      drawBodyPart(skinContext, 16, 0, 8, 8, skinPalette); // Head Bottom
-
-      // 2. Draw Clothing (which covers Torso, Arms, Legs)
-      drawClothing(skinContext);
-
-      // 3. Draw Hair (which covers Head)
-      drawHair(skinContext, hairPalette);
-
-      // 4. Draw Face Features (which covers Head Front)
-      drawFace(skinContext, skinPalette);
-
-      // 5. Draw Decals (which covers Clothing)
-      drawDecals(skinContext);
-
-      // Save the generated image data back to the bodyPartFaces for the editor to use
-      saveCurrentFace(false); // Save the result of all drawing to the internal editor storage
-
-      if (saveHistory) {
-        saveToHistory();
-      }
-    }
-
-    // --- 3D Viewer Functions (THREE.js) ---
-
-    function setUVs(geometry, fx, fy, fw, fh, bx, by, bw, bh, tx, ty, tw, th, dx, dy, dw, dh, lx, ly, lw, lh, rx, ry, rw, rh) {
-      const uvs = geometry.attributes.uv.array;
-      const coords = [
-        fx, fy, fw, fh, // Front
-        bx, by, bw, bh, // Back
-        tx, ty, tw, th, // Top
-        dx, dy, dw, dh, // Bottom
-        lx, ly, lw, lh, // Left
-        rx, ry, rw, rh // Right
-      ];
-
-      const parts = ['front', 'back', 'top', 'bottom', 'left', 'right'];
-
-      for (let i = 0; i < 6; i++) {
-        const x = coords[i * 4] / 64;
-        const y = 1 - (coords[i * 4 + 1] / 64);
-        const w = coords[i * 4 + 2] / 64;
-        const h = coords[i * 4 + 3] / 64;
-
-        const offset = i * 8;
-
-        // Vertices for face
-        // Bottom Left (BL)
-        uvs[offset] = x;
-        uvs[offset + 1] = y - h;
-
-        // Bottom Right (BR)
-        uvs[offset + 2] = x + w;
-        uvs[offset + 3] = y - h;
-
-        // Top Right (TR)
-        uvs[offset + 4] = x + w;
-        uvs[offset + 5] = y;
-
-        // Top Left (TL)
-        uvs[offset + 6] = x;
-        uvs[offset + 7] = y;
-      }
-      geometry.attributes.uv.needsUpdate = true;
-    }
-
-    function setHeadUVs(geometry) {
-      setUVs(
-        geometry,
-        8, 8, 8, 8, // Front (8, 8, 8, 8)
-        24, 8, 8, 8, // Back (24, 8, 8, 8)
-        8, 0, 8, 8, // Top (8, 0, 8, 8)
-        16, 0, 8, 8, // Bottom (16, 0, 8, 8)
-        0, 8, 8, 8, // Left (0, 8, 8, 8)
-        16, 8, 8, 8 // Right (16, 8, 8, 8)
-      );
-    }
-
-    function createMinecraftModel() {
-      if (skinMesh) {
-        scene.remove(skinMesh);
-      }
-
-      const group = new THREE.Group();
-      const texture = new THREE.Texture(skinCanvas);
-      texture.needsUpdate = true;
-      const material = new THREE.MeshLambertMaterial({
-        map: texture,
-        transparent: true,
-        alphaTest: 0.5
-      });
-
-      // Head
-      const headGeo = new THREE.BoxGeometry(8, 8, 8);
-      const head = new THREE.Mesh(headGeo, material);
-      head.position.y = 10;
-      setHeadUVs(headGeo);
-      group.add(head);
-
-      // Torso
-      const torsoGeo = new THREE.BoxGeometry(8, 12, 4);
-      const torso = new THREE.Mesh(torsoGeo, material);
-      torso.position.y = 4;
-      setUVs(torsoGeo, 20, 20, 8, 12, 32, 20, 8, 12, 20, 16, 8, 4, 28, 16, 8, 4, 16, 20, 4, 12, 28, 20, 4, 12);
-      group.add(torso);
-
-      // Arms
-      const armWidth = avatarState.modelType === 'slim' ? 3 : 4;
-      const armOffset = avatarState.modelType === 'slim' ? 5.5 : 6;
-
-      // Right Arm
-      const rightArmGeo = new THREE.BoxGeometry(armWidth, 12, 4);
-      const rightArm = new THREE.Mesh(rightArmGeo, material);
-      rightArm.position.set(-armOffset, 4, 0);
-      setUVs(rightArmGeo, 44, 20, 4, 12, 52, 20, 4, 12, 44, 16, 4, 4, 48, 16, 4, 4, 40, 20, 4, 12, 48, 20, 4, 12);
-      group.add(rightArm);
-
-      // Left Arm
-      const leftArmGeo = new THREE.BoxGeometry(armWidth, 12, 4);
-      const leftArm = new THREE.Mesh(leftArmGeo, material);
-      leftArm.position.set(armOffset, 4, 0);
-      setUVs(leftArmGeo, 36, 52, 4, 12, 44, 52, 4, 12, 36, 48, 4, 4, 40, 48, 4, 4, 32, 52, 4, 12, 40, 52, 4, 12);
-      group.add(leftArm);
-
-
-      // Legs
-      const legWidth = 4;
-      const legOffset = 2;
-
-      // Right Leg
-      const rightLegGeo = new THREE.BoxGeometry(legWidth, 12, 4);
-      const rightLeg = new THREE.Mesh(rightLegGeo, material);
-      rightLeg.position.set(-legOffset, -2, 0);
-      setUVs(rightLegGeo, 4, 20, 4, 12, 12, 20, 4, 12, 4, 16, 4, 4, 8, 16, 4, 4, 0, 20, 4, 12, 8, 20, 4, 12);
-      group.add(rightLeg);
-
-      // Left Leg
-      const leftLegGeo = new THREE.BoxGeometry(legWidth, 12, 4);
-      const leftLeg = new THREE.Mesh(leftLegGeo, material);
-      leftLeg.position.set(legOffset, -2, 0);
-      setUVs(leftLegGeo, 20, 52, 4, 12, 28, 52, 4, 12, 20, 48, 4, 4, 24, 48, 4, 4, 16, 52, 4, 12, 24, 52, 4, 12);
-      group.add(leftLeg);
-
-      skinMesh = group;
-      scene.add(skinMesh);
-    }
-
-    function setup3DViewer(container, initialCameraZ = 35) {
-      // Scene
-      scene = new THREE.Scene();
-
-      // Camera
-      camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 1, 1000);
-      camera.position.z = initialCameraZ;
-      camera.position.y = 4;
-
-      // Renderer
-      renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
-      });
-      renderer.setClearColor(0x000000, 0); // Transparent background
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      container.appendChild(renderer.domElement);
-
-      // Lighting
-      const light = new THREE.DirectionalLight(0xffffff, 0.8);
-      light.position.set(2, 5, 4);
-      scene.add(light);
-      scene.add(new THREE.AmbientLight(0x404040, 1.5));
-
-      // Animation Loop
-      function animate() {
-        requestAnimationFrame(animate);
-
-        if (skinMesh) {
-          skinMesh.rotation.y += 0.005; // Gentle rotation
-        }
-        renderer.render(scene, camera);
-      }
-
-      // Handle resize
-      window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-      });
-
-      // User Interaction (Rotate/Zoom)
-      let isDragging = false;
-      let previousMousePosition = {
-        x: 0,
-        y: 0
-      };
-      renderer.domElement.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        previousMousePosition = {
-          x: e.clientX,
-          y: e.clientY
-        };
-      });
-      renderer.domElement.addEventListener('mousemove', (e) => {
-        if (isDragging && skinMesh) {
-          const deltaX = e.clientX - previousMousePosition.x;
-          skinMesh.rotation.y += deltaX * 0.01;
-          previousMousePosition = {
-            x: e.clientX,
-            y: e.clientY
-          };
-        }
-      });
-      renderer.domElement.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-      renderer.domElement.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        camera.position.z += e.deltaY * 0.05;
-        camera.position.z = Math.max(25, Math.min(50, camera.position.z));
-      });
-
-      animate();
-    }
-
-    // --- UI/State Management ---
-
-    function updatePreview(updateHistory = true) {
-      generateSkin(updateHistory);
-      if (skinTexture) {
-        skinTexture.needsUpdate = true;
-        if (skinMesh) {
-          // If the model exists, force a rotation update to refresh
-          skinMesh.rotation.y += 0.0001;
-        } else {
-          // If model doesn't exist, create it.
-          createMinecraftModel();
-        }
-      } else {
-        createMinecraftModel();
-      }
-      updateHistoryButtons();
-    }
-
-    function updateUIFromState() {
-      // Update toggle buttons
-      if (document.getElementById('blush-toggle')) {
-        document.getElementById('blush-toggle').classList.toggle('active', avatarState.hasBlush);
-        document.getElementById('blush-toggle').setAttribute('aria-checked', avatarState.hasBlush ? 'true' : 'false');
-      }
-      if (document.getElementById('glasses-toggle')) {
-        document.getElementById('glasses-toggle').classList.toggle('active', avatarState.hasGlasses);
-        document.getElementById('glasses-toggle').setAttribute('aria-checked', avatarState.hasGlasses ? 'true' : 'false');
-      }
-
-      // Update option buttons
-      document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.classList.remove('selected');
-        const key = Object.keys(avatarState).find(k => k.toLowerCase().includes(btn.dataset.model || btn.dataset.facestyle || btn.dataset.hairstyle || btn.dataset.bangs || btn.dataset.hairtexture || btn.dataset.expression || btn.dataset.top || btn.dataset.bottom || btn.dataset.footwear || btn.dataset.pattern));
-        if (key && avatarState[key] === btn.dataset[Object.keys(btn.dataset)[0]]) {
-          btn.classList.add('selected');
-        } else if (btn.dataset.pattern === 'none' && !avatarState.pattern) {
-          btn.classList.add('selected');
-        }
-      });
-
-      updateExpressionButtons();
-    }
-
-    function updateExpressionButtons() {
-      document.querySelectorAll('[data-expression]').forEach(btn => {
-        btn.classList.remove('selected');
-        if (avatarState.expression === btn.dataset.expression) {
-          btn.classList.add('selected');
-        }
-      });
-    }
-
-
-    function populateColorGrids() {
-      const grids = [{
-        id: 'skin-tone-grid',
-        colors: skinTones,
-        key: 'skinTone'
-      }, {
-        id: 'hair-color-grid',
-        colors: hairColors,
-        key: 'hairColor'
-      }, {
-        id: 'eye-color-grid',
-        colors: hairColors, // Using hair colors for variety
-        key: 'eyeColor'
-      }, {
-        id: 'glasses-color-grid',
-        colors: glassesColors,
-        key: 'glassesColor'
-      }, {
-        id: 'top-color-grid',
-        colors: topColors,
-        key: 'topColor'
-      }, {
-        id: 'bottom-color-grid',
-        colors: bottomColors,
-        key: 'bottomColor'
-      }, {
-        id: 'footwear-color-grid',
-        colors: footwearColors,
-        key: 'footwearColor'
-      }, {
-        id: 'pattern-color1-grid',
-        colors: topColors,
-        key: 'patternColor1'
-      }, {
-        id: 'pattern-color2-grid',
-        colors: bottomColors,
-        key: 'patternColor2'
-      }, ];
-
-      grids.forEach(gridInfo => {
-        const grid = document.getElementById(gridInfo.id);
-        if (!grid) return;
-        grid.innerHTML = '';
-        gridInfo.colors.forEach(color => {
-          const button = document.createElement('button');
-          button.className = 'color-swatch';
-          button.style.backgroundColor = color;
-          button.setAttribute('data-color', color);
-          button.setAttribute('aria-label', `Select color ${color}`);
-
-          if (avatarState[gridInfo.key] === color) {
-            button.classList.add('selected');
-          }
-
-          button.addEventListener('click', function() {
-            // Deselect all swatches in this grid
-            grid.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('selected'));
-            this.classList.add('selected');
-            avatarState[gridInfo.key] = color;
-            speak(translations[currentLanguage][gridInfo.key] + ' set');
-            updatePreview();
-          });
-          grid.appendChild(button);
-        });
-      });
-    }
-
-    // --- Editor Functions ---
-
-    function saveCurrentFace(pushHistory = true) {
-      if (!FACE_MAP[currentBodyPart]) return;
-      const face = FACE_MAP[currentBodyPart][currentFace];
-      const data = skinContext.getImageData(face.x, face.y, face.w, face.h);
-
-      if (!bodyPartFaces[currentBodyPart]) {
-        bodyPartFaces[currentBodyPart] = {};
-      }
-      bodyPartFaces[currentBodyPart][currentFace] = data;
-
-      if (pushHistory) {
-        pushToEditorHistory(currentBodyPart, currentFace, data);
-      }
-    }
-
-    function loadFaceToEditor(bodyPart = currentBodyPart, face = currentFace) {
-      if (!FACE_MAP[bodyPart]) return;
-      const faceInfo = FACE_MAP[bodyPart][face];
-      currentBodyPart = bodyPart;
-      currentFace = face;
-
-      editorCanvas.width = faceInfo.w;
-      editorCanvas.height = faceInfo.h;
-
-      // Calculate display size (Fixed pixel size of 50px)
-      const PIXEL_SIZE = 50;
-      const displayWidth = faceInfo.w * PIXEL_SIZE;
-      const displayHeight = faceInfo.h * PIXEL_SIZE;
-      editorCanvas.style.width = displayWidth + 'px';
-      editorCanvas.style.height = displayHeight + 'px';
-
-      // Draw the image data to the editor canvas
-      if (bodyPartFaces[bodyPart] && bodyPartFaces[bodyPart][face]) {
-        editorContext.putImageData(bodyPartFaces[bodyPart][face], 0, 0);
-      } else {
-        // If no data saved, load from skin context (fresh load)
-        const data = skinContext.getImageData(faceInfo.x, faceInfo.y, faceInfo.w, faceInfo.h);
-        editorContext.putImageData(data, 0, 0);
-        bodyPartFaces[bodyPart] = bodyPartFaces[bodyPart] || {};
-        bodyPartFaces[bodyPart][face] = data;
-        pushToEditorHistory(bodyPart, face, data); // Initial state
-      }
-
-      // Update the hidden canvas with the current editor view
-      updateSkinCanvasFromEditor();
-    }
-
-    function pushToEditorHistory(bodyPart, face, imageData) {
-      const historyItem = {
-        bodyPart,
-        face,
-        imageData: editorContext.createImageData(imageData.width, imageData.height),
-      };
-      historyItem.imageData.data.set(imageData.data);
-
-      editorHistoryStack.splice(editorHistoryIndex + 1); // Clear redo history
-      editorHistoryStack.push(historyItem);
-      editorHistoryIndex = editorHistoryStack.length - 1;
-
-      if (editorHistoryStack.length > 50) {
-        editorHistoryStack.shift();
-        editorHistoryIndex--;
-      }
-      updateEditorHistoryButtons();
-    }
-
-    function updateEditorHistoryButtons() {
-      const undoBtn = document.getElementById('editor-undo-btn');
-      const redoBtn = document.getElementById('editor-redo-btn');
-      if (undoBtn) {
-        undoBtn.disabled = editorHistoryIndex <= 0;
-      }
-      if (redoBtn) {
-        redoBtn.disabled = editorHistoryIndex >= editorHistoryStack.length - 1;
-      }
-    }
-
-    function undoEditor() {
-      if (editorHistoryIndex > 0) {
-        editorHistoryIndex--;
-        applyEditorHistory();
-      }
-    }
-
-    function redoEditor() {
-      if (editorHistoryIndex < editorHistoryStack.length - 1) {
-        editorHistoryIndex++;
-        applyEditorHistory();
-      }
-    }
-
-    function applyEditorHistory() {
-      const historyItem = editorHistoryStack[editorHistoryIndex];
-      const faceInfo = FACE_MAP[historyItem.bodyPart][historyItem.face];
-
-      // If body part or face changed, switch the editor view
-      if (historyItem.bodyPart !== currentBodyPart || historyItem.face !== currentFace) {
-        currentBodyPart = historyItem.bodyPart;
-        currentFace = historyItem.face;
-        document.getElementById('body-part-select').value = currentBodyPart;
-        document.getElementById('face-select').value = currentFace;
-        // Reload editor with new size/content
-        loadFaceToEditor(currentBodyPart, currentFace);
-        return;
-      }
-
-      // Apply image data to the editor canvas
-      editorCanvas.width = historyItem.imageData.width;
-      editorCanvas.height = historyItem.imageData.height;
-      editorContext.putImageData(historyItem.imageData, 0, 0);
-
-      // Save the state to the skin canvas (preview) and bodyPartFaces
-      updateSkinCanvasFromEditor(false); // Don't push to history, already in history stack
-      bodyPartFaces[currentBodyPart][currentFace] = historyItem.imageData;
-
-      updateEditorHistoryButtons();
-    }
-
-    function updateSkinCanvasFromEditor(pushHistory = true) {
-      const face = FACE_MAP[currentBodyPart][currentFace];
-      const data = editorContext.getImageData(0, 0, face.w, face.h);
-
-      skinContext.putImageData(data, face.x, face.y);
-      if (skinTexture) skinTexture.needsUpdate = true;
-      if (pushHistory) {
-        saveCurrentFace(true);
-      }
-    }
-
-    function handleEditorInput(e) {
-      e.preventDefault();
-      const rect = editorCanvas.getBoundingClientRect();
-      const scaleX = editorCanvas.width / rect.width;
-      const scaleY = editorCanvas.height / rect.height;
-
-      const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-      const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-
-      const x = (clientX - rect.left) * scaleX;
-      const y = (clientY - rect.top) * scaleY;
-
-      const px = Math.floor(x);
-      const py = Math.floor(y);
-
-      if (px >= 0 && px < editorCanvas.width && py >= 0 && py < editorCanvas.height) {
-        const faceInfo = FACE_MAP[currentBodyPart][currentFace];
-        const data = editorContext.getImageData(0, 0, faceInfo.w, faceInfo.h);
-
-        // Save current state before drawing for undo/redo
-        saveCurrentFace(true);
-
-        const color = document.getElementById('brush-color').value;
-        const colorRgb = hexToRgb(color);
-        const dataIndex = (py * faceInfo.w + px) * 4;
-
-        if (currentTool === 'pen') {
-          data.data[dataIndex] = colorRgb.r;
-          data.data[dataIndex + 1] = colorRgb.g;
-          data.data[dataIndex + 2] = colorRgb.b;
-          data.data[dataIndex + 3] = 255; // Full opacity
-        } else if (currentTool === 'eraser') {
-          data.data[dataIndex + 3] = 0; // Full transparency
-        }
-
-        editorContext.putImageData(data, 0, 0);
-        updateSkinCanvasFromEditor(false);
-      }
-    }
-
-    // --- Language/Accessibility ---
 
     const translations = {
       en: {
@@ -2582,8 +1434,11 @@
         openText: "Open My Design",
         saveText: "Save My Draft",
         randomize: "🎲 Randomize Avatar",
-        undo: "↩️ Undo",
-        redo: "↪️ Redo",
+        undo: "↶ Undo",
+        redo: "Redo ↷",
+        languageToggle: "🌐 Español",
+        ttsToggle: "🔊 Text-to-Speech",
+        fullscreenToggle: "🖥️ Fullscreen",
         tabIdentity: "IDENTITY",
         tabClothing: "CLOTHING",
         tabDecals: "DECALS",
@@ -2652,28 +1507,31 @@
         openEditor: "🎨 Open Advanced Editor",
         editorDescription: "Click the button below to open the full-screen advanced editor with live preview!"
       },
-      es: {
+    es: {
         title: "🎮 ¡MINECRAFT YO! 🎮",
         instructions: "¡Crea tu personaje único de Minecraft!",
         downloadText: "Descargar para Minecraft",
         openText: "Abrir Mi Diseño",
         saveText: "Guardar Mi Borrador",
-        randomize: "🎲 Avatar Aleatorio",
-        undo: "↩️ Deshacer",
-        redo: "↪️ Rehacer",
+        randomize: "🎲 Aleatorizar Avatar",
+        undo: "↶ Deshacer",
+        redo: "Rehacer ↷",
+        languageToggle: "🌐 English",
+        ttsToggle: "🔊 Texto a Voz",
+        fullscreenToggle: "🖥️ Pantalla Completa",
         tabIdentity: "IDENTIDAD",
         tabClothing: "ROPA",
         tabDecals: "CALCOMANÍAS",
         tabEditor: "EDITOR",
-        modelType: "🧍 Tipo de Cuerpo",
+        modelType: "🧍 Tipo de Modelo",
         standard: "🧍 Estándar",
         slim: "🧘 Delgado",
         faceStyle: "😊 Estilo de Cara",
         classic: "🎮 Clásico",
         anime: "✨ Anime",
         skinTone: "🎨 Tono de Piel",
-        hairColor: "💇 Color de Pelo",
-        hairStyle: "💇‍♀️ Estilo de Pelo",
+        hairColor: "💇 Color de Cabello",
+        hairStyle: "💇‍♀️ Estilo de Cabello",
         short: "✂️ Corto",
         long: "👩 Largo",
         bald: "🧑‍🦲 Calvo",
@@ -2682,12 +1540,12 @@
         bangsLong: "Largo",
         bangsLayered: "En Capas",
         bangsAsymmetric: "Asimétrico",
-        hairTexture: "🌀 Textura de Pelo",
+        hairTexture: "🌀 Textura de Cabello",
         straight: "📏 Liso",
         wavy: "〰️ Ondulado",
         curly: "🌀 Rizado",
         eyeColor: "👁️ Color de Ojos",
-        facialFeatures: "😊 Características Faciales",
+        facialFeatures: "😊 Rasgos Faciales",
         blush: "Rubor",
         expression: "😄 Expresión",
         smile: "🙂 Sonrisa",
@@ -2731,8 +1589,10 @@
       }
     };
 
+
     function speak(text) {
       if (!ttsEnabled || !window.speechSynthesis) return;
+      
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = currentLanguage === 'es' ? 'es-ES' : 'en-US';
@@ -2740,57 +1600,102 @@
       window.speechSynthesis.speak(utterance);
     }
 
+
     function updateLanguage() {
       const t = translations[currentLanguage];
+      
       document.getElementById('app-title').textContent = t.title;
       document.getElementById('instructions').textContent = t.instructions;
       document.getElementById('download-text').textContent = t.downloadText;
       document.getElementById('open-text').textContent = t.openText;
       document.getElementById('save-text').textContent = t.saveText;
       document.getElementById('randomize-btn').innerHTML = t.randomize;
+      document.getElementById('undo-btn').textContent = t.undo;
+      document.getElementById('redo-btn').textContent = t.redo;
+     // Preview control buttons
+document.getElementById('rotate-left-btn').addEventListener('click', function() {
+  if (skinMesh) {
+    skinMesh.rotation.y -= 0.3;
+  }
+});
 
-      // Update Tab Buttons
+document.getElementById('rotate-right-btn').addEventListener('click', function() {
+  if (skinMesh) {
+    skinMesh.rotation.y += 0.3;
+  }
+});
+
+document.getElementById('zoom-in-btn').addEventListener('click', function() {
+  if (camera) {
+    camera.position.z = Math.max(25, camera.position.z - 3);
+  }
+});
+
+document.getElementById('zoom-out-btn').addEventListener('click', function() {
+  if (camera) {
+    camera.position.z = Math.min(50, camera.position.z + 3);
+  }
+});
+
+document.getElementById('reset-view-btn').addEventListener('click', function() {
+  if (camera) {
+    camera.position.z = 35;
+  }
+  if (skinMesh) {
+    skinMesh.rotation.y = 0;
+  }
+});
+      document.getElementById('language-toggle').textContent = t.languageToggle;
+      document.getElementById('tts-toggle').textContent = t.ttsToggle;
+      document.getElementById('fullscreen-toggle').textContent = t.fullscreenToggle;
+
+      
       document.querySelector('[data-tab="identity"]').textContent = t.tabIdentity;
       document.querySelector('[data-tab="clothing"]').textContent = t.tabClothing;
       document.querySelector('[data-tab="decals"]').textContent = t.tabDecals;
       document.querySelector('[data-tab="editor"]').textContent = t.tabEditor;
-
-      // Update Identity Tab
-      const identitySections = document.querySelectorAll('#identity-tab .section-title');
-      identitySections[0].innerHTML = t.modelType;
+      
+      document.querySelectorAll('.section-title')[0].innerHTML = t.modelType;
       document.querySelector('[data-model="standard"]').innerHTML = t.standard;
       document.querySelector('[data-model="slim"]').innerHTML = t.slim;
-      identitySections[1].innerHTML = t.faceStyle;
+      
+      document.querySelectorAll('.section-title')[1].innerHTML = t.faceStyle;
       document.querySelector('[data-facestyle="classic"]').innerHTML = t.classic;
       document.querySelector('[data-facestyle="anime"]').innerHTML = t.anime;
-      identitySections[2].innerHTML = t.skinTone;
-      identitySections[3].innerHTML = t.hairColor;
-      identitySections[4].innerHTML = t.hairStyle;
+      
+      document.querySelectorAll('.section-title')[2].innerHTML = t.skinTone;
+      document.querySelectorAll('.section-title')[3].innerHTML = t.hairColor;
+      document.querySelectorAll('.section-title')[4].innerHTML = t.hairStyle;
+      
       document.querySelector('[data-hairstyle="short"]').innerHTML = t.short;
       document.querySelector('[data-hairstyle="long"]').innerHTML = t.long;
       document.querySelector('[data-hairstyle="none"]').innerHTML = t.bald;
-      identitySections[5].innerHTML = t.bangs;
+      
+      document.querySelectorAll('.section-title')[5].innerHTML = t.bangs;
       document.querySelector('[data-bangs="short"]').textContent = t.bangsShort;
       document.querySelector('[data-bangs="long"]').textContent = t.bangsLong;
       document.querySelector('[data-bangs="layered"]').textContent = t.bangsLayered;
       document.querySelector('[data-bangs="asymmetric"]').textContent = t.bangsAsymmetric;
-      identitySections[6].innerHTML = t.hairTexture;
+      
+      document.querySelectorAll('.section-title')[6].innerHTML = t.hairTexture;
       document.querySelector('[data-hairtexture="straight"]').innerHTML = t.straight;
       document.querySelector('[data-hairtexture="wavy"]').innerHTML = t.wavy;
       document.querySelector('[data-hairtexture="curly"]').innerHTML = t.curly;
-      identitySections[7].innerHTML = t.eyeColor;
-      identitySections[8].innerHTML = t.facialFeatures;
+      
+      document.querySelectorAll('.section-title')[7].innerHTML = t.eyeColor;
+      document.querySelectorAll('.section-title')[8].innerHTML = t.facialFeatures;
       document.querySelectorAll('.switch-label')[0].textContent = t.blush;
-      identitySections[9].innerHTML = t.expression;
+      
+      document.querySelectorAll('.section-title')[9].innerHTML = t.expression;
       document.querySelector('[data-expression="smile"]').innerHTML = t.smile;
       document.querySelector('[data-expression="happy"]').innerHTML = t.happy;
       document.querySelector('[data-expression="neutral"]').innerHTML = t.neutral;
       document.querySelector('[data-expression="surprised"]').innerHTML = t.surprised;
-      identitySections[10].innerHTML = t.glasses;
+      
+      document.querySelectorAll('.section-title')[10].innerHTML = t.glasses;
       document.querySelectorAll('.switch-label')[1].textContent = t.wearGlasses;
-      document.getElementById('glasses-color-label').textContent = t.glassesColor;
-
-      // Update Clothing Tab
+      document.querySelectorAll('#identity-tab label')[0].textContent = t.glassesColor;
+      
       const clothingSections = document.querySelectorAll('#clothing-tab .section-title');
       clothingSections[0].innerHTML = t.tops;
       document.querySelector('[data-top="tshirt"]').innerHTML = t.tshirt;
@@ -2798,18 +1703,21 @@
       document.querySelector('[data-top="tank"]').innerHTML = t.tank;
       document.querySelector('[data-top="polo"]').innerHTML = t.polo;
       document.querySelectorAll('#clothing-tab label')[0].textContent = t.topColor;
+      
       clothingSections[1].innerHTML = t.bottoms;
       document.querySelector('[data-bottom="jeans"]').innerHTML = t.jeans;
       document.querySelector('[data-bottom="shorts"]').innerHTML = t.shorts;
       document.querySelector('[data-bottom="cargo"]').innerHTML = t.cargo;
       document.querySelector('[data-bottom="joggers"]').innerHTML = t.joggers;
       document.querySelectorAll('#clothing-tab label')[1].textContent = t.bottomColor;
+      
       clothingSections[2].innerHTML = t.footwear;
       document.querySelector('[data-footwear="sneakers"]').innerHTML = t.sneakers;
       document.querySelector('[data-footwear="boots"]').innerHTML = t.boots;
       document.querySelector('[data-footwear="converse"]').innerHTML = t.converse;
       document.querySelector('[data-footwear="dress"]').innerHTML = t.dress;
       document.querySelectorAll('#clothing-tab label')[2].textContent = t.footwearColor;
+      
       clothingSections[3].innerHTML = t.patternTemplates;
       document.querySelector('[data-pattern="checkers"]').innerHTML = t.checkers;
       document.querySelector('[data-pattern="hstripes"]').innerHTML = t.hstripes;
@@ -2819,473 +1727,2537 @@
       document.querySelector('[data-pattern="camo"]').innerHTML = t.camo;
       document.querySelectorAll('#clothing-tab label')[3].textContent = t.patternColor1;
       document.querySelectorAll('#clothing-tab label')[4].textContent = t.patternColor2;
-
-      // Update Decals Tab
+      
       document.querySelector('#decals-tab .section-title').innerHTML = t.stickerLibrary;
-
-      // Update Editor Tab
+      
       document.querySelector('#editor-tab .section-title').innerHTML = t.advancedPixelEditor;
       document.querySelector('#editor-tab p').textContent = t.editorDescription;
-      document.getElementById('open-editor-text').textContent = t.openEditor;
+      document.getElementById('open-editor-btn').textContent = t.openEditor;
+      
+      if (ttsEnabled) {
+        speak(t.instructions);
+      }
     }
 
 
-    // --- Event Listeners ---
+    function updateExpressionButtons() {
+      const expressionButtons = document.querySelectorAll('[data-expression]');
+      const isAnime = avatarState.faceStyle === 'anime';
+      
+      expressionButtons.forEach(btn => {
+        if (isAnime) {
+          btn.disabled = true;
+          btn.classList.remove('selected');
+        } else {
+          btn.disabled = false;
+          if (btn.dataset.expression === avatarState.expression) {
+            btn.classList.add('selected');
+          }
+        }
+      });
+    }
+    
+     // Open My Design - Upload PNG
+document.getElementById('open-design-btn').addEventListener('click', function() {
+  document.getElementById('upload-skin').click();
+});
 
-    window.onload = function() {
-      // Initialize 3D Viewer
-      const previewContainer = document.getElementById('preview-canvas');
-      setup3DViewer(previewContainer);
+document.getElementById('upload-skin').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    const img = new Image();
+    img.onload = function() {
+      if (img.width === 64 && img.height === 64) {
+        skinContext.clearRect(0, 0, 64, 64);
+        skinContext.drawImage(img, 0, 0);
+        skinTexture.needsUpdate = true;
+        speak('Design loaded successfully');
+        saveToHistory();
+      } else {
+        alert('Please upload a 64x64 pixel Minecraft skin PNG file.');
+        speak('Invalid file size. Please use a 64 by 64 pixel image.');
+      }
+    };
+    img.src = event.target.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
 
-      // Initial drawing and state save
-      generateSkin(false); // Draw initial skin without saving to history
-      saveToHistory(); // Save the initial state
+// Save My Draft - Download PNG
+document.getElementById('save-draft-btn').addEventListener('click', function() {
+  const skinName = getSkinName();
+  if (!skinName) return; // Don't save if name is invalid
 
-      // Populate color grids and update UI
-      populateColorGrids();
-      updateUIFromState();
+  const skinDataUrl = skinCanvas.toDataURL('image/png');
+  
+  const link = document.createElement('a');
+  link.download = `${skinName}-draft.png`;
+  link.href = skinCanvas.toDataURL('image/png');
+  link.click();
+  speak('Draft saved to your computer');
+});
+    
+
+
+    let editorCanvas, editorContext;
+    let currentTool = 'brush';
+        let brushColor = '#000000';
+    let shadeHelperEnabled = false;
+    let brushSize = 1;
+    let isDrawing = false;
+    let advancedMode = false;
+    let editorScene, editorCamera, editorRenderer, editorSkinMesh;
+    let editorTexture, editorSkinCanvas, editorSkinContext;
+    let currentBodyPart = 'head';
+    let currentFace = 'front';
+    let faceCanvas, faceContext;
+    let editorHistoryStack = [];
+    let editorHistoryIndex = -1;
+    const MAX_EDITOR_HISTORY = 15;
+
+
+    const bodyPartFaces = {
+      'head': {
+        'front': { x: 8, y: 8, w: 8, h: 8 },
+        'back': { x: 24, y: 8, w: 8, h: 8 },
+        'left': { x: 0, y: 8, w: 8, h: 8 },
+        'right': { x: 16, y: 8, w: 8, h: 8 },
+        'top': { x: 8, y: 0, w: 8, h: 8 },
+        'bottom': { x: 16, y: 0, w: 8, h: 8 }
+      },
+      'torso': {
+        'front': { x: 20, y: 20, w: 8, h: 12 },
+        'back': { x: 32, y: 20, w: 8, h: 12 },
+        'left': { x: 16, y: 20, w: 4, h: 12 },
+        'right': { x: 28, y: 20, w: 4, h: 12 },
+        'top': { x: 20, y: 16, w: 8, h: 4 },
+        'bottom': { x: 28, y: 16, w: 8, h: 4 }
+      },
+      'right-arm': {
+        'front': { x: 44, y: 20, w: 4, h: 12 },
+        'back': { x: 52, y: 20, w: 4, h: 12 },
+        'left': { x: 40, y: 20, w: 4, h: 12 },
+        'right': { x: 48, y: 20, w: 4, h: 12 },
+        'top': { x: 44, y: 16, w: 4, h: 4 },
+        'bottom': { x: 48, y: 16, w: 4, h: 4 }
+      },
+      'left-arm': {
+        'front': { x: 36, y: 52, w: 4, h: 12 },
+        'back': { x: 44, y: 52, w: 4, h: 12 },
+        'left': { x: 32, y: 52, w: 4, h: 12 },
+        'right': { x: 40, y: 52, w: 4, h: 12 },
+        'top': { x: 36, y: 48, w: 4, h: 4 },
+        'bottom': { x: 40, y: 48, w: 4, h: 4 }
+      },
+      'right-leg': {
+        'front': { x: 4, y: 20, w: 4, h: 12 },
+        'back': { x: 12, y: 20, w: 4, h: 12 },
+        'left': { x: 0, y: 20, w: 4, h: 12 },
+        'right': { x: 8, y: 20, w: 4, h: 12 },
+        'top': { x: 4, y: 16, w: 4, h: 4 },
+        'bottom': { x: 8, y: 16, w: 4, h: 4 }
+      },
+      'left-leg': {
+        'front': { x: 20, y: 52, w: 4, h: 12 },
+        'back': { x: 28, y: 52, w: 4, h: 12 },
+        'left': { x: 16, y: 52, w: 4, h: 12 },
+        'right': { x: 24, y: 52, w: 4, h: 12 },
+        'top': { x: 20, y: 48, w: 4, h: 4 },
+        'bottom': { x: 24, y: 48, w: 4, h: 4 }
+      }
+    };
+
+
+    function saveToHistory() {
+      if (historyIndex < historyStack.length - 1) {
+        historyStack = historyStack.slice(0, historyIndex + 1);
+      }
+      
+      historyStack.push(JSON.parse(JSON.stringify(avatarState)));
+      
+      if (historyStack.length > MAX_HISTORY) {
+        historyStack.shift();
+      } else {
+        historyIndex++;
+      }
+      
       updateHistoryButtons();
-      updateLanguage();
+    }
 
-      // Language Toggle
-      document.getElementById('language-toggle').addEventListener('click', function() {
-        currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
-        this.textContent = currentLanguage === 'en' ? '🌐 Español' : '🌐 English';
-        updateLanguage();
-        speak(translations[currentLanguage].title);
+
+    function saveToEditorHistory() {
+      const face = bodyPartFaces[currentBodyPart][currentFace];
+      const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
+      const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
+      
+      // Extract only the face region from the centered position
+      const imageData = editorContext.getImageData(offsetX, offsetY, face.w, face.h);
+      
+      if (editorHistoryIndex < editorHistoryStack.length - 1) {
+        editorHistoryStack = editorHistoryStack.slice(0, editorHistoryIndex + 1);
+      }
+      
+      editorHistoryStack.push({
+        bodyPart: currentBodyPart,
+        face: currentFace,
+        imageData: imageData
       });
+      
+      if (editorHistoryStack.length > MAX_EDITOR_HISTORY) {
+        editorHistoryStack.shift();
+      } else {
+        editorHistoryIndex++;
+      }
+      
+      updateEditorHistoryButtons();
+    }
 
-      // TTS Toggle
-      document.getElementById('tts-toggle').addEventListener('click', function() {
-        ttsEnabled = !ttsEnabled;
-        this.classList.toggle('active', ttsEnabled);
-        this.textContent = ttsEnabled ? '🔊 Text-to-Speech' : '🔇 Text-to-Speech';
-        speak(ttsEnabled ? 'Text-to-speech enabled' : 'Text-to-speech disabled');
+
+    function editorUndo() {
+      if (editorHistoryIndex > 0) {
+        editorHistoryIndex--;
+        const historyItem = editorHistoryStack[editorHistoryIndex];
+        
+        if (historyItem.bodyPart !== currentBodyPart || historyItem.face !== currentFace) {
+          saveCurrentFace();
+          currentBodyPart = historyItem.bodyPart;
+          currentFace = historyItem.face;
+          document.getElementById('body-part-select').value = currentBodyPart;
+          document.getElementById('face-select').value = currentFace;
+        }
+        
+        const face = bodyPartFaces[currentBodyPart][currentFace];
+        
+        // Fixed grid size - 8x12
+        const GRID_WIDTH = 8;
+        const GRID_HEIGHT = 12;
+        editorCanvas.width = GRID_WIDTH;
+        editorCanvas.height = GRID_HEIGHT;
+        editorContext.clearRect(0, 0, GRID_WIDTH, GRID_HEIGHT);
+        
+        // Center the face
+        const offsetX = Math.floor((GRID_WIDTH - face.w) / 2);
+        const offsetY = Math.floor((GRID_HEIGHT - face.h) / 2);
+        editorContext.putImageData(historyItem.imageData, offsetX, offsetY);
+        
+        // Fixed pixel size
+        const PIXEL_SIZE = 50;
+        const displayWidth = GRID_WIDTH * PIXEL_SIZE;
+        const displayHeight = GRID_HEIGHT * PIXEL_SIZE;
+        editorCanvas.style.width = displayWidth + 'px';
+        editorCanvas.style.height = displayHeight + 'px';
+        
+        // Store grid info and offset
+        editorCanvas.dataset.gridWidth = GRID_WIDTH;
+        editorCanvas.dataset.gridHeight = GRID_HEIGHT;
+        editorCanvas.dataset.offsetX = offsetX;
+        editorCanvas.dataset.offsetY = offsetY;
+        editorCanvas.dataset.faceW = face.w;
+        editorCanvas.dataset.faceH = face.h;
+        
+        saveCurrentFace();
+        updateEditorHistoryButtons();
+      }
+    }
+
+
+    function editorRedo() {
+      if (editorHistoryIndex < editorHistoryStack.length - 1) {
+        editorHistoryIndex++;
+        const historyItem = editorHistoryStack[editorHistoryIndex];
+        
+        if (historyItem.bodyPart !== currentBodyPart || historyItem.face !== currentFace) {
+          saveCurrentFace();
+          currentBodyPart = historyItem.bodyPart;
+          currentFace = historyItem.face;
+          document.getElementById('body-part-select').value = currentBodyPart;
+          document.getElementById('face-select').value = currentFace;
+        }
+        
+        const face = bodyPartFaces[currentBodyPart][currentFace];
+        
+        // Fixed grid size - 8x12
+        const GRID_WIDTH = 8;
+        const GRID_HEIGHT = 12;
+        editorCanvas.width = GRID_WIDTH;
+        editorCanvas.height = GRID_HEIGHT;
+        editorContext.clearRect(0, 0, GRID_WIDTH, GRID_HEIGHT);
+        
+        // Center the face
+        const offsetX = Math.floor((GRID_WIDTH - face.w) / 2);
+        const offsetY = Math.floor((GRID_HEIGHT - face.h) / 2);
+        editorContext.putImageData(historyItem.imageData, offsetX, offsetY);
+        
+        // Fixed pixel size
+        const PIXEL_SIZE = 50;
+        const displayWidth = GRID_WIDTH * PIXEL_SIZE;
+        const displayHeight = GRID_HEIGHT * PIXEL_SIZE;
+        editorCanvas.style.width = displayWidth + 'px';
+        editorCanvas.style.height = displayHeight + 'px';
+        
+        // Store grid info and offset
+        editorCanvas.dataset.gridWidth = GRID_WIDTH;
+        editorCanvas.dataset.gridHeight = GRID_HEIGHT;
+        editorCanvas.dataset.offsetX = offsetX;
+        editorCanvas.dataset.offsetY = offsetY;
+        editorCanvas.dataset.faceW = face.w;
+        editorCanvas.dataset.faceH = face.h;
+        
+        saveCurrentFace();
+        updateEditorHistoryButtons();
+      }
+    }
+
+
+    function updateEditorHistoryButtons() {
+      const undoBtn = document.getElementById('editor-undo-btn');
+      const redoBtn = document.getElementById('editor-redo-btn');
+      
+      if (undoBtn) {
+        undoBtn.disabled = editorHistoryIndex <= 0;
+      }
+      
+      if (redoBtn) {
+        redoBtn.disabled = editorHistoryIndex >= editorHistoryStack.length - 1;
+      }
+    }
+
+
+    function undo() {
+      if (historyIndex > 0) {
+        historyIndex--;
+        avatarState = JSON.parse(JSON.stringify(historyStack[historyIndex]));
+        updatePreview();
+        updateHistoryButtons();
+        updateExpressionButtons();
+      }
+    }
+
+
+    function redo() {
+      if (historyIndex < historyStack.length - 1) {
+        historyIndex++;
+        avatarState = JSON.parse(JSON.stringify(historyStack[historyIndex]));
+        updatePreview();
+        updateHistoryButtons();
+        updateExpressionButtons();
+      }
+    }
+
+
+    function updateHistoryButtons() {
+      const undoBtn = document.getElementById('undo-btn');
+      const redoBtn = document.getElementById('redo-btn');
+      
+      if (undoBtn) {
+        undoBtn.disabled = historyIndex <= 0;
+      }
+      
+      if (redoBtn) {
+        redoBtn.disabled = historyIndex >= historyStack.length - 1;
+      }
+    }
+
+
+    let scene, camera, renderer, skinMesh;
+    let skinTexture, skinCanvas, skinContext;
+
+
+    function initThreeJS() {
+      const container = document.getElementById('preview-canvas');
+      
+      if (!window.THREE) {
+        console.error('THREE.js not loaded');
+        container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #718096;">Loading 3D preview...</div>';
+        setTimeout(initThreeJS, 500);
+        return;
+      }
+      
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xe0f2fe);
+      
+      camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.set(0, 4, 35);
+      camera.lookAt(0, 0, 0);
+      
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.innerHTML = '';
+      container.appendChild(renderer.domElement);
+      
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+      
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(5, 10, 7);
+      scene.add(directionalLight);
+      
+      skinCanvas = document.createElement('canvas');
+      skinCanvas.width = 64;
+      skinCanvas.height = 64;
+      skinContext = skinCanvas.getContext('2d');
+      
+      skinTexture = new THREE.CanvasTexture(skinCanvas);
+      skinTexture.magFilter = THREE.NearestFilter;
+      skinTexture.minFilter = THREE.NearestFilter;
+      
+      createMinecraftModel();
+      updatePreview();
+      
+      let isDragging = false;
+      let previousMousePosition = { x: 0, y: 0 };
+      
+      renderer.domElement.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
       });
-
-      // Fullscreen Toggle
-      document.getElementById('fullscreen-toggle').addEventListener('click', function() {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen();
-        } else if (document.exitFullscreen) {
-          document.exitFullscreen();
+      
+      renderer.domElement.addEventListener('mousemove', (e) => {
+        if (isDragging && skinMesh) {
+          const deltaX = e.clientX - previousMousePosition.x;
+          skinMesh.rotation.y += deltaX * 0.01;
+          previousMousePosition = { x: e.clientX, y: e.clientY };
         }
       });
+      
+      renderer.domElement.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+      
+      renderer.domElement.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        camera.position.z += e.deltaY * 0.05;
+        camera.position.z = Math.max(25, Math.min(50, camera.position.z));
+      });
+      
+      animate();
+    }
 
-      // Tab Navigation
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-          document.getElementById(this.dataset.tab + '-tab').classList.add('active');
-          speak(this.textContent);
-        });
-      });
 
-      // Identity Options
-      document.querySelectorAll('[data-model]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-model]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.modelType = this.dataset.model;
-          speak(this.textContent);
-          updatePreview();
-        });
-      });
-      document.querySelectorAll('[data-facestyle]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-facestyle]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.faceStyle = this.dataset.facestyle;
-          speak(this.textContent);
-          updatePreview();
-        });
-      });
-      document.querySelectorAll('[data-hairstyle]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-hairstyle]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.hairStyle = this.dataset.hairstyle;
-          speak(this.textContent);
-          updatePreview();
-        });
-      });
-      document.querySelectorAll('[data-hairtexture]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-hairtexture]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.hairTexture = this.dataset.hairtexture;
-          speak(this.textContent);
-          updatePreview();
-        });
-      });
-      document.querySelectorAll('[data-bangs]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-bangs]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.bangsStyle = this.dataset.bangs;
-          speak(this.textContent);
-          updatePreview();
-        });
-      });
-      document.getElementById('blush-toggle').addEventListener('click', function() {
-        avatarState.hasBlush = !avatarState.hasBlush;
-        this.classList.toggle('active');
-        this.setAttribute('aria-checked', avatarState.hasBlush ? 'true' : 'false');
-        const t = translations[currentLanguage];
-        speak(t.blush + (avatarState.hasBlush ? ' on' : ' off'));
-        updatePreview();
-        saveToHistory();
-      });
-      document.querySelectorAll('[data-expression]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-expression]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.expression = this.dataset.expression;
-          speak(this.textContent);
-          updatePreview();
-          saveToHistory();
-        });
-      });
-      document.getElementById('glasses-toggle').addEventListener('click', function() {
-        avatarState.hasGlasses = !avatarState.hasGlasses;
-        this.classList.toggle('active');
-        this.setAttribute('aria-checked', avatarState.hasGlasses ? 'true' : 'false');
-        const t = translations[currentLanguage];
-        speak(t.glasses + (avatarState.hasGlasses ? ' on' : ' off'));
-        updatePreview();
-        saveToHistory();
-      });
+    function createMinecraftModel() {
+      if (skinMesh) {
+        scene.remove(skinMesh);
+      }
+      
+      const group = new THREE.Group();
+      const material = new THREE.MeshLambertMaterial({ map: skinTexture });
+      
+      const headGeo = new THREE.BoxGeometry(8, 8, 8);
+      const head = new THREE.Mesh(headGeo, material);
+      head.position.y = 10;
+      setHeadUVs(headGeo);
+      group.add(head);
+      
+      const torsoGeo = new THREE.BoxGeometry(8, 12, 4);
+      const torso = new THREE.Mesh(torsoGeo, material);
+      torso.position.y = 0;
+      setUVs(torsoGeo, 16, 20, 4, 12, 28, 20, 4, 12, 20, 16, 8, 4, 28, 16, 8, 4, 20, 20, 8, 12, 32, 20, 8, 12);
+      group.add(torso);
+      
+      const armWidth = avatarState.modelType === 'slim' ? 3 : 4;
+      const armOffset = avatarState.modelType === 'slim' ? 5.5 : 6;
+      
+      const rightArmGeo = new THREE.BoxGeometry(armWidth, 12, 4);
+      const rightArm = new THREE.Mesh(rightArmGeo, material);
+      rightArm.position.set(-armOffset, 0, 0);
+      setUVs(rightArmGeo, 40, 20, 4, 12, 48, 20, 4, 12, 44, 16, armWidth, 4, 48, 16, armWidth, 4, 44, 20, armWidth, 12, 52, 20, armWidth, 12);
+      group.add(rightArm);
+      
+      const leftArmGeo = new THREE.BoxGeometry(armWidth, 12, 4);
+      const leftArm = new THREE.Mesh(leftArmGeo, material);
+      leftArm.position.set(armOffset, 0, 0);
+      setUVs(leftArmGeo, 32, 52, 4, 12, 40, 52, 4, 12, 36, 48, armWidth, 4, 40, 48, armWidth, 4, 36, 52, armWidth, 12, 44, 52, armWidth, 12);
+      group.add(leftArm);
+      
+      const rightLegGeo = new THREE.BoxGeometry(4, 12, 4);
+      const rightLeg = new THREE.Mesh(rightLegGeo, material);
+      rightLeg.position.set(-2, -12, 0);
+      setUVs(rightLegGeo, 0, 20, 4, 12, 8, 20, 4, 12, 4, 16, 4, 4, 8, 16, 4, 4, 4, 20, 4, 12, 12, 20, 4, 12);
+      group.add(rightLeg);
+      
+      const leftLegGeo = new THREE.BoxGeometry(4, 12, 4);
+      const leftLeg = new THREE.Mesh(leftLegGeo, material);
+      leftLeg.position.set(2, -12, 0);
+      setUVs(leftLegGeo, 16, 52, 4, 12, 24, 52, 4, 12, 20, 48, 4, 4, 24, 48, 4, 4, 20, 52, 4, 12, 28, 52, 4, 12);
+      group.add(leftLeg);
+      
+      skinMesh = group;
+      scene.add(skinMesh);
+    }
 
-      // Clothing Options
-      document.querySelectorAll('[data-top]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-top]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.topStyle = this.dataset.top;
-          speak(this.textContent);
-          updatePreview();
-          saveToHistory();
-        });
-      });
-      document.querySelectorAll('[data-bottom]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-bottom]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.bottomStyle = this.dataset.bottom;
-          speak(this.textContent);
-          updatePreview();
-          saveToHistory();
-        });
-      });
-      document.querySelectorAll('[data-footwear]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-footwear]').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
-          avatarState.footwear = this.dataset.footwear;
-          speak(this.textContent);
-          updatePreview();
-          saveToHistory();
-        });
-      });
-      document.querySelectorAll('[data-pattern]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('[data-pattern]').forEach(b => b.classList.remove('selected'));
-          const patternType = this.dataset.pattern;
-          if (patternType === 'none') {
-            avatarState.pattern = null;
-            this.classList.add('selected');
-            speak('Pattern removed');
-          } else if (avatarState.pattern === patternType) {
-            avatarState.pattern = null;
-            this.classList.add('selected');
-            speak('Pattern removed');
-          } else {
-            this.classList.add('selected');
-            avatarState.pattern = patternType;
-            speak(this.textContent);
-          }
-          updatePreview();
-          saveToHistory();
-        });
-      });
 
-      // Decals Options
-      document.querySelectorAll('.sticker-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const stickerType = this.dataset.sticker;
-          document.querySelectorAll('.sticker-btn').forEach(b => b.classList.remove('selected'));
-          this.classList.add('selected');
+    function setUVs(geometry, ...coords) {
+      const uvs = geometry.attributes.uv.array;
+      
+      for (let i = 0; i < 6; i++) {
+        const x = coords[i * 4] / 64;
+        const y = 1 - (coords[i * 4 + 1] / 64);
+        const w = coords[i * 4 + 2] / 64;
+        const h = coords[i * 4 + 3] / 64;
+        
+        const offset = i * 8;
+        uvs[offset] = x;
+        uvs[offset + 1] = y;
+        uvs[offset + 2] = x + w;
+        uvs[offset + 3] = y;
+        uvs[offset + 4] = x;
+        uvs[offset + 5] = y - h;
+        uvs[offset + 6] = x + w;
+        uvs[offset + 7] = y - h;
+      }
+      geometry.attributes.uv.needsUpdate = true;
+    }
 
-          if (stickerType === 'none') {
-            avatarState.currentSticker = null;
-            speak('Sticker removed');
-          } else {
-            avatarState.currentSticker = {
-              emoji: this.textContent
-            };
-            speak('Sticker added');
-          }
-          updatePreview();
-          saveToHistory();
-        });
+
+function setHeadUVs(geometry) {
+  const uvs = geometry.attributes.uv.array;
+  
+  uvs[0] = 0/64; uvs[1] = 1 - 8/64;
+  uvs[2] = 8/64; uvs[3] = 1 - 8/64;
+  uvs[4] = 0/64; uvs[5] = 1 - 16/64;
+  uvs[6] = 8/64; uvs[7] = 1 - 16/64;
+  
+  uvs[8] = 16/64; uvs[9] = 1 - 8/64;
+  uvs[10] = 24/64; uvs[11] = 1 - 8/64;
+  uvs[12] = 16/64; uvs[13] = 1 - 16/64;
+  uvs[14] = 24/64; uvs[15] = 1 - 16/64;
+  
+  uvs[16] = 8/64; uvs[17] = 1 - 0/64;
+  uvs[18] = 16/64; uvs[19] = 1 - 0/64;
+  uvs[20] = 8/64; uvs[21] = 1 - 8/64;
+  uvs[22] = 16/64; uvs[23] = 1 - 8/64;
+  
+  uvs[24] = 16/64; uvs[25] = 1 - 0/64;
+  uvs[26] = 24/64; uvs[27] = 1 - 0/64;
+  uvs[28] = 16/64; uvs[29] = 1 - 8/64;
+  uvs[30] = 24/64; uvs[31] = 1 - 8/64;
+  
+  uvs[32] = 8/64; uvs[33] = 1 - 8/64;
+  uvs[34] = 16/64; uvs[35] = 1 - 8/64;
+  uvs[36] = 8/64; uvs[37] = 1 - 16/64;
+  uvs[38] = 16/64; uvs[39] = 1 - 16/64;
+  
+  uvs[40] = 24/64; uvs[41] = 1 - 8/64;
+  uvs[42] = 32/64; uvs[43] = 1 - 8/64;
+  uvs[44] = 24/64; uvs[45] = 1 - 16/64;
+  uvs[46] = 32/64; uvs[47] = 1 - 16/64;
+  
+  geometry.attributes.uv.needsUpdate = true;
+}`
+
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+
+
+    function generateTonalPalette(baseColor) {
+      const base = hexToRgb(baseColor);
+      return {
+        base: baseColor,
+        shadow: rgbToHex(Math.max(0, base.r - 40), Math.max(0, base.g - 40), Math.max(0, base.b - 40)),
+        highlight: rgbToHex(Math.min(255, base.r + 40), Math.min(255, base.g + 40), Math.min(255, base.b + 40)),
+        accent: rgbToHex(Math.min(255, base.r + 20), Math.min(255, base.g + 20), Math.min(255, base.b + 20))
+      };
+    }
+
+
+    
+    function updateShadeHelperSwatches() {
+      const container = document.getElementById('shade-helper-swatches');
+      if (!container) return;
+
+      if (!shadeHelperEnabled) {
+        container.style.display = 'none';
+        return;
+      }
+
+      const palette = generateTonalPalette(brushColor || '#000000');
+      const mapping = {
+        shadow: palette.shadow,
+        base: palette.base,
+        highlight: palette.highlight,
+        accent: palette.accent
+      };
+
+      container.style.display = 'flex';
+      const swatches = container.querySelectorAll('.shade-swatch');
+      swatches.forEach(btn => {
+        const shadeKey = btn.dataset.shade;
+        const color = mapping[shadeKey] || palette.base;
+        btn.style.backgroundColor = color;
+        btn.dataset.color = color;
       });
+    }
 
-      // Randomize Button
-      document.getElementById('randomize-btn').addEventListener('click', function() {
-        const randomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
-        const getRandomOption = (selector) => {
-          const options = Array.from(document.querySelectorAll(selector));
-          return randomElement(options).dataset[Object.keys(options[0].dataset)[0]];
+
+function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : { r: 0, g: 0, b: 0 };
+    }
+
+
+    function rgbToHex(r, g, b) {
+      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
+
+    // Convert RGB to HSL for color manipulation
+    function rgbToHsl(r, g, b) {
+      r /= 255;
+      g /= 255;
+      b /= 255;
+      
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+      
+      if (max === min) {
+        h = s = 0; // achromatic
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        
+        switch (max) {
+          case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+          case g: h = ((b - r) / d + 2) / 6; break;
+          case b: h = ((r - g) / d + 4) / 6; break;
+        }
+      }
+      
+      return { h, s, l };
+    }
+
+
+    // Convert HSL back to RGB
+    function hslToRgb(h, s, l) {
+      let r, g, b;
+      
+      if (s === 0) {
+        r = g = b = l; // achromatic
+      } else {
+        const hue2rgb = (p, q, t) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1/6) return p + (q - p) * 6 * t;
+          if (t < 1/2) return q;
+          if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          return p;
         };
+        
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+      }
+      
+      return {
+        r: Math.round(r * 255),
+        g: Math.round(g * 255),
+        b: Math.round(b * 255)
+      };
+    }
 
-        avatarState.modelType = getRandomOption('[data-model]');
-        avatarState.faceStyle = getRandomOption('[data-facestyle]');
-        avatarState.skinTone = randomElement(skinTones);
-        avatarState.hairColor = randomElement(hairColors);
-        avatarState.hairStyle = getRandomOption('[data-hairstyle]');
-        avatarState.bangsStyle = getRandomOption('[data-bangs]');
-        avatarState.hairTexture = getRandomOption('[data-hairtexture]');
-        avatarState.eyeColor = randomElement(hairColors);
-        avatarState.hasBlush = Math.random() < 0.5;
-        avatarState.expression = getRandomOption('[data-expression]');
-        avatarState.hasGlasses = Math.random() < 0.3;
-        avatarState.glassesColor = randomElement(glassesColors);
-        avatarState.topStyle = getRandomOption('[data-top]');
-        avatarState.topColor = randomElement(topColors);
-        avatarState.bottomStyle = getRandomOption('[data-bottom]');
-        avatarState.bottomColor = randomElement(bottomColors);
-        avatarState.footwear = getRandomOption('[data-footwear]');
-        avatarState.footwearColor = randomElement(footwearColors);
-        avatarState.pattern = Math.random() < 0.7 ? null : getRandomOption('[data-pattern]:not([data-pattern="none"])');
-        avatarState.patternColor1 = randomElement(topColors);
-        avatarState.patternColor2 = randomElement(bottomColors);
 
-        // Update UI elements from new state
-        populateColorGrids();
-        updateUIFromState();
-        if (avatarState.hasBlush) {
-          document.getElementById('blush-toggle').classList.add('active');
-        } else {
-          document.getElementById('blush-toggle').classList.remove('active');
+    // Create a color with slight variation in lightness for noise/texture effect
+    function getNoiseColor(baseColor) {
+      const rgb = hexToRgb(baseColor);
+      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+      
+      // Randomly vary lightness by ±10-20%
+      const variation = (Math.random() - 0.5) * 0.3; // -0.15 to +0.15
+      let newL = hsl.l + variation;
+      
+      // Clamp lightness between 0 and 1
+      newL = Math.max(0, Math.min(1, newL));
+      
+      const newRgb = hslToRgb(hsl.h, hsl.s, newL);
+      return rgbToHex(newRgb.r, newRgb.g, newRgb.b);
+    }
+
+
+    function updatePreview() {
+      skinContext.clearRect(0, 0, 64, 64);
+      
+      const skinPalette = generateTonalPalette(avatarState.skinTone);
+      drawBodyPart(skinContext, 8, 8, 8, 8, skinPalette);
+      drawBodyPart(skinContext, 24, 8, 8, 8, skinPalette);
+      drawBodyPart(skinContext, 0, 8, 8, 8, skinPalette);
+      drawBodyPart(skinContext, 16, 8, 8, 8, skinPalette);
+      drawBodyPart(skinContext, 8, 0, 8, 8, skinPalette);
+      drawBodyPart(skinContext, 16, 0, 8, 8, skinPalette);
+      
+      drawFace(skinContext);
+      
+      const hairPalette = generateTonalPalette(avatarState.hairColor);
+      drawHair(skinContext, hairPalette);
+      
+      const topPalette = generateTonalPalette(avatarState.topColor);
+      drawBodyPart(skinContext, 20, 20, 8, 12, topPalette);
+      drawBodyPart(skinContext, 32, 20, 8, 12, topPalette);
+      drawBodyPart(skinContext, 16, 20, 4, 12, topPalette);
+      drawBodyPart(skinContext, 28, 20, 4, 12, topPalette);
+      drawBodyPart(skinContext, 20, 16, 8, 4, topPalette);
+      drawBodyPart(skinContext, 28, 16, 8, 4, topPalette);
+      
+      if (avatarState.topStyle === 'tshirt' || avatarState.topStyle === 'polo') {
+        skinContext.fillStyle = skinPalette.base;
+        skinContext.fillRect(22, 20, 4, 1);
+        skinContext.fillRect(23, 21, 2, 1);
+      }
+      
+      if (avatarState.topStyle === 'tank') {
+        drawBodyPart(skinContext, 44, 20, 4, 12, skinPalette);
+        drawBodyPart(skinContext, 52, 20, 4, 12, skinPalette);
+        drawBodyPart(skinContext, 40, 20, 4, 12, skinPalette);
+        drawBodyPart(skinContext, 48, 20, 4, 12, skinPalette);
+        drawBodyPart(skinContext, 44, 16, 4, 4, skinPalette);
+        drawBodyPart(skinContext, 48, 16, 4, 4, skinPalette);
+        
+        drawBodyPart(skinContext, 36, 52, 4, 12, skinPalette);
+        drawBodyPart(skinContext, 44, 52, 4, 12, skinPalette);
+        drawBodyPart(skinContext, 32, 52, 4, 12, skinPalette);
+        drawBodyPart(skinContext, 40, 52, 4, 12, skinPalette);
+        drawBodyPart(skinContext, 36, 48, 4, 4, skinPalette);
+        drawBodyPart(skinContext, 40, 48, 4, 4, skinPalette);
+      } else if (avatarState.topStyle === 'tshirt') {
+        drawBodyPart(skinContext, 44, 20, 4, 4, topPalette);
+        drawBodyPart(skinContext, 52, 20, 4, 4, topPalette);
+        drawBodyPart(skinContext, 40, 20, 4, 4, topPalette);
+        drawBodyPart(skinContext, 48, 20, 4, 4, topPalette);
+        drawBodyPart(skinContext, 44, 16, 4, 4, topPalette);
+        drawBodyPart(skinContext, 44, 24, 4, 8, skinPalette);
+        drawBodyPart(skinContext, 52, 24, 4, 8, skinPalette);
+        drawBodyPart(skinContext, 40, 24, 4, 8, skinPalette);
+        drawBodyPart(skinContext, 48, 24, 4, 8, skinPalette);
+        drawBodyPart(skinContext, 48, 16, 4, 4, skinPalette);
+        
+        drawBodyPart(skinContext, 36, 52, 4, 4, topPalette);
+        drawBodyPart(skinContext, 44, 52, 4, 4, topPalette);
+        drawBodyPart(skinContext, 32, 52, 4, 4, topPalette);
+        drawBodyPart(skinContext, 40, 52, 4, 4, topPalette);
+        drawBodyPart(skinContext, 36, 48, 4, 4, topPalette);
+        drawBodyPart(skinContext, 36, 56, 4, 8, skinPalette);
+        drawBodyPart(skinContext, 44, 56, 4, 8, skinPalette);
+        drawBodyPart(skinContext, 32, 56, 4, 8, skinPalette);
+        drawBodyPart(skinContext, 40, 56, 4, 8, skinPalette);
+        drawBodyPart(skinContext, 40, 48, 4, 4, skinPalette);
+      } else if (avatarState.topStyle === 'hoodie' || avatarState.topStyle === 'polo') {
+        drawBodyPart(skinContext, 44, 20, 4, 10, topPalette);
+        drawBodyPart(skinContext, 52, 20, 4, 10, topPalette);
+        drawBodyPart(skinContext, 40, 20, 4, 10, topPalette);
+        drawBodyPart(skinContext, 48, 20, 4, 10, topPalette);
+        drawBodyPart(skinContext, 44, 16, 4, 4, topPalette);
+        drawBodyPart(skinContext, 44, 30, 4, 2, skinPalette);
+        drawBodyPart(skinContext, 52, 30, 4, 2, skinPalette);
+        drawBodyPart(skinContext, 40, 30, 4, 2, skinPalette);
+        drawBodyPart(skinContext, 48, 30, 4, 2, skinPalette);
+        drawBodyPart(skinContext, 48, 16, 4, 4, skinPalette);
+        
+        drawBodyPart(skinContext, 36, 52, 4, 10, topPalette);
+        drawBodyPart(skinContext, 44, 52, 4, 10, topPalette);
+        drawBodyPart(skinContext, 32, 52, 4, 10, topPalette);
+        drawBodyPart(skinContext, 40, 52, 4, 10, topPalette);
+        drawBodyPart(skinContext, 36, 48, 4, 4, topPalette);
+        drawBodyPart(skinContext, 36, 62, 4, 2, skinPalette);
+        drawBodyPart(skinContext, 44, 62, 4, 2, skinPalette);
+        drawBodyPart(skinContext, 32, 62, 4, 2, skinPalette);
+        drawBodyPart(skinContext, 40, 62, 4, 2, skinPalette);
+        drawBodyPart(skinContext, 40, 48, 4, 4, skinPalette);
+      }
+      
+      const bottomPalette = generateTonalPalette(avatarState.bottomColor);
+      
+      if (avatarState.bottomStyle === 'shorts') {
+        drawBodyPart(skinContext, 4, 20, 4, 6, bottomPalette);
+        drawBodyPart(skinContext, 12, 20, 4, 6, bottomPalette);
+        drawBodyPart(skinContext, 0, 20, 4, 6, bottomPalette);
+        drawBodyPart(skinContext, 8, 20, 4, 6, bottomPalette);
+        drawBodyPart(skinContext, 4, 16, 4, 4, bottomPalette);
+        drawBodyPart(skinContext, 4, 26, 4, 6, skinPalette);
+        drawBodyPart(skinContext, 12, 26, 4, 6, skinPalette);
+        drawBodyPart(skinContext, 0, 26, 4, 6, skinPalette);
+        drawBodyPart(skinContext, 8, 26, 4, 6, skinPalette);
+        drawBodyPart(skinContext, 8, 16, 4, 4, skinPalette);
+        
+        drawBodyPart(skinContext, 20, 52, 4, 6, bottomPalette);
+        drawBodyPart(skinContext, 28, 52, 4, 6, bottomPalette);
+        drawBodyPart(skinContext, 16, 52, 4, 6, bottomPalette);
+        drawBodyPart(skinContext, 24, 52, 4, 6, bottomPalette);
+        drawBodyPart(skinContext, 20, 48, 4, 4, bottomPalette);
+        drawBodyPart(skinContext, 20, 58, 4, 6, skinPalette);
+        drawBodyPart(skinContext, 28, 58, 4, 6, skinPalette);
+        drawBodyPart(skinContext, 16, 58, 4, 6, skinPalette);
+        drawBodyPart(skinContext, 24, 58, 4, 6, skinPalette);
+        drawBodyPart(skinContext, 24, 48, 4, 4, skinPalette);
+      } else {
+        drawBodyPart(skinContext, 4, 20, 4, 12, bottomPalette);
+        drawBodyPart(skinContext, 12, 20, 4, 12, bottomPalette);
+        drawBodyPart(skinContext, 0, 20, 4, 12, bottomPalette);
+        drawBodyPart(skinContext, 8, 20, 4, 12, bottomPalette);
+        drawBodyPart(skinContext, 4, 16, 4, 4, bottomPalette);
+        drawBodyPart(skinContext, 8, 16, 4, 4, bottomPalette);
+        
+        drawBodyPart(skinContext, 20, 52, 4, 12, bottomPalette);
+        drawBodyPart(skinContext, 28, 52, 4, 12, bottomPalette);
+        drawBodyPart(skinContext, 16, 52, 4, 12, bottomPalette);
+        drawBodyPart(skinContext, 24, 52, 4, 12, bottomPalette);
+        drawBodyPart(skinContext, 20, 48, 4, 4, bottomPalette);
+        drawBodyPart(skinContext, 24, 48, 4, 4, bottomPalette);
+        
+        if (avatarState.bottomStyle === 'cargo') {
+          skinContext.fillStyle = bottomPalette.shadow;
+          skinContext.fillRect(0, 23, 4, 1);
+          skinContext.fillRect(0, 24, 1, 4);
+          skinContext.fillRect(3, 24, 1, 4);
+          skinContext.fillRect(0, 27, 4, 1);
+          
+          skinContext.fillRect(16, 55, 4, 1);
+          skinContext.fillRect(16, 56, 1, 4);
+          skinContext.fillRect(19, 56, 1, 4);
+          skinContext.fillRect(16, 59, 4, 1);
         }
-        if (avatarState.hasGlasses) {
-          document.getElementById('glasses-toggle').classList.add('active');
-        } else {
-          document.getElementById('glasses-toggle').classList.remove('active');
+        
+        if (avatarState.bottomStyle === 'joggers') {
+          skinContext.fillStyle = bottomPalette.highlight;
+          skinContext.fillRect(9, 20, 2, 12);
+          skinContext.fillRect(17, 52, 2, 12);
         }
+      }
+      
+      const footwearPalette = generateTonalPalette(avatarState.footwearColor);
+      const footwearHeight = (avatarState.footwear === 'boots') ? 6 : 3;
+      
+      drawBodyPart(skinContext, 4, 32 - footwearHeight, 4, footwearHeight, footwearPalette);
+      drawBodyPart(skinContext, 12, 32 - footwearHeight, 4, footwearHeight, footwearPalette);
+      drawBodyPart(skinContext, 0, 32 - footwearHeight, 4, footwearHeight, footwearPalette);
+      drawBodyPart(skinContext, 8, 32 - footwearHeight, 4, footwearHeight, footwearPalette);
+      
+      drawBodyPart(skinContext, 20, 64 - footwearHeight, 4, footwearHeight, footwearPalette);
+      drawBodyPart(skinContext, 28, 64 - footwearHeight, 4, footwearHeight, footwearPalette);
+      drawBodyPart(skinContext, 16, 64 - footwearHeight, 4, footwearHeight, footwearPalette);
+      drawBodyPart(skinContext, 24, 64 - footwearHeight, 4, footwearHeight, footwearPalette);
+      
+      if (avatarState.footwear === 'converse') {
+        skinContext.fillStyle = '#FFFFFF';
+        skinContext.fillRect(4, 31, 4, 1);
+        skinContext.fillRect(12, 31, 4, 1);
+        skinContext.fillRect(0, 31, 4, 1);
+        skinContext.fillRect(8, 31, 4, 1);
+        skinContext.fillRect(4, 30, 4, 2);
+        
+        skinContext.fillRect(20, 63, 4, 1);
+        skinContext.fillRect(28, 63, 4, 1);
+        skinContext.fillRect(16, 63, 4, 1);
+        skinContext.fillRect(24, 63, 4, 1);
+        skinContext.fillRect(20, 62, 4, 2);
+      }
+      
+      if (avatarState.pattern) {
+        applyPattern(skinContext, avatarState.pattern);
+      }
+      
+      if (avatarState.currentSticker) {
+        drawStickerOnTorso(skinContext, avatarState.currentSticker.emoji);
+      }
+      
+      skinTexture.needsUpdate = true;
+      
+      if (avatarState.modelType !== (skinMesh.children[2].geometry.parameters.width === 3 ? 'slim' : 'standard')) {
+        createMinecraftModel();
+      }
+      
+      if (advancedMode) {
+        syncEditorCanvas();
+      }
+    }
 
-        speak('Avatar randomized');
+
+    function drawBodyPart(ctx, x, y, w, h, palette) {
+      for (let py = 0; py < h; py++) {
+        for (let px = 0; px < w; px++) {
+          const seed = (px * 7 + py * 13) % 100;
+          
+          if (seed < 20) {
+            ctx.fillStyle = palette.shadow;
+          } else if (seed < 80) {
+            ctx.fillStyle = palette.base;
+          } else if (seed < 92) {
+            ctx.fillStyle = palette.highlight;
+          } else {
+            ctx.fillStyle = palette.accent;
+          }
+          
+          ctx.fillRect(x + px, y + py, 1, 1);
+        }
+      }
+    }
+
+function drawHair(ctx, palette) {
+  if (avatarState.hairStyle === 'none') return;
+  
+  // Apply texture-based shading pattern
+  const texturePattern = getHairTexturePattern(avatarState.hairTexture);
+  
+  drawBodyPartWithTexture(ctx, 8, 0, 8, 8, palette, texturePattern);
+  drawBodyPartWithTexture(ctx, 24, 8, 8, 8, palette, texturePattern);
+  
+  if (avatarState.bangsStyle === 'short') {
+    drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
+  } else if (avatarState.bangsStyle === 'long') {
+    drawBodyPartWithTexture(ctx, 8, 8, 8, 4, palette, texturePattern);
+  } else if (avatarState.bangsStyle === 'layered') {
+    drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 10, 2, 2, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 14, 10, 2, 2, palette, texturePattern);
+  } else if (avatarState.bangsStyle === 'asymmetric') {
+    drawBodyPartWithTexture(ctx, 8, 8, 8, 1, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 9, 7, 1, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 10, 6, 1, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 11, 5, 1, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 8, 12, 4, 1, palette, texturePattern);
+  }
+  
+  let bangsRows = 0;
+  if (avatarState.bangsStyle === 'short') bangsRows = 2;
+  else if (avatarState.bangsStyle === 'long') bangsRows = 4;
+  else if (avatarState.bangsStyle === 'layered') bangsRows = 4;
+  else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
+  
+  if (avatarState.hairStyle === 'long') {
+    drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
+    drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
+  } else {
+    drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
+    if (bangsRows > 0) {
+      drawBodyPartWithTexture(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+    }
+    
+    drawBodyPartWithTexture(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
+    if (bangsRows > 0) {
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+    }
+  }
+  
+  if (avatarState.hairStyle === 'long') {
+    drawBodyPartWithTexture(ctx, 32, 20, 8, 10, palette, texturePattern);
+  }
+}
+   
+
+    function getHairTexturePattern(texture) {
+      if (texture === 'curly') {
+        // Curly: tight clusters, more variation
+        return (px, py) => {
+          const clusterX = Math.floor(px / 2);
+          const clusterY = Math.floor(py / 2);
+          const seed = (clusterX * 17 + clusterY * 23 + px * 3 + py * 5) % 100;
+          
+          if (seed < 25) return 'shadow';
+          if (seed < 45) return 'base';
+          if (seed < 70) return 'highlight';
+          return 'accent';
+        };
+      } else if (texture === 'wavy') {
+        // Wavy: flowing horizontal patterns
+        return (px, py) => {
+          const wave = Math.sin(px * 0.8 + py * 0.5) * 50 + 50;
+          const seed = (px * 11 + py * 7 + wave) % 100;
+          
+          if (seed < 30) return 'shadow';
+          if (seed < 60) return 'base';
+          if (seed < 80) return 'highlight';
+          return 'accent';
+        };
+      } else {
+        // Straight: more uniform vertical patterns
+        return (px, py) => {
+          const seed = (px * 19 + py * 3) % 100;
+          
+          if (seed < 35) return 'shadow';
+          if (seed < 70) return 'base';
+          if (seed < 85) return 'highlight';
+          return 'accent';
+        };
+      }
+    }
+
+
+    function drawBodyPartWithTexture(ctx, x, y, w, h, palette, texturePattern) {
+      for (let py = 0; py < h; py++) {
+        for (let px = 0; px < w; px++) {
+          const shade = texturePattern(px, py);
+          ctx.fillStyle = palette[shade];
+          ctx.fillRect(x + px, y + py, 1, 1);
+        }
+      }
+    }
+
+
+    function drawFace(ctx) {
+      const eyeColor = eyeColors[avatarState.eyeColor];
+      const skinPalette = generateTonalPalette(avatarState.skinTone);
+      
+      if (avatarState.faceStyle === 'anime') {
+        drawAnimeFace(ctx, eyeColor, skinPalette);
+      } else {
+        drawClassicFace(ctx, eyeColor, skinPalette);
+      }
+    }
+
+
+    function drawClassicFace(ctx, eyeColor, skinPalette) {
+      ctx.fillStyle = skinPalette.base;
+      ctx.fillRect(8, 10, 8, 6);
+      
+      ctx.fillStyle = skinPalette.shadow;
+      ctx.fillRect(8, 10, 1, 5);
+      ctx.fillRect(15, 10, 1, 5);
+      
+      ctx.fillStyle = skinPalette.highlight;
+      ctx.fillRect(11, 11, 2, 1);
+      ctx.fillRect(12, 12, 1, 1);
+      
+      ctx.fillStyle = skinPalette.base;
+      ctx.fillRect(0, 10, 8, 6);
+      
+      ctx.fillStyle = skinPalette.shadow;
+      ctx.fillRect(0, 11, 1, 4);
+      ctx.fillRect(1, 12, 1, 2);
+      ctx.fillStyle = skinPalette.highlight;
+      ctx.fillRect(2, 12, 1, 2);
+      
+      ctx.fillStyle = skinPalette.base;
+      ctx.fillRect(16, 10, 8, 6);
+      
+      ctx.fillStyle = skinPalette.shadow;
+      ctx.fillRect(23, 11, 1, 4);
+      ctx.fillRect(22, 12, 1, 2);
+      ctx.fillStyle = skinPalette.highlight;
+      ctx.fillRect(21, 12, 1, 2);
+      
+      ctx.fillStyle = skinPalette.base;
+      ctx.fillRect(24, 10, 8, 6);
+      
+      ctx.fillStyle = skinPalette.shadow;
+      ctx.fillRect(9, 11, 2, 1);
+      ctx.fillRect(13, 11, 2, 1);
+      
+      // Left eye - white on inside (left), iris on outside (right, closest to nose)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(9, 12, 1, 1);
+      ctx.fillStyle = eyeColor;
+      ctx.fillRect(10, 12, 1, 1);
+      
+      // Right eye - iris on inside (left, closest to nose), white on outside (right)
+      ctx.fillStyle = eyeColor;
+      ctx.fillRect(13, 12, 1, 1);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(14, 12, 1, 1);
+      
+      ctx.fillStyle = '#000000';
+      if (avatarState.expression === 'smile') {
+        ctx.fillRect(10, 14, 1, 1);
+        ctx.fillRect(11, 15, 1, 1);
+        ctx.fillRect(12, 15, 1, 1);
+        ctx.fillRect(13, 14, 1, 1);
+      } else if (avatarState.expression === 'happy') {
+        ctx.fillRect(9, 14, 1, 1);
+        ctx.fillRect(10, 15, 1, 1);
+        ctx.fillRect(11, 15, 1, 1);
+        ctx.fillRect(12, 15, 1, 1);
+        ctx.fillRect(13, 15, 1, 1);
+        ctx.fillRect(14, 14, 1, 1);
+      } else if (avatarState.expression === 'neutral') {
+        ctx.fillRect(10, 14, 1, 1);
+        ctx.fillRect(11, 14, 1, 1);
+        ctx.fillRect(12, 14, 1, 1);
+        ctx.fillRect(13, 14, 1, 1);
+      } else if (avatarState.expression === 'surprised') {
+        ctx.fillRect(11, 14, 2, 2);
+      }
+      
+      if (avatarState.hasBlush) {
+        ctx.fillStyle = '#FF69B4';
+        ctx.globalAlpha = 0.4;
+        ctx.fillRect(9, 13, 1, 1);
+        ctx.fillRect(14, 13, 1, 1);
+        ctx.globalAlpha = 1.0;
+      }
+
+
+      if (avatarState.hasGlasses) {
+        ctx.fillStyle = avatarState.glassesColor;
+        // Left lens frame
+        ctx.fillRect(8, 11, 3, 1);  // top
+        ctx.fillRect(8, 13, 3, 1);  // bottom
+        ctx.fillRect(8, 12, 1, 1);  // left side
+        ctx.fillRect(10, 12, 1, 1); // right side
+        
+        // Right lens frame
+        ctx.fillRect(13, 11, 3, 1); // top
+        ctx.fillRect(13, 13, 3, 1); // bottom
+        ctx.fillRect(13, 12, 1, 1); // left side
+        ctx.fillRect(15, 12, 1, 1); // right side
+        
+        // Bridge
+        ctx.fillRect(11, 11, 2, 1);
+      }
+    }
+
+
+    function drawAnimeFace(ctx, eyeColor, skinPalette) {
+      ctx.fillStyle = skinPalette.base;
+      ctx.fillRect(8, 10, 8, 6);
+      
+      ctx.fillStyle = skinPalette.shadow;
+      ctx.fillRect(8, 10, 1, 5);
+      ctx.fillRect(15, 10, 1, 5);
+      
+      ctx.fillStyle = skinPalette.highlight;
+      ctx.fillRect(11, 11, 2, 1);
+      ctx.fillRect(12, 12, 1, 1);
+      
+      ctx.fillStyle = skinPalette.base;
+      ctx.fillRect(0, 10, 8, 6);
+      ctx.fillRect(16, 10, 8, 6);
+      ctx.fillRect(24, 10, 8, 6);
+      
+      // Eyebrows
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(9, 12, 2, 1);
+      ctx.fillRect(13, 12, 2, 1);
+      
+      // Left eye - 2x2 pixels (white on inside/left, iris on outside/right closest to nose)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(9, 13, 1, 2);
+      
+      ctx.fillStyle = eyeColor;
+      ctx.fillRect(10, 13, 1, 2);
+      
+      // Right eye - 2x2 pixels (iris on inside/left closest to nose, white on outside/right)
+      ctx.fillStyle = eyeColor;
+      ctx.fillRect(13, 13, 1, 2);
+      
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(14, 13, 1, 2);
+      
+      if (avatarState.hasBlush) {
+        ctx.fillStyle = '#FF69B4';
+        ctx.globalAlpha = 0.5;
+        ctx.fillRect(8, 15, 2, 1);
+        ctx.fillRect(14, 15, 2, 1);
+        ctx.globalAlpha = 1.0;
+      }
+
+
+      if (avatarState.hasGlasses) {
+        ctx.fillStyle = avatarState.glassesColor;
+        // Left lens frame
+        ctx.fillRect(8, 12, 3, 1);  // top
+        ctx.fillRect(8, 15, 3, 1);  // bottom
+        ctx.fillRect(8, 13, 1, 2);  // left side
+        ctx.fillRect(10, 13, 1, 2); // right side
+        
+        // Right lens frame
+        ctx.fillRect(13, 12, 3, 1); // top
+        ctx.fillRect(13, 15, 3, 1); // bottom
+        ctx.fillRect(13, 13, 1, 2); // left side
+        ctx.fillRect(15, 13, 1, 2); // right side
+        
+        // Bridge
+        ctx.fillRect(11, 12, 2, 1);
+      }
+    }
+
+
+    function applyPattern(ctx, pattern) {
+      const topRegions = [
+        { x: 20, y: 20, w: 8, h: 12 },
+        { x: 32, y: 20, w: 8, h: 12 },
+        { x: 16, y: 20, w: 4, h: 12 },
+        { x: 28, y: 20, w: 4, h: 12 },
+        { x: 20, y: 16, w: 8, h: 4 },
+        { x: 28, y: 16, w: 8, h: 4 },
+        { x: 44, y: 20, w: 4, h: 12 },
+        { x: 52, y: 20, w: 4, h: 12 },
+        { x: 40, y: 20, w: 4, h: 12 },
+        { x: 48, y: 20, w: 4, h: 12 },
+        { x: 44, y: 16, w: 4, h: 4 },
+        { x: 48, y: 16, w: 4, h: 4 },
+        { x: 36, y: 52, w: 4, h: 12 },
+        { x: 44, y: 52, w: 4, h: 12 },
+        { x: 32, y: 52, w: 4, h: 12 },
+        { x: 40, y: 52, w: 4, h: 12 },
+        { x: 36, y: 48, w: 4, h: 4 },
+        { x: 40, y: 48, w: 4, h: 4 }
+      ];
+      
+      const palette1 = generateTonalPalette(avatarState.patternColor1);
+      const palette2 = generateTonalPalette(avatarState.patternColor2);
+      const skinPalette = generateTonalPalette(avatarState.skinTone);
+      const skinColors = [
+        hexToRgb(skinPalette.base),
+        hexToRgb(skinPalette.shadow),
+        hexToRgb(skinPalette.highlight),
+        hexToRgb(skinPalette.accent)
+      ];
+      
+      topRegions.forEach(region => {
+        const imageData = ctx.getImageData(region.x, region.y, region.w, region.h);
+        const data = imageData.data;
+        
+        for (let y = 0; y < region.h; y++) {
+          for (let x = 0; x < region.w; x++) {
+            const idx = (y * region.w + x) * 4;
+            
+            const pixelColor = { r: data[idx], g: data[idx + 1], b: data[idx + 2] };
+            let isSkinTone = false;
+            
+            for (const skinColor of skinColors) {
+              const rDiff = Math.abs(pixelColor.r - skinColor.r);
+              const gDiff = Math.abs(pixelColor.g - skinColor.g);
+              const bDiff = Math.abs(pixelColor.b - skinColor.b);
+              
+              if (rDiff < 30 && gDiff < 30 && bDiff < 30) {
+                isSkinTone = true;
+                break;
+              }
+            }
+            
+            if (isSkinTone) continue;
+            
+            let useColor2 = false;
+            
+            if (pattern === 'checkers') {
+              useColor2 = (Math.floor(x / 2) + Math.floor(y / 2)) % 2 === 0;
+            } else if (pattern === 'hstripes') {
+              useColor2 = Math.floor(y / 2) % 2 === 0;
+            } else if (pattern === 'vstripes') {
+              useColor2 = Math.floor(x / 2) % 2 === 0;
+            } else if (pattern === 'dots') {
+              useColor2 = (x % 3 === 0 && y % 3 === 0);
+            } else if (pattern === 'plaid') {
+              useColor2 = (Math.floor(x / 2) % 2 === 0) || (Math.floor(y / 2) % 2 === 0);
+            } else if (pattern === 'camo') {
+              useColor2 = Math.random() > 0.7;
+            }
+            
+            // Apply tonal variation to pattern colors
+            const seed = (x * 7 + y * 13) % 100;
+            let selectedPalette = useColor2 ? palette2 : palette1;
+            let colorValue;
+            
+            if (seed < 35) {
+              colorValue = hexToRgb(selectedPalette.shadow);
+            } else if (seed < 70) {
+              colorValue = hexToRgb(selectedPalette.base);
+            } else if (seed < 85) {
+              colorValue = hexToRgb(selectedPalette.highlight);
+            } else {
+              colorValue = hexToRgb(selectedPalette.accent);
+            }
+            
+            data[idx] = colorValue.r;
+            data[idx + 1] = colorValue.g;
+            data[idx + 2] = colorValue.b;
+          }
+        }
+        
+        ctx.putImageData(imageData, region.x, region.y);
+      });
+    }
+
+
+    function drawStickerOnTorso(ctx, emoji) {
+      const patterns = {
+        '❤️': {
+          pattern: [[0,0,0,0,0,0],[0,1,0,0,1,0],[1,1,1,1,1,1],[0,1,1,1,1,0],[0,0,1,1,0,0],[0,0,0,0,0,0]],
+          color: '#FF0000'
+        },
+        '😊': {
+          pattern: [[0,1,1,1,1,0],[1,1,1,1,1,1],[1,2,1,1,2,1],[1,1,1,1,1,1],[1,1,2,2,1,1],[0,1,1,1,1,0]],
+          color: '#FFFF00',
+          color2: '#000000'
+        },
+        '👻': {
+          pattern: [[0,1,1,1,1,0],[1,1,1,1,1,1],[1,2,1,1,2,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,0,1,1,0,1]],
+          color: '#FFFFFF',
+          color2: '#000000'
+        },
+        '🏀': {
+          pattern: [[0,2,1,1,2,0],[2,1,1,1,1,2],[1,1,2,2,1,1],[1,1,2,2,1,1],[2,1,1,1,1,2],[0,2,1,1,2,0]],
+          color: '#FF8C00',
+          color2: '#000000'
+        },
+        '🎵': {
+          pattern: [[0,0,0,0,1,1],[0,0,0,0,1,1],[0,0,0,0,1,0],[0,0,0,0,1,0],[0,0,1,1,1,0],[0,1,1,1,0,0]],
+          color: '#000000'
+        },
+        '🌸': {
+          pattern: [[0,1,0,0,1,0],[1,0,1,1,0,1],[0,1,3,3,1,0],[0,1,3,3,1,0],[1,0,1,1,0,1],[0,1,0,0,1,0]],
+          color: '#FFB6C1',
+          color2: '#32CD32',
+          color3: '#FFD700'
+        },
+        '🌈': {
+          pattern: [[0,0,1,1,0,0],[0,1,2,2,1,0],[1,2,3,3,2,1],[1,2,3,3,2,1],[0,0,0,0,0,0],[0,0,0,0,0,0]],
+          color: '#FF0000',
+          color2: '#FFFF00',
+          color3: '#0000FF'
+        },
+        '💎': {
+          pattern: [[0,0,1,1,0,0],[0,1,1,1,1,0],[1,1,1,1,1,1],[1,1,1,1,1,1],[0,1,1,1,1,0],[0,0,1,1,0,0]],
+          color: '#00FFFF'
+        },
+        '💀': {
+          pattern: [[0,1,1,1,1,0],[1,1,1,1,1,1],[1,2,1,1,2,1],[1,1,1,1,1,1],[0,1,2,2,1,0],[0,1,1,1,1,0]],
+          color: '#FFFFFF',
+          color2: '#000000'
+        },
+        '😐': {
+          pattern: [[0,0,0,0,0,0],[1,1,0,0,1,1],[1,1,0,0,1,1],[0,0,0,0,0,0],[0,1,1,1,1,0],[0,1,0,0,1,0]],
+          color: '#000000'
+        },
+        '☀️': {
+          pattern: [[0,1,0,0,1,0],[1,1,1,1,1,1],[0,1,1,1,1,0],[0,1,1,1,1,0],[1,1,1,1,1,1],[0,1,0,0,1,0]],
+          color: '#FFD700'
+        },
+        '🍎': {
+          pattern: [[0,0,2,2,0,0],[0,1,1,1,1,0],[1,1,1,1,1,1],[1,1,1,1,1,1],[0,1,1,1,1,0],[0,0,1,1,0,0]],
+          color: '#FF0000',
+          color2: '#228B22'
+        },
+        '🎃': {
+          pattern: [[0,1,1,1,1,0],[1,1,1,1,1,1],[1,2,1,1,2,1],[1,1,1,1,1,1],[1,2,2,2,2,1],[0,1,1,1,1,0]],
+          color: '#FF8C00',
+          color2: '#000000'
+        },
+        '🎮': {
+          pattern: [[0,0,2,2,0,0],[0,0,2,2,0,0],[2,2,2,2,2,2],[2,2,2,2,2,2],[0,0,2,2,0,0],[0,0,2,2,0,0]],
+          color: '#808080',
+          color2: '#000000'
+        },
+        '⚽': {
+          pattern: [[2,1,1,1,1,2],[1,1,2,2,1,1],[1,2,1,1,2,1],[1,2,1,1,2,1],[1,1,2,2,1,1],[2,1,1,1,1,2]],
+          color: '#FFFFFF',
+          color2: '#000000'
+        }
+      };
+      
+      const stickerData = patterns[emoji] || patterns['😊'];
+      const pattern = stickerData.pattern;
+      
+      const startX = 21;
+      const startY = 20 + Math.floor((12 - pattern.length) / 2);
+      
+      for (let y = 0; y < pattern.length; y++) {
+        for (let x = 0; x < pattern[y].length; x++) {
+          if (pattern[y][x] === 1) {
+            ctx.fillStyle = stickerData.color;
+            ctx.fillRect(startX + x, startY + y, 1, 1);
+          } else if (pattern[y][x] === 2 && stickerData.color2) {
+            ctx.fillStyle = stickerData.color2;
+            ctx.fillRect(startX + x, startY + y, 1, 1);
+          } else if (pattern[y][x] === 3 && stickerData.color3) {
+            ctx.fillStyle = stickerData.color3;
+            ctx.fillRect(startX + x, startY + y, 1, 1);
+          }
+        }
+      }
+    }
+
+
+    function loadCurrentFace() {
+      const face = bodyPartFaces[currentBodyPart][currentFace];
+      faceContext.clearRect(0, 0, faceCanvas.width, faceCanvas.height);
+      
+      const imageData = skinContext.getImageData(face.x, face.y, face.w, face.h);
+      
+      faceCanvas.width = face.w;
+      faceCanvas.height = face.h;
+      faceContext.putImageData(imageData, 0, 0);
+      
+      // Fixed grid size - 8x12 to accommodate the largest faces (8 wide, 12 tall)
+      const GRID_WIDTH = 8;
+      const GRID_HEIGHT = 12;
+      editorCanvas.width = GRID_WIDTH;
+      editorCanvas.height = GRID_HEIGHT;
+      
+      // Clear the entire canvas
+      editorContext.clearRect(0, 0, GRID_WIDTH, GRID_HEIGHT);
+      
+      // Center the face within the grid
+      const offsetX = Math.floor((GRID_WIDTH - face.w) / 2);
+      const offsetY = Math.floor((GRID_HEIGHT - face.h) / 2);
+      
+      // Draw the face at the centered position
+      editorContext.putImageData(imageData, offsetX, offsetY);
+      
+      // Calculate optimal pixel size - use a good default that fills space nicely
+      // Aim for roughly 480px height (12 pixels * 40) which gives good size
+      const PIXEL_SIZE = 50; // 50px per pixel gives us 400x600 display size
+      
+      const displayWidth = GRID_WIDTH * PIXEL_SIZE;   // 8 * 50 = 400px
+      const displayHeight = GRID_HEIGHT * PIXEL_SIZE;  // 12 * 50 = 600px
+      
+      editorCanvas.style.width = displayWidth + 'px';
+      editorCanvas.style.height = displayHeight + 'px';
+      editorCanvas.style.imageRendering = 'pixelated';
+      
+      // Store grid info and offset for drawing operations
+      editorCanvas.dataset.gridWidth = GRID_WIDTH;
+      editorCanvas.dataset.gridHeight = GRID_HEIGHT;
+      editorCanvas.dataset.offsetX = offsetX;
+      editorCanvas.dataset.offsetY = offsetY;
+      editorCanvas.dataset.faceW = face.w;
+      editorCanvas.dataset.faceH = face.h;
+      
+      const partNames = {
+        'head': '🧑 Head',
+        'torso': '👕 Torso',
+        'right-arm': '💪 Right Arm',
+        'left-arm': '🤚 Left Arm',
+        'right-leg': '🦵 Right Leg',
+        'left-leg': '🦿 Left Leg'
+      };
+      
+      const faceNames = {
+        'front': '👁️ Front',
+        'back': '🔙 Back',
+        'left': '⬅️ Left',
+        'right': '➡️ Right',
+        'top': '⬆️ Top',
+        'bottom': '⬇️ Bottom'
+      };
+      
+      document.getElementById('current-face-label').textContent = 
+        `${partNames[currentBodyPart]} - ${faceNames[currentFace]} Face`;
+      document.getElementById('face-dimensions').textContent = 
+        `${face.w}×${face.h} pixels`;
+      
+      saveToEditorHistory();
+      updateEditorHistoryButtons();
+    }
+
+
+    function saveCurrentFace() {
+      const face = bodyPartFaces[currentBodyPart][currentFace];
+      const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
+      const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
+      
+      // Extract only the face region from the centered position
+      const imageData = editorContext.getImageData(offsetX, offsetY, face.w, face.h);
+      skinContext.putImageData(imageData, face.x, face.y);
+      skinTexture.needsUpdate = true;
+      updateEditorPreview();
+    }
+
+
+    function initPixelEditor() {
+      editorCanvas = document.getElementById('pixel-editor');
+      editorContext = editorCanvas.getContext('2d');
+      
+      faceCanvas = document.createElement('canvas');
+      faceContext = faceCanvas.getContext('2d');
+      
+      loadCurrentFace();
+      
+      editorCanvas.addEventListener('mousedown', startDrawing);
+      editorCanvas.addEventListener('mousemove', draw);
+      editorCanvas.addEventListener('mouseup', stopDrawing);
+      editorCanvas.addEventListener('mouseleave', stopDrawing);
+      
+      document.getElementById('body-part-select').addEventListener('change', function(e) {
+  saveCurrentFace();
+  currentBodyPart = e.target.value;
+  // Clear editor history to save memory
+  editorHistoryStack = [];
+  editorHistoryIndex = -1;
+  loadCurrentFace();
+});
+      
+      document.getElementById('face-select').addEventListener('change', function(e) {
+  saveCurrentFace();
+  currentFace = e.target.value;
+  // Clear editor history to save memory
+  editorHistoryStack = [];
+  editorHistoryIndex = -1;
+  loadCurrentFace();
+});
+      
+      document.querySelectorAll('[data-tool]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('[data-tool]').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentTool = this.dataset.tool;
+        });
+      });
+      
+            const brushColorInput = document.getElementById('brush-color');
+      if (brushColorInput) {
+        brushColor = brushColorInput.value || brushColor;
+        brushColorInput.addEventListener('input', function(e) {
+          brushColor = e.target.value;
+          if (shadeHelperEnabled) {
+            updateShadeHelperSwatches();
+          }
+        });
+      }
+
+      // Favorite colors palette
+      const paletteRow = document.getElementById('palette-row');
+      let paletteColors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#000000'];
+      let activePaletteIndex = 0;
+
+      function renderPaletteSwatches() {
+        if (!paletteRow) return;
+        const buttons = paletteRow.querySelectorAll('.palette-swatch');
+        buttons.forEach(btn => {
+          const idx = parseInt(btn.dataset.index, 10);
+          const color = paletteColors[idx] || '#000000';
+          btn.style.backgroundColor = color;
+          btn.dataset.color = color;
+          btn.classList.toggle('active', idx === activePaletteIndex);
+        });
+      }
+
+      if (paletteRow) {
+        paletteRow.querySelectorAll('.palette-swatch').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.index, 10);
+            activePaletteIndex = idx;
+            const color = this.dataset.color || paletteColors[idx] || '#000000';
+            brushColor = color;
+            if (brushColorInput) {
+              brushColorInput.value = color;
+            }
+            renderPaletteSwatches();
+            if (shadeHelperEnabled) {
+              updateShadeHelperSwatches();
+            }
+          });
+        });
+        // initial render
+        renderPaletteSwatches();
+      }
+
+      const savePaletteBtn = document.getElementById('save-palette-color');
+      if (savePaletteBtn) {
+        savePaletteBtn.addEventListener('click', function() {
+          const colorToSave = brushColor || (brushColorInput ? brushColorInput.value : '#000000') || '#000000';
+          paletteColors[activePaletteIndex] = colorToSave;
+          renderPaletteSwatches();
+        });
+      }
+
+      // Shade helper toggle
+      const autoShadeBtn = document.getElementById('auto-shade');
+      if (autoShadeBtn) {
+        autoShadeBtn.addEventListener('click', function() {
+          shadeHelperEnabled = !shadeHelperEnabled;
+          if (shadeHelperEnabled) {
+            this.textContent = '🌓 Shade Helper (On)';
+            updateShadeHelperSwatches();
+          } else {
+            this.textContent = '🌓 Shade Helper (Off)';
+            const container = document.getElementById('shade-helper-swatches');
+            if (container) {
+              container.style.display = 'none';
+            }
+          }
+        });
+      }
+
+      // Shade helper swatch clicks
+      const shadeContainer = document.getElementById('shade-helper-swatches');
+      if (shadeContainer) {
+        shadeContainer.querySelectorAll('.shade-swatch').forEach(btn => {
+          btn.addEventListener('click', function() {
+            if (!shadeHelperEnabled) return;
+            const color = this.dataset.color;
+            if (color) {
+              brushColor = color;
+              if (brushColorInput) {
+                brushColorInput.value = color;
+              }
+              updateShadeHelperSwatches();
+            }
+          });
+        });
+      }
+
+document.getElementById('clear-face').addEventListener('click', function() {
+        saveToEditorHistory();
+        const face = bodyPartFaces[currentBodyPart][currentFace];
+        const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
+        const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
+        editorContext.clearRect(offsetX, offsetY, face.w, face.h);
+        saveCurrentFace();
+      });
+      
+      document.getElementById('editor-undo-btn').addEventListener('click', function() {
+        editorUndo();
+      });
+      
+      document.getElementById('editor-redo-btn').addEventListener('click', function() {
+        editorRedo();
+      });
+      
+      document.getElementById('reset-edits').addEventListener('click', function() {
+        syncEditorCanvas();
+        loadCurrentFace();
+      });
+
+
+      initEditorPreview();
+    }
+
+
+    function syncEditorCanvas() {
+      updatePreview();
+    }
+
+
+    function initEditorPreview() {
+      const container = document.getElementById('editor-preview-3d');
+      
+      editorScene = new THREE.Scene();
+      editorScene.background = new THREE.Color(0x2d3748);
+      
+      const width = 240;
+      const height = 200;
+      
+      editorCamera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      editorCamera.position.set(0, 2, 35);
+      editorCamera.lookAt(0, 2, 0);
+      
+      editorRenderer = new THREE.WebGLRenderer({ antialias: true });
+      editorRenderer.setSize(width, height);
+      container.appendChild(editorRenderer.domElement);
+      
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      editorScene.add(ambientLight);
+      
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(5, 10, 7);
+      editorScene.add(directionalLight);
+      
+      editorSkinCanvas = document.createElement('canvas');
+      editorSkinCanvas.width = 64;
+      editorSkinCanvas.height = 64;
+      editorSkinContext = editorSkinCanvas.getContext('2d');
+      
+      editorTexture = new THREE.CanvasTexture(editorSkinCanvas);
+      editorTexture.magFilter = THREE.NearestFilter;
+      editorTexture.minFilter = THREE.NearestFilter;
+      
+      createEditorModel();
+      
+      let isDragging = false;
+      let previousMousePosition = { x: 0, y: 0 };
+      
+      editorRenderer.domElement.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      });
+      
+      editorRenderer.domElement.addEventListener('mousemove', (e) => {
+        if (isDragging && editorSkinMesh) {
+          const deltaX = e.clientX - previousMousePosition.x;
+          editorSkinMesh.rotation.y += deltaX * 0.01;
+          previousMousePosition = { x: e.clientX, y: e.clientY };
+        }
+      });
+      
+      editorRenderer.domElement.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+      
+      animateEditor();
+    }
+
+
+    function createEditorModel() {
+      if (editorSkinMesh) {
+        editorScene.remove(editorSkinMesh);
+      }
+      
+      const group = new THREE.Group();
+      const material = new THREE.MeshLambertMaterial({ map: editorTexture });
+      
+      const headGeo = new THREE.BoxGeometry(8, 8, 8);
+      const head = new THREE.Mesh(headGeo, material);
+      head.position.y = 10;
+      setHeadUVs(headGeo);
+      group.add(head);
+      
+      const torsoGeo = new THREE.BoxGeometry(8, 12, 4);
+      const torso = new THREE.Mesh(torsoGeo, material);
+      torso.position.y = 0;
+      setUVs(torsoGeo, 16, 20, 4, 12, 28, 20, 4, 12, 20, 16, 8, 4, 28, 16, 8, 4, 20, 20, 8, 12, 32, 20, 8, 12);
+      group.add(torso);
+      
+      const armWidth = avatarState.modelType === 'slim' ? 3 : 4;
+      const armOffset = avatarState.modelType === 'slim' ? 5.5 : 6;
+      
+      const rightArmGeo = new THREE.BoxGeometry(armWidth, 12, 4);
+      const rightArm = new THREE.Mesh(rightArmGeo, material);
+      rightArm.position.set(-armOffset, 0, 0);
+      setUVs(rightArmGeo, 40, 20, 4, 12, 48, 20, 4, 12, 44, 16, armWidth, 4, 48, 16, armWidth, 4, 44, 20, armWidth, 12, 52, 20, armWidth, 12);
+      group.add(rightArm);
+      
+      const leftArmGeo = new THREE.BoxGeometry(armWidth, 12, 4);
+      const leftArm = new THREE.Mesh(leftArmGeo, material);
+      leftArm.position.set(armOffset, 0, 0);
+      setUVs(leftArmGeo, 32, 52, 4, 12, 40, 52, 4, 12, 36, 48, armWidth, 4, 40, 48, armWidth, 4, 36, 52, armWidth, 12, 44, 52, armWidth, 12);
+      group.add(leftArm);
+      
+      const rightLegGeo = new THREE.BoxGeometry(4, 12, 4);
+      const rightLeg = new THREE.Mesh(rightLegGeo, material);
+      rightLeg.position.set(-2, -12, 0);
+      setUVs(rightLegGeo, 0, 20, 4, 12, 8, 20, 4, 12, 4, 16, 4, 4, 8, 16, 4, 4, 4, 20, 4, 12, 12, 20, 4, 12);
+      group.add(rightLeg);
+      
+      const leftLegGeo = new THREE.BoxGeometry(4, 12, 4);
+      const leftLeg = new THREE.Mesh(leftLegGeo, material);
+      leftLeg.position.set(2, -12, 0);
+      setUVs(leftLegGeo, 16, 52, 4, 12, 24, 52, 4, 12, 20, 48, 4, 4, 24, 48, 4, 4, 20, 52, 4, 12, 28, 52, 4, 12);
+      group.add(leftLeg);
+      
+      editorSkinMesh = group;
+      editorScene.add(editorSkinMesh);
+    }
+
+
+    function animateEditor() {
+      requestAnimationFrame(animateEditor);
+      if (editorRenderer && editorScene && editorCamera) {
+        editorRenderer.render(editorScene, editorCamera);
+      }
+    }
+
+
+    function updateEditorPreview() {
+      editorSkinContext.clearRect(0, 0, 64, 64);
+      editorSkinContext.drawImage(skinCanvas, 0, 0);
+      editorTexture.needsUpdate = true;
+    }
+
+
+    function startDrawing(e) {
+      saveToEditorHistory();
+      isDrawing = true;
+      draw(e);
+    }
+
+
+    function stopDrawing() {
+      if (isDrawing) {
+        isDrawing = false;
+      }
+    }
+
+
+    function draw(e) {
+      if (!isDrawing && currentTool !== 'eyedropper') return;
+      
+      const face = bodyPartFaces[currentBodyPart][currentFace];
+      const rect = editorCanvas.getBoundingClientRect();
+      
+      const GRID_WIDTH = parseInt(editorCanvas.dataset.gridWidth) || 8;
+      const GRID_HEIGHT = parseInt(editorCanvas.dataset.gridHeight) || 12;
+      const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
+      const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
+      
+      // Calculate position in the grid (0-7 for width, 0-11 for height)
+      const scaleX = GRID_WIDTH / rect.width;
+      const scaleY = GRID_HEIGHT / rect.height;
+      const gridX = Math.floor((e.clientX - rect.left) * scaleX);
+      const gridY = Math.floor((e.clientY - rect.top) * scaleY);
+      
+      // Calculate position relative to the face (accounting for offset)
+      const faceX = gridX - offsetX;
+      const faceY = gridY - offsetY;
+      
+      // Check if we're within the face bounds
+      if (faceX < 0 || faceX >= face.w || faceY < 0 || faceY >= face.h) return;
+      
+      // Actual canvas position (grid coordinates)
+      const canvasX = offsetX + faceX;
+      const canvasY = offsetY + faceY;
+      
+      if (currentTool === 'brush') {
+        editorContext.fillStyle = brushColor;
+        editorContext.fillRect(canvasX, canvasY, 1, 1);
+        saveCurrentFace();
+      } else if (currentTool === 'noise') {
+        // Use varied color for texture/shading effect
+        const variedColor = getNoiseColor(brushColor);
+        editorContext.fillStyle = variedColor;
+        editorContext.fillRect(canvasX, canvasY, 1, 1);
+        saveCurrentFace();
+      } else if (currentTool === 'eraser') {
+        editorContext.clearRect(canvasX, canvasY, 1, 1);
+        saveCurrentFace();
+      } else if (currentTool === 'eyedropper') {
+        const pixel = editorContext.getImageData(canvasX, canvasY, 1, 1).data;
+        brushColor = rgbToHex(pixel[0], pixel[1], pixel[2]);
+        document.getElementById('brush-color').value = brushColor;
+      } else if (currentTool === 'fill') {
+        floodFill(faceX, faceY, brushColor, face);
+        saveCurrentFace();
+      }
+    }
+
+
+    function floodFill(startX, startY, fillColor, face) {
+      const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
+      const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
+      
+      // Get only the face region
+      const imageData = editorContext.getImageData(offsetX, offsetY, face.w, face.h);
+      const data = imageData.data;
+      
+      const targetColor = getPixelColor(data, startX, startY, face.w);
+      const fillRgb = hexToRgb(fillColor);
+      
+      if (colorsMatch(targetColor, fillRgb)) return;
+      
+      const stack = [[startX, startY]];
+      
+      while (stack.length > 0) {
+        const [x, y] = stack.pop();
+        
+        if (x < 0 || x >= face.w || y < 0 || y >= face.h) continue;
+        
+        const currentColor = getPixelColor(data, x, y, face.w);
+        if (!colorsMatch(currentColor, targetColor)) continue;
+        
+        setPixelColor(data, x, y, fillRgb, face.w);
+        
+        stack.push([x + 1, y]);
+        stack.push([x - 1, y]);
+        stack.push([x, y + 1]);
+        stack.push([x, y - 1]);
+      }
+      
+      // Put the data back at the offset position
+      editorContext.putImageData(imageData, offsetX, offsetY);
+    }
+
+
+    function getPixelColor(data, x, y, width) {
+      const idx = (y * width + x) * 4;
+      return { r: data[idx], g: data[idx + 1], b: data[idx + 2], a: data[idx + 3] };
+    }
+
+
+    function setPixelColor(data, x, y, color, width) {
+      const idx = (y * width + x) * 4;
+      data[idx] = color.r;
+      data[idx + 1] = color.g;
+      data[idx + 2] = color.b;
+      data[idx + 3] = 255;
+    }
+
+
+    function colorsMatch(c1, c2) {
+      return c1.r === c2.r && c1.g === c2.g && c1.b === c2.b && c1.a === c2.a;
+    }
+
+
+    function initColorGrids() {
+      const skinGrid = document.getElementById('skin-tone-grid');
+      skinGrid.setAttribute('role', 'radiogroup');
+      skinGrid.setAttribute('aria-label', 'Skin tone colors');
+      skinTones.forEach((color, index) => {
+        const swatch = document.createElement('button');
+        swatch.className = 'color-swatch' + (index === 0 ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.setAttribute('role', 'radio');
+        swatch.setAttribute('aria-checked', index === 0 ? 'true' : 'false');
+        swatch.setAttribute('aria-label', `Skin tone ${index + 1}`);
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#skin-tone-grid .color-swatch').forEach(s => {
+            s.classList.remove('selected');
+            s.setAttribute('aria-checked', 'false');
+          });
+          swatch.classList.add('selected');
+          swatch.setAttribute('aria-checked', 'true');
+          avatarState.skinTone = color;
+          updatePreview();
+          saveToHistory();
+        });
+        skinGrid.appendChild(swatch);
+      });
+
+
+      const eyeGrid = document.getElementById('eye-color-grid');
+      Object.entries(eyeColors).forEach(([name, color]) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch' + (name === 'brown' ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#eye-color-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+          swatch.classList.add('selected');
+          avatarState.eyeColor = name;
+          updatePreview();
+          saveToHistory();
+        });
+        eyeGrid.appendChild(swatch);
+      });
+
+
+      const hairGrid = document.getElementById('hair-color-grid');
+      hairColors.forEach((color, index) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch' + (index === 0 ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#hair-color-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+          swatch.classList.add('selected');
+          avatarState.hairColor = color;
+          updatePreview();
+          saveToHistory();
+        });
+        hairGrid.appendChild(swatch);
+      });
+
+
+      const topGrid = document.getElementById('top-color-grid');
+      topColors.forEach((color, index) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch' + (index === 0 ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#top-color-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+          swatch.classList.add('selected');
+          avatarState.topColor = color;
+          updatePreview();
+          saveToHistory();
+        });
+        topGrid.appendChild(swatch);
+      });
+
+
+      const bottomGrid = document.getElementById('bottom-color-grid');
+      bottomColors.forEach((color, index) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch' + (index === 0 ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#bottom-color-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+          swatch.classList.add('selected');
+          avatarState.bottomColor = color;
+          updatePreview();
+          saveToHistory();
+        });
+        bottomGrid.appendChild(swatch);
+      });
+
+
+      const footwearGrid = document.getElementById('footwear-color-grid');
+      footwearColors.forEach((color, index) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch' + (index === 0 ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#footwear-color-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+          swatch.classList.add('selected');
+          avatarState.footwearColor = color;
+          updatePreview();
+          saveToHistory();
+        });
+        footwearGrid.appendChild(swatch);
+      });
+
+
+      const pattern1Grid = document.getElementById('pattern-color1-grid');
+      topColors.forEach((color, index) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch' + (index === 1 ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#pattern-color1-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+          swatch.classList.add('selected');
+          avatarState.patternColor1 = color;
+          updatePreview();
+          saveToHistory();
+        });
+        pattern1Grid.appendChild(swatch);
+      });
+
+
+      const pattern2Grid = document.getElementById('pattern-color2-grid');
+      topColors.forEach((color, index) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch' + (index === 3 ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#pattern-color2-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+          swatch.classList.add('selected');
+          avatarState.patternColor2 = color;
+          updatePreview();
+          saveToHistory();
+        });
+        pattern2Grid.appendChild(swatch);
+      });
+
+
+      const glassesGrid = document.getElementById('glasses-color-grid');
+      topColors.forEach((color) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch' + (color === '#000000' ? ' selected' : '');
+        swatch.style.backgroundColor = color;
+        swatch.addEventListener('click', () => {
+          document.querySelectorAll('#glasses-color-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+          swatch.classList.add('selected');
+          avatarState.glassesColor = color;
+          updatePreview();
+          saveToHistory();
+        });
+        glassesGrid.appendChild(swatch);
+      });
+    }
+
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const targetTab = this.dataset.tab;
+    
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    document.getElementById(targetTab + '-tab').classList.add('active');
+  });
+});
+
+
+    document.getElementById('undo-btn').addEventListener('click', undo);
+    document.getElementById('redo-btn').addEventListener('click', redo);
+
+
+    document.getElementById('language-toggle').addEventListener('click', function() {
+      currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+      this.classList.add('active');
+      setTimeout(() => this.classList.remove('active'), 200);
+      updateLanguage();
+    });
+
+
+    document.getElementById('tts-toggle').addEventListener('click', function() {
+      ttsEnabled = !ttsEnabled;
+      this.classList.toggle('active');
+      
+      if (ttsEnabled) {
+        const t = translations[currentLanguage];
+        speak(t.instructions);
+      } else {
+        if (window.speechSynthesis) {
+          window.speechSynthesis.cancel();
+        }
+      }
+    });
+
+
+   document.getElementById('fullscreen-toggle').addEventListener('click', function() {
+  if (!document.fullscreenElement) {
+    // Enter fullscreen
+    document.documentElement.requestFullscreen().then(() => {
+      this.classList.add('active');
+      const t = translations[currentLanguage];
+      speak(currentLanguage === 'en' ? 'Fullscreen mode activated' : 'Modo de pantalla completa activado');
+    }).catch(err => {
+      console.log('Error attempting to enable fullscreen:', err);
+    });
+  } else {
+    // Exit fullscreen
+    document.exitFullscreen().then(() => {
+      this.classList.remove('active');
+      const t = translations[currentLanguage];
+      speak(currentLanguage === 'en' ? 'Fullscreen mode deactivated' : 'Modo de pantalla completa desactivado');
+    });
+  }
+});
+
+// Update button state when user exits fullscreen with ESC key
+document.addEventListener('fullscreenchange', function() {
+  const fullscreenBtn = document.getElementById('fullscreen-toggle');
+  if (!document.fullscreenElement) {
+    fullscreenBtn.classList.remove('active');
+  } else {
+    fullscreenBtn.classList.add('active');
+  }
+});
+
+
+    document.getElementById('open-editor-btn').addEventListener('click', function() {
+      document.getElementById('editor-overlay').classList.add('active');
+      if (!editorCanvas) {
+        initPixelEditor();
+      } else {
+        loadCurrentFace();
+        updateEditorPreview();
+      }
+    });
+
+
+    document.getElementById('close-editor-btn').addEventListener('click', function() {
+      document.getElementById('editor-overlay').classList.remove('active');
+    });
+
+
+    document.querySelectorAll('[data-model]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-model]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.modelType = this.dataset.model;
+        speak(this.textContent);
+        updatePreview();
+        saveToHistory();
+      });
+    });
+
+
+    document.querySelectorAll('[data-facestyle]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-facestyle]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.faceStyle = this.dataset.facestyle;
+        speak(this.textContent);
         updateExpressionButtons();
         updatePreview();
         saveToHistory();
       });
+    });
 
-      // Download Button (FIXED)
-      document.getElementById('download-btn').addEventListener('click', async function() {
-        try {
-          if (!window.JSZip) {
-            // This fallback should not be needed if script is loaded, but safe to keep
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-            document.head.appendChild(script);
-            await new Promise(resolve => script.onload = resolve);
-          }
-          const zip = new JSZip();
-          const skinName = getSkinName();
-          if (!skinName) return; // Don't download if name is invalid
-          const skinDataUrl = skinCanvas.toDataURL('image/png');
-          const skinBase64 = skinDataUrl.split(',')[1];
 
-          // Minecraft Skin Pack Manifest (JSON structure)
-          const manifest = {
-            "format_version": 2,
-            "header": {
-              "name": skinName,
-              "description": "My custom Minecraft skin created with Minecraft Me!",
-              "uuid": generateUUID(),
-              "version": [1, 0, 0],
-              "min_engine_version": [1, 13, 0]
-            },
-            "modules": [{
-              "type": "skin_pack",
-              "uuid": generateUUID(),
-              "version": [1, 0, 0]
-            }],
-            "skins": [{
-              "geometry": avatarState.modelType === 'slim' ? "geometry.slim" : "geometry.humanoid",
-              "texture": "skin.png",
-              "type": "free",
-              "localization_name": skinName.toLowerCase().replace(/[^a-z0-9]/g, '_'),
-              "id": `skin_${generateUUID()}`
-            }]
-          }; // <-- END OF MANIFEST OBJECT
+    document.getElementById('blush-toggle').addEventListener('click', function() {
+      avatarState.hasBlush = !avatarState.hasBlush;
+      this.classList.toggle('active');
+      this.setAttribute('aria-checked', avatarState.hasBlush ? 'true' : 'false');
+      const t = translations[currentLanguage];
+      speak(t.blush + (avatarState.hasBlush ? ' on' : ' off'));
+      updatePreview();
+      saveToHistory();
+    });
 
-          // Add manifest and skin to zip
-          zip.file("manifest.json", JSON.stringify(manifest, null, 2));
-          zip.file("skin.png", skinBase64, {
-            base64: true
-          });
 
-          // Generate and download the zip file as a .mcpack
-          const content = await zip.generateAsync({
-            type: "blob",
-            mimeType: "application/octet-stream",
-            compression: "DEFLATE"
-          });
-          const downloadLink = document.createElement('a');
-          downloadLink.href = URL.createObjectURL(content);
-          downloadLink.download = `${skinName.replace(/[^a-z0-9]/gi, '_')}.mcpack`;
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
+    document.querySelectorAll('[data-expression]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (avatarState.faceStyle === 'anime') return;
+        
+        document.querySelectorAll('[data-expression]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.expression = this.dataset.expression;
+        speak(this.textContent);
+        updatePreview();
+        saveToHistory();
+      });
+    });
 
-        } catch (error) {
-          console.error("Download failed:", error);
-          alert("Sorry, the download failed. Check the console for details.");
+
+    document.querySelectorAll('[data-hairstyle]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-hairstyle]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.hairStyle = this.dataset.hairstyle;
+        speak(this.textContent);
+        updatePreview();
+        saveToHistory();
+      });
+    });
+
+
+    document.querySelectorAll('[data-hairtexture]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-hairtexture]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.hairTexture = this.dataset.hairtexture;
+        speak(this.textContent);
+        updatePreview();
+        saveToHistory();
+      });
+    });
+
+
+    document.querySelectorAll('[data-bangs]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-bangs]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.bangsStyle = this.dataset.bangs;
+        speak(this.textContent);
+        updatePreview();
+        saveToHistory();
+      });
+    });
+
+
+    document.getElementById('glasses-toggle').addEventListener('click', function() {
+      avatarState.hasGlasses = !avatarState.hasGlasses;
+      this.classList.toggle('active');
+      this.setAttribute('aria-checked', avatarState.hasGlasses ? 'true' : 'false');
+      const t = translations[currentLanguage];
+      speak(t.glasses + (avatarState.hasGlasses ? ' on' : ' off'));
+      updatePreview();
+      saveToHistory();
+    });
+
+
+    document.querySelectorAll('[data-top]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-top]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.topStyle = this.dataset.top;
+        speak(this.textContent);
+        updatePreview();
+        saveToHistory();
+      });
+    });
+
+
+    document.querySelectorAll('[data-bottom]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-bottom]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.bottomStyle = this.dataset.bottom;
+        speak(this.textContent);
+        updatePreview();
+        saveToHistory();
+      });
+    });
+
+
+    document.querySelectorAll('[data-footwear]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-footwear]').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        avatarState.footwear = this.dataset.footwear;
+        speak(this.textContent);
+        updatePreview();
+        saveToHistory();
+      });
+    });
+
+
+   document.querySelectorAll('[data-pattern]').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-pattern]').forEach(b => b.classList.remove('selected'));
+    
+    const patternType = this.dataset.pattern;
+    
+    if (patternType === 'none') {
+      avatarState.pattern = null;
+      this.classList.add('selected');
+      speak('Pattern removed');
+    } else if (avatarState.pattern === patternType) {
+      avatarState.pattern = null;
+      speak('Pattern removed');
+    } else {
+      this.classList.add('selected');
+      avatarState.pattern = patternType;
+      speak(this.textContent);
+    }
+    
+    updatePreview();
+    saveToHistory();
+  });
+});
+
+
+   document.querySelectorAll('.sticker-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const stickerType = this.dataset.sticker;
+    if (stickerType === 'none') {
+      avatarState.currentSticker = null;
+      speak('Sticker removed');
+    } else {
+      avatarState.currentSticker = { emoji: this.textContent };
+      speak('Sticker added');
+    }
+    updatePreview();
+    saveToHistory();
+  });
+});
+
+
+    document.getElementById('randomize-btn').addEventListener('click', function() {
+      avatarState.modelType = Math.random() > 0.5 ? 'standard' : 'slim';
+      avatarState.faceStyle = Math.random() > 0.5 ? 'classic' : 'anime';
+      avatarState.skinTone = skinTones[Math.floor(Math.random() * skinTones.length)];
+      avatarState.hairColor = hairColors[Math.floor(Math.random() * hairColors.length)];
+      avatarState.hairStyle = ['short', 'long', 'none'][Math.floor(Math.random() * 3)];
+      avatarState.bangsStyle = ['short', 'long', 'layered', 'asymmetric'][Math.floor(Math.random() * 4)];
+      avatarState.hairTexture = ['straight', 'wavy', 'curly'][Math.floor(Math.random() * 3)];
+      avatarState.eyeColor = Object.keys(eyeColors)[Math.floor(Math.random() * Object.keys(eyeColors).length)];
+      avatarState.topColor = topColors[Math.floor(Math.random() * topColors.length)];
+      avatarState.bottomColor = bottomColors[Math.floor(Math.random() * bottomColors.length)];
+      avatarState.footwearColor = footwearColors[Math.floor(Math.random() * footwearColors.length)];
+      avatarState.hasBlush = Math.random() > 0.5;
+      avatarState.expression = ['smile', 'happy', 'neutral', 'surprised'][Math.floor(Math.random() * 4)];
+      avatarState.hasGlasses = Math.random() > 0.7;
+      avatarState.topStyle = ['tshirt', 'hoodie', 'tank', 'polo'][Math.floor(Math.random() * 4)];
+      avatarState.bottomStyle = ['jeans', 'shorts', 'cargo', 'joggers'][Math.floor(Math.random() * 4)];
+      avatarState.footwear = ['sneakers', 'boots', 'converse', 'dress'][Math.floor(Math.random() * 4)];
+      
+     document.querySelectorAll('.option-btn, .color-swatch').forEach(btn => btn.classList.remove('selected'));
+document.querySelector('[data-model="' + avatarState.modelType + '"]').classList.add('selected');
+document.querySelector('[data-facestyle="' + avatarState.faceStyle + '"]').classList.add('selected');
+document.querySelector('[data-hairstyle="' + avatarState.hairStyle + '"]').classList.add('selected');
+document.querySelector('[data-bangs="' + avatarState.bangsStyle + '"]').classList.add('selected');
+document.querySelector('[data-hairtexture="' + avatarState.hairTexture + '"]').classList.add('selected');
+document.querySelector('[data-expression="' + avatarState.expression + '"]').classList.add('selected');
+document.querySelector('[data-top="' + avatarState.topStyle + '"]').classList.add('selected');
+document.querySelector('[data-bottom="' + avatarState.bottomStyle + '"]').classList.add('selected');
+document.querySelector('[data-footwear="' + avatarState.footwear + '"]').classList.add('selected');
+      
+      if (avatarState.hasBlush) {
+        document.getElementById('blush-toggle').classList.add('active');
+      } else {
+        document.getElementById('blush-toggle').classList.remove('active');
+      }
+      
+      if (avatarState.hasGlasses) {
+        document.getElementById('glasses-toggle').classList.add('active');
+      } else {
+        document.getElementById('glasses-toggle').classList.remove('active');
+      }
+      
+      speak('Avatar randomized');
+      updateExpressionButtons();
+      updatePreview();
+      saveToHistory();
+    });
+
+
+   document.getElementById('download-btn').addEventListener('click', async function() {
+  try {
+    if (!window.JSZip) {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      document.head.appendChild(script);
+      await new Promise(resolve => script.onload = resolve);
+    }
+
+    const zip = new JSZip();
+    const skinName = getSkinName();
+if (!skinName) return; // Don't download if name is invalid
+    
+    const skinDataUrl = skinCanvas.toDataURL('image/png');
+    const skinBase64 = skinDataUrl.split(',')[1];
+    
+    const manifest = {
+      "format_version": 2,
+      "header": {
+        "name": skinName,
+        "description": "My custom Minecraft skin created with Minecraft Me!",
+        "uuid": generateUUID(),
+        "version": [1, 0, 0],
+        "min_engine_version": [1, 13, 0]
+      },
+      "modules": [
+        {
+          "type": "skin_pack",
+          "uuid": generateUUID(),
+          "version": [1, 0, 0]
         }
-      }); // <-- END OF EVENT LISTENER
-
-      // --- Editor Event Listeners ---
-
-      const editorOverlay = document.getElementById('editor-overlay');
-      const editorPreview3D = document.getElementById('editor-preview-3d');
-
-      document.getElementById('open-editor-btn').addEventListener('click', function() {
-        editorOverlay.classList.add('active');
-        // Setup 3D viewer for the editor if not already done
-        if (!scene || editorPreview3D.children.length === 0) {
-          setup3DViewer(editorPreview3D, 20); // Closer view for editing
-        }
-        // Save the current drawing to the hidden canvas data
-        for (const part in FACE_MAP) {
-          for (const face in FACE_MAP[part]) {
-            const faceInfo = FACE_MAP[part][face];
-            const data = skinContext.getImageData(faceInfo.x, faceInfo.y, faceInfo.w, faceInfo.h);
-            if (!bodyPartFaces[part]) bodyPartFaces[part] = {};
-            bodyPartFaces[part][face] = data;
-          }
-        }
-        editorHistoryStack = []; // Clear main history for editor history
-        editorHistoryIndex = -1;
-
-        // Load the head/front face initially
-        loadFaceToEditor('head', 'front');
-        updateEditorHistoryButtons();
-      });
-
-      document.getElementById('close-editor-btn').addEventListener('click', function() {
-        editorOverlay.classList.remove('active');
-      });
-
-      document.getElementById('editor-apply-btn').addEventListener('click', function() {
-        // Apply changes back to the main avatar state
-        updateSkinCanvasFromEditor(false); // Update skin canvas from editor
-        updatePreview(); // Re-render the main 3D model and save to main history
-        editorOverlay.classList.remove('active');
-        speak('Editor changes applied');
-      });
-
-      document.getElementById('body-part-select').addEventListener('change', function() {
-        currentBodyPart = this.value;
-        currentFace = 'front'; // Reset to front when body part changes
-        document.getElementById('face-select').value = 'front';
-        loadFaceToEditor(currentBodyPart, currentFace);
-      });
-
-      document.getElementById('face-select').addEventListener('change', function() {
-        currentFace = this.value;
-        loadFaceToEditor(currentBodyPart, currentFace);
-      });
-
-      document.getElementById('pen-tool').addEventListener('click', function() {
-        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentTool = 'pen';
-      });
-      document.getElementById('eraser-tool').addEventListener('click', function() {
-        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentTool = 'eraser';
-      });
-      document.getElementById('dropper-tool').addEventListener('click', function() {
-        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentTool = 'dropper';
-      });
-      document.getElementById('fill-tool').addEventListener('click', function() {
-        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentTool = 'fill';
-      });
-
-      editorCanvas.addEventListener('mousedown', handleEditorInput);
-      editorCanvas.addEventListener('mousemove', (e) => {
-        if (e.buttons === 1) handleEditorInput(e); // Only if left mouse button is held
-      });
-      editorCanvas.addEventListener('touchstart', handleEditorInput);
-      editorCanvas.addEventListener('touchmove', handleEditorInput);
-
-      document.getElementById('editor-undo-btn').addEventListener('click', undoEditor);
-      document.getElementById('editor-redo-btn').addEventListener('click', redoEditor);
-
-      // Handle Color Pickers in Editor
-      document.getElementById('brush-color').addEventListener('input', function() {
-        // Update the global current color for drawing logic if needed
-        // For simplicity, we just rely on the input value in handleEditorInput
-        // but this could be used to update a 'window.currentColor' if needed.
-      });
-
-
-      // Save/Load Drafts
-      document.getElementById('save-draft-btn').addEventListener('click', function() {
-        const data = {
-          ...avatarState,
-          skinDataUrl: skinCanvas.toDataURL(),
-          name: getSkinName(),
-          config: JSON.parse(JSON.stringify(config))
-        };
-        const draftJSON = JSON.stringify(data);
-        localStorage.setItem('minecraftMeDraft', draftJSON);
-        alert('Draft saved successfully to your browser!');
-        speak('Draft saved successfully');
-      });
-
-      document.getElementById('open-design-btn').addEventListener('click', function() {
-        const draftJSON = localStorage.getItem('minecraftMeDraft');
-        if (draftJSON) {
-          try {
-            const loadedState = JSON.parse(draftJSON);
-            Object.assign(avatarState, { ...loadedState
-            });
-            document.getElementById('skin-name').value = loadedState.name;
-
-            const img = new Image();
-            img.onload = () => {
-              skinContext.clearRect(0, 0, 64, 64);
-              skinContext.drawImage(img, 0, 0);
-              updatePreview(false);
-              updateUIFromState();
-              populateColorGrids();
-              saveToHistory(); // Save loaded state to history
-              alert('Draft loaded successfully!');
-              speak('Draft loaded successfully');
-            };
-            img.src = loadedState.skinDataUrl;
-
-          } catch (e) {
-            console.error('Failed to load draft:', e);
-            alert('Failed to load draft. The saved data may be corrupted.');
-            speak('Failed to load draft');
-          }
-        } else {
-          alert('No saved draft found.');
-          speak('No saved draft found');
-        }
-      });
+      ]
     };
-  </script>
+    
+    const skinsJson = {
+      "skins": [
+        {
+          "localization_name": skinName,
+          "geometry": "geometry.humanoid.custom",
+          "texture": "skin.png",
+          "type": "free"
+        }
+      ],
+      "serialize_name": skinName,
+      "localization_name": skinName
+    };
+    
+    const langFile = `skinpack.${skinName}=${skinName}\n` +
+                    `skin.${skinName}.${skinName}=My Custom Skin`;
+    
+    zip.file("manifest.json", JSON.stringify(manifest, null, 2));
+    zip.file("skins.json", JSON.stringify(skinsJson, null, 2));
+    zip.file("texts/en_US.lang", langFile);
+    zip.file("skin.png", skinBase64, {base64: true});
+    
+    const blob = await zip.generateAsync({type: "blob"});
+    const link = document.createElement('a');
+    link.download = `${skinName}.mcpack`;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    URL.revokeObjectURL(link.href);
+    
+    speak('Minecraft pack downloaded! You can now import it into Minecraft Education.');
+  } catch (error) {
+    console.error('Error creating mcpack:', error);
+    const link = document.createElement('a');
+    const timestamp = new Date().toISOString().slice(0, 10);
+    link.download = `minecraft-skin-${timestamp}.png`;
+    link.href = skinCanvas.toDataURL('image/png');
+    link.click();
+    speak('Skin downloaded as PNG');
+  }
+});
+    
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
 
- </body>
+
+    window.addEventListener('resize', function() {
+      if (renderer && camera) {
+        const container = document.getElementById('preview-canvas');
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      }
+    });
+
+
+    initColorGrids();
+    initThreeJS();
+    saveToHistory();
+    updateLanguage();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d14ecf461ff5fc',t:'MTc2MjkwMDk5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>
+(function(){
+    const previewElement = document.querySelector('#previewCanvas');
+    const pixelGrid = document.querySelector('#pixelGrid');
+    let initialDistance = null;
+    let highlightedPixel = null;
+    let isDrawing = false;
+    let clothingState = {};
+
+    // Pinch-to-Zoom for Preview
+    if(previewElement){
+        previewElement.addEventListener('touchstart', function(e){
+            if(e.touches.length === 2){
+                initialDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+            }
+        }, { passive: false });
+
+        previewElement.addEventListener('touchmove', function(e){
+            if(e.touches.length === 2 && initialDistance){
+                e.preventDefault();
+                let currentDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                let zoomChange = currentDistance / initialDistance;
+                initialDistance = currentDistance;
+                if(window.camera){
+                    window.camera.zoom = Math.min(Math.max(window.camera.zoom * zoomChange, 0.5), 5);
+                    window.camera.updateProjectionMatrix();
+                }
+            }
+        }, { passive: false });
+
+        previewElement.addEventListener('touchend', function(){
+            initialDistance = null;
+        });
+    }
+
+    // Continuous Touch Drawing with Glow Feedback
+    if(pixelGrid){
+        pixelGrid.addEventListener('touchstart', function(e){
+            isDrawing = true;
+            colorPixel(e);
+        }, { passive: false });
+
+        pixelGrid.addEventListener('touchmove', function(e){
+            if(isDrawing){
+                e.preventDefault();
+                colorPixel(e);
+            }
+        }, { passive: false });
+
+        pixelGrid.addEventListener('touchend', function(){
+            isDrawing = false;
+            if(highlightedPixel){
+                highlightedPixel.classList.remove('glow-highlight');
+                highlightedPixel = null;
+            }
+        });
+    }
+
+    function colorPixel(e){
+        let touch = e.touches[0];
+        let target = document.elementFromPoint(touch.clientX, touch.clientY);
+        if(target && target.classList.contains('pixel')){
+            target.style.backgroundColor = window.currentColor || '#000';
+            if(highlightedPixel && highlightedPixel !== target){
+                highlightedPixel.classList.remove('glow-highlight');
+            }
+            highlightedPixel = target;
+            highlightedPixel.classList.add('glow-highlight');
+        }
+    }
+
+    // Fix: Preserve clothing patterns when identity changes
+    const identitySelectors = document.querySelectorAll('.identity-option');
+
+    function captureClothingState(){
+        const clothingElements = document.querySelectorAll('.clothing-option');
+        clothingElements.forEach(el => {
+            clothingState[el.id] = el.style.backgroundImage || '';
+        });
+    }
+
+    function restoreClothingState(){
+        for(const id in clothingState){
+            const el = document.getElementById(id);
+            if(el){
+                el.style.backgroundImage = clothingState[id];
+            }
+        }
+    }
+
+    identitySelectors.forEach(selector => {
+        selector.addEventListener('click', function(){
+            captureClothingState();
+            setTimeout(restoreClothingState, 300);
+        });
+    });
+})();
+</script>
+
+</body>
 </html>
