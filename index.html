@@ -1161,28 +1161,12 @@
    
   </div>
   
- <div style="background: #edf2f7; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
-  <div style="font-size: 0.9em; color: #2d3748; font-weight: 600; margin-bottom: 10px; text-align: center;">
-    📁 My Project
-  </div>
-  
-  <div style="margin-bottom: 12px;">
-    <label style="font-size: 0.85em; color: #4a5568; display: block; margin-bottom: 5px; font-weight: 600;">
-      ✏️ Skin Name
-    </label>
-    <input 
-      type="text" 
-      id="skin-name-input" 
-      placeholder="Enter a name for your skin" 
-      maxlength="30"
-      style="width: 100%; padding: 10px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 0.9em; font-family: inherit;"
-    />
-    <div style="font-size: 0.7em; color: #718096; margin-top: 5px; line-height: 1.3;">
-      ⚠️ Don't use your real name or personal info!
+  <div style="background: #edf2f7; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+    <div style="font-size: 0.9em; color: #2d3748; font-weight: 600; margin-bottom: 10px; text-align: center;">
+      📁 My Project
     </div>
-  </div>
-  
-  <input type="file" id="upload-skin" accept="image/png" style="display: none;">
+    
+    <input type="file" id="upload-skin" accept="image/png" style="display: none;">
     <button class="action-button secondary-btn" id="open-design-btn" style="margin-bottom: 10px;">
       📂 <span id="open-text">Open My Design</span>
     </button>
@@ -1383,41 +1367,6 @@
       pattern: null
     };
 
-   // Profanity filter
-const bannedWords = [
-  'damn', 'hell', 'crap', 'stupid', 'idiot', 'dumb', 'butt', 'poop',
-  'fart', 'pee', 'hate', 'kill', 'die', 'shutup', 'shut up', 'retard', 'fuck', 'sex',
-  // Add more as needed - keep it age-appropriate for K-5
-];
-
-function containsProfanity(text) {
-  const lowerText = text.toLowerCase();
-  return bannedWords.some(word => lowerText.includes(word));
-}
-
-function getSkinName() {
-  const nameInput = document.getElementById('skin-name-input');
-  let skinName = nameInput.value.trim();
-  
-  // Check if name is empty
-  if (!skinName) {
-    alert('Please enter a name for your skin!');
-    nameInput.focus();
-    return null;
-  }
-  
-  // Check for profanity
-  if (containsProfanity(skinName)) {
-    alert('Please use appropriate language in your skin name.');
-    nameInput.focus();
-    return null;
-  }
-  
-  // Clean the name for filename use (remove special characters)
-  skinName = skinName.replace(/[^a-zA-Z0-9_-]/g, '_');
-  
-  return skinName;
-}
 
     let historyStack = [];
     let historyIndex = -1;
@@ -1755,8 +1704,6 @@ document.getElementById('reset-view-btn').addEventListener('click', function() {
           }
         }
       });
-    
-    
      // Open My Design - Upload PNG
 document.getElementById('open-design-btn').addEventListener('click', function() {
   document.getElementById('upload-skin').click();
@@ -1789,18 +1736,14 @@ document.getElementById('upload-skin').addEventListener('change', function(e) {
 
 // Save My Draft - Download PNG
 document.getElementById('save-draft-btn').addEventListener('click', function() {
-  const skinName = getSkinName();
-  if (!skinName) return; // Don't save if name is invalid
-
-  const skinDataUrl = skinCanvas.toDataURL('image/png');
-  
   const link = document.createElement('a');
-  link.download = `${skinName}-draft.png`;
+  const timestamp = new Date().toISOString().slice(0, 10);
+  link.download = `my-minecraft-skin-draft-${timestamp}.png`;
   link.href = skinCanvas.toDataURL('image/png');
   link.click();
   speak('Draft saved to your computer');
 });
-    
+    }
 
 
     let editorCanvas, editorContext;
@@ -1817,7 +1760,7 @@ document.getElementById('save-draft-btn').addEventListener('click', function() {
     let faceCanvas, faceContext;
     let editorHistoryStack = [];
     let editorHistoryIndex = -1;
-    const MAX_EDITOR_HISTORY = 15;
+    const MAX_EDITOR_HISTORY = 50;
 
 
     const bodyPartFaces = {
@@ -2213,41 +2156,41 @@ document.getElementById('save-draft-btn').addEventListener('click', function() {
     }
 
 
-function setHeadUVs(geometry) {
-  const uvs = geometry.attributes.uv.array;
-  
-  uvs[0] = 0/64; uvs[1] = 1 - 8/64;
-  uvs[2] = 8/64; uvs[3] = 1 - 8/64;
-  uvs[4] = 0/64; uvs[5] = 1 - 16/64;
-  uvs[6] = 8/64; uvs[7] = 1 - 16/64;
-  
-  uvs[8] = 16/64; uvs[9] = 1 - 8/64;
-  uvs[10] = 24/64; uvs[11] = 1 - 8/64;
-  uvs[12] = 16/64; uvs[13] = 1 - 16/64;
-  uvs[14] = 24/64; uvs[15] = 1 - 16/64;
-  
-  uvs[16] = 8/64; uvs[17] = 1 - 0/64;
-  uvs[18] = 16/64; uvs[19] = 1 - 0/64;
-  uvs[20] = 8/64; uvs[21] = 1 - 8/64;
-  uvs[22] = 16/64; uvs[23] = 1 - 8/64;
-  
-  uvs[24] = 16/64; uvs[25] = 1 - 0/64;
-  uvs[26] = 24/64; uvs[27] = 1 - 0/64;
-  uvs[28] = 16/64; uvs[29] = 1 - 8/64;
-  uvs[30] = 24/64; uvs[31] = 1 - 8/64;
-  
-  uvs[32] = 8/64; uvs[33] = 1 - 8/64;
-  uvs[34] = 16/64; uvs[35] = 1 - 8/64;
-  uvs[36] = 8/64; uvs[37] = 1 - 16/64;
-  uvs[38] = 16/64; uvs[39] = 1 - 16/64;
-  
-  uvs[40] = 24/64; uvs[41] = 1 - 8/64;
-  uvs[42] = 32/64; uvs[43] = 1 - 8/64;
-  uvs[44] = 24/64; uvs[45] = 1 - 16/64;
-  uvs[46] = 32/64; uvs[47] = 1 - 16/64;
-  
-  geometry.attributes.uv.needsUpdate = true;
-}`
+    function setHeadUVs(geometry) {
+      const uvs = geometry.attributes.uv.array;
+      
+      uvs[0] = 0/64; uvs[1] = 1 - 8/64;
+      uvs[2] = 8/64; uvs[3] = 1 - 8/64;
+      uvs[4] = 0/64; uvs[5] = 1 - 16/64;
+      uvs[6] = 8/64; uvs[7] = 1 - 16/64;
+      
+      uvs[8] = 16/64; uvs[9] = 1 - 8/64;
+      uvs[10] = 24/64; uvs[11] = 1 - 8/64;
+      uvs[12] = 16/64; uvs[13] = 1 - 16/64;
+      uvs[14] = 24/64; uvs[15] = 1 - 16/64;
+      
+      uvs[16] = 8/64; uvs[17] = 1 - 0/64;
+      uvs[18] = 16/64; uvs[19] = 1 - 0/64;
+      uvs[20] = 8/64; uvs[21] = 1 - 8/64;
+      uvs[22] = 16/64; uvs[23] = 1 - 8/64;
+      
+      uvs[24] = 16/64; uvs[25] = 1 - 0/64;
+      uvs[26] = 24/64; uvs[27] = 1 - 0/64;
+      uvs[28] = 16/64; uvs[29] = 1 - 8/64;
+      uvs[30] = 24/64; uvs[31] = 1 - 8/64;
+      
+      uvs[32] = 8/64; uvs[33] = 1 - 8/64;
+      uvs[34] = 16/64; uvs[35] = 1 - 8/64;
+      uvs[36] = 8/64; uvs[37] = 1 - 16/64;
+      uvs[38] = 16/64; uvs[39] = 1 - 16/64;
+      
+      uvs[40] = 24/64; uvs[41] = 1 - 8/64;
+      uvs[42] = 32/64; uvs[43] = 1 - 8/64;
+      uvs[44] = 24/64; uvs[45] = 1 - 16/64;
+      uvs[46] = 32/64; uvs[47] = 1 - 16/64;
+      
+      geometry.attributes.uv.needsUpdate = true;
+    }
 
 
     function animate() {
@@ -2604,67 +2547,68 @@ function hexToRgb(hex) {
       }
     }
 
-function drawHair(ctx, palette) {
-  if (avatarState.hairStyle === 'none') return;
-  
-  // Apply texture-based shading pattern
-  const texturePattern = getHairTexturePattern(avatarState.hairTexture);
-  
-  drawBodyPartWithTexture(ctx, 8, 0, 8, 8, palette, texturePattern);
-  drawBodyPartWithTexture(ctx, 24, 8, 8, 8, palette, texturePattern);
-  
-  if (avatarState.bangsStyle === 'short') {
-    drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
-  } else if (avatarState.bangsStyle === 'long') {
-    drawBodyPartWithTexture(ctx, 8, 8, 8, 4, palette, texturePattern);
-  } else if (avatarState.bangsStyle === 'layered') {
-    drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
-    drawBodyPartWithTexture(ctx, 8, 10, 2, 2, palette, texturePattern);
-    drawBodyPartWithTexture(ctx, 14, 10, 2, 2, palette, texturePattern);
-  } else if (avatarState.bangsStyle === 'asymmetric') {
-    drawBodyPartWithTexture(ctx, 8, 8, 8, 1, palette, texturePattern);
-    drawBodyPartWithTexture(ctx, 8, 9, 7, 1, palette, texturePattern);
-    drawBodyPartWithTexture(ctx, 8, 10, 6, 1, palette, texturePattern);
-    drawBodyPartWithTexture(ctx, 8, 11, 5, 1, palette, texturePattern);
-    drawBodyPartWithTexture(ctx, 8, 12, 4, 1, palette, texturePattern);
-  }
-  
-  let bangsRows = 0;
-  if (avatarState.bangsStyle === 'short') bangsRows = 2;
-  else if (avatarState.bangsStyle === 'long') bangsRows = 4;
-  else if (avatarState.bangsStyle === 'layered') bangsRows = 4;
-  else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
-  
-  if (avatarState.hairStyle === 'long') {
-    drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
-    drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
-  } else {
-    drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
-    if (bangsRows > 0) {
-      drawBodyPartWithTexture(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+
+    function drawHair(ctx, palette) {
+      if (avatarState.hairStyle === 'none') return;
+      
+      // Apply texture-based shading pattern
+      const texturePattern = getHairTexturePattern(avatarState.hairTexture);
+      
+      drawBodyPartWithTexture(ctx, 8, 0, 8, 8, palette, texturePattern);
+      drawBodyPartWithTexture(ctx, 24, 8, 8, 8, palette, texturePattern);
+      
+      if (avatarState.bangsStyle === 'short') {
+        drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
+      } else if (avatarState.bangsStyle === 'long') {
+        drawBodyPartWithTexture(ctx, 8, 8, 8, 4, palette, texturePattern);
+      } else if (avatarState.bangsStyle === 'layered') {
+        drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 8, 10, 2, 2, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 14, 10, 2, 2, palette, texturePattern);
+      } else if (avatarState.bangsStyle === 'asymmetric') {
+        drawBodyPartWithTexture(ctx, 8, 8, 8, 1, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 8, 9, 7, 1, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 8, 10, 6, 1, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 8, 11, 5, 1, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 8, 12, 4, 1, palette, texturePattern);
+      }
+      
+      let bangsRows = 0;
+      if (avatarState.bangsStyle === 'short') bangsRows = 2;
+      else if (avatarState.bangsStyle === 'long') bangsRows = 4;
+      else if (avatarState.bangsStyle === 'layered') bangsRows = 4;
+      else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
+      
+      if (avatarState.hairStyle === 'long') {
+        drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
+      } else {
+        drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
+        if (bangsRows > 0) {
+          drawBodyPartWithTexture(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+        }
+        
+        drawBodyPartWithTexture(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
+        if (bangsRows > 0) {
+          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+        }
+      }
+      
+      if (avatarState.hairStyle === 'long') {
+        drawBodyPartWithTexture(ctx, 32, 20, 8, 10, palette, texturePattern);
+      }
     }
-    
-    drawBodyPartWithTexture(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
-    if (bangsRows > 0) {
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
-      drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
-    }
-  }
-  
-  if (avatarState.hairStyle === 'long') {
-    drawBodyPartWithTexture(ctx, 32, 20, 8, 10, palette, texturePattern);
-  }
-}
-   
+
 
     function getHairTexturePattern(texture) {
       if (texture === 'curly') {
@@ -3190,22 +3134,16 @@ function drawHair(ctx, palette) {
       editorCanvas.addEventListener('mouseleave', stopDrawing);
       
       document.getElementById('body-part-select').addEventListener('change', function(e) {
-  saveCurrentFace();
-  currentBodyPart = e.target.value;
-  // Clear editor history to save memory
-  editorHistoryStack = [];
-  editorHistoryIndex = -1;
-  loadCurrentFace();
-});
+        saveCurrentFace();
+        currentBodyPart = e.target.value;
+        loadCurrentFace();
+      });
       
       document.getElementById('face-select').addEventListener('change', function(e) {
-  saveCurrentFace();
-  currentFace = e.target.value;
-  // Clear editor history to save memory
-  editorHistoryStack = [];
-  editorHistoryIndex = -1;
-  loadCurrentFace();
-});
+        saveCurrentFace();
+        currentFace = e.target.value;
+        loadCurrentFace();
+      });
       
       document.querySelectorAll('[data-tool]').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -3744,18 +3682,18 @@ document.getElementById('clear-face').addEventListener('click', function() {
 
 
     document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const targetTab = this.dataset.tab;
-    
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    
-    document.querySelectorAll('.tab-content').forEach(content => {
-      content.classList.remove('active');
+      btn.addEventListener('click', function() {
+        const targetTab = this.dataset.tab;
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`${targetTab}-tab`).classList.add('active');
+      });
     });
-    document.getElementById(targetTab + '-tab').classList.add('active');
-  });
-});
 
 
     document.getElementById('undo-btn').addEventListener('click', undo);
@@ -4025,16 +3963,16 @@ document.addEventListener('fullscreenchange', function() {
       avatarState.bottomStyle = ['jeans', 'shorts', 'cargo', 'joggers'][Math.floor(Math.random() * 4)];
       avatarState.footwear = ['sneakers', 'boots', 'converse', 'dress'][Math.floor(Math.random() * 4)];
       
-     document.querySelectorAll('.option-btn, .color-swatch').forEach(btn => btn.classList.remove('selected'));
-document.querySelector('[data-model="' + avatarState.modelType + '"]').classList.add('selected');
-document.querySelector('[data-facestyle="' + avatarState.faceStyle + '"]').classList.add('selected');
-document.querySelector('[data-hairstyle="' + avatarState.hairStyle + '"]').classList.add('selected');
-document.querySelector('[data-bangs="' + avatarState.bangsStyle + '"]').classList.add('selected');
-document.querySelector('[data-hairtexture="' + avatarState.hairTexture + '"]').classList.add('selected');
-document.querySelector('[data-expression="' + avatarState.expression + '"]').classList.add('selected');
-document.querySelector('[data-top="' + avatarState.topStyle + '"]').classList.add('selected');
-document.querySelector('[data-bottom="' + avatarState.bottomStyle + '"]').classList.add('selected');
-document.querySelector('[data-footwear="' + avatarState.footwear + '"]').classList.add('selected');
+      document.querySelectorAll('.option-btn, .color-swatch').forEach(btn => btn.classList.remove('selected'));
+      document.querySelector(`[data-model="${avatarState.modelType}"]`).classList.add('selected');
+      document.querySelector(`[data-facestyle="${avatarState.faceStyle}"]`).classList.add('selected');
+      document.querySelector(`[data-hairstyle="${avatarState.hairStyle}"]`).classList.add('selected');
+      document.querySelector(`[data-bangs="${avatarState.bangsStyle}"]`).classList.add('selected');
+      document.querySelector(`[data-hairtexture="${avatarState.hairTexture}"]`).classList.add('selected');
+      document.querySelector(`[data-expression="${avatarState.expression}"]`).classList.add('selected');
+      document.querySelector(`[data-top="${avatarState.topStyle}"]`).classList.add('selected');
+      document.querySelector(`[data-bottom="${avatarState.bottomStyle}"]`).classList.add('selected');
+      document.querySelector(`[data-footwear="${avatarState.footwear}"]`).classList.add('selected');
       
       if (avatarState.hasBlush) {
         document.getElementById('blush-toggle').classList.add('active');
@@ -4065,8 +4003,8 @@ document.querySelector('[data-footwear="' + avatarState.footwear + '"]').classLi
     }
 
     const zip = new JSZip();
-    const skinName = getSkinName();
-if (!skinName) return; // Don't download if name is invalid
+    const timestamp = new Date().toISOString().slice(0, 10);
+    const skinName = `MyMinecraftSkin_${timestamp}`;
     
     const skinDataUrl = skinCanvas.toDataURL('image/png');
     const skinBase64 = skinDataUrl.split(',')[1];
