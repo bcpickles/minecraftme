@@ -1040,6 +1040,21 @@
         border-bottom: none;
       }
     }
+    
+    /* Skin name input styles */
+    #skin-name-input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    #skin-name-input.valid {
+      border-color: #48bb78;
+    }
+    
+    #skin-name-input.invalid {
+      border-color: #e53e3e;
+    }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -1362,6 +1377,25 @@
     </div>
   </div>
   
+  <div style="margin: 15px 0;">
+    <label for="skin-name-input" style="display: block; font-weight: 600; color: #4a5568; margin-bottom: 8px; font-size: 0.95em;">
+      ✏️ <span id="name-label">Name Your Skin</span>
+    </label>
+    <input 
+      type="text" 
+      id="skin-name-input" 
+      maxlength="25"
+      placeholder="CoolSkin123" 
+      style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1em; font-family: 'Segoe UI', sans-serif; transition: border-color 0.2s;"
+    />
+    <div style="font-size: 0.75em; color: #e53e3e; margin-top: 5px; line-height: 1.4; font-weight: 600;">
+      ⚠️ <span id="name-warning">Safety tip: Don't use your real name! Use a creative nickname instead.</span>
+    </div>
+    <div id="name-error" style="display: none; font-size: 0.75em; color: #e53e3e; margin-top: 5px; font-weight: 600;">
+      ❌ <span id="error-message">Please choose a different name.</span>
+    </div>
+  </div>
+  
   <button class="action-button primary-btn" id="download-btn">
     🎮 <span id="download-text">Download for Minecraft</span>
   </button>
@@ -1656,7 +1690,10 @@
         stickerLibrary: "✨ Sticker Library",
         advancedPixelEditor: "🎨 Advanced Pixel Editor",
         openEditor: "🎨 Open Advanced Editor",
-        editorDescription: "Click the button below to open the full-screen advanced editor with live preview!"
+        editorDescription: "Click the button below to open the full-screen advanced editor with live preview!",
+        nameLabel: "Name Your Skin",
+        nameWarning: "Safety tip: Don't use your real name! Use a creative nickname instead.",
+        errorMessage: "Please choose a different name."
       },
     es: {
         title: "🎮 ¡MINECRAFT YO! 🎮",
@@ -1736,7 +1773,10 @@
         stickerLibrary: "✨ Biblioteca de Calcomanías",
         advancedPixelEditor: "🎨 Editor de Píxeles Avanzado",
         openEditor: "🎨 Abrir Editor Avanzado",
-        editorDescription: "¡Haz clic en el botón de abajo para abrir el editor avanzado de pantalla completa con vista previa en vivo!"
+        editorDescription: "¡Haz clic en el botón de abajo para abrir el editor avanzado de pantalla completa con vista previa en vivo!",
+        nameLabel: "Nombra Tu Skin",
+        nameWarning: "Consejo de seguridad: ¡No uses tu nombre real! Usa un apodo creativo.",
+        errorMessage: "Por favor elige un nombre diferente."
       }
     };
 
@@ -1894,6 +1934,10 @@ document.getElementById('reset-view-btn').addEventListener('click', function() {
       document.querySelector('#editor-tab p').textContent = t.editorDescription;
       document.getElementById('open-editor-btn').textContent = t.openEditor;
       
+      document.getElementById('name-label').textContent = t.nameLabel;
+      document.getElementById('name-warning').textContent = t.nameWarning;
+      document.getElementById('error-message').textContent = t.errorMessage;
+      
       if (ttsEnabled) {
         speak(t.instructions);
       }
@@ -1936,7 +1980,7 @@ document.getElementById('reset-view-btn').addEventListener('click', function() {
     let faceCanvas, faceContext;
     let editorHistoryStack = [];
     let editorHistoryIndex = -1;
-    const MAX_EDITOR_HISTORY = 50;
+    const MAX_EDITOR_HISTORY = 20; // Reduced from 50 to save memory
 
 
 
@@ -2206,6 +2250,61 @@ document.getElementById('reset-view-btn').addEventListener('click', function() {
     let skinTexture, skinCanvas, skinContext;
 
 
+
+
+    // Profanity filter - kid-friendly list
+    const inappropriateWords = [
+      'damn', 'hell', 'crap', 'stupid', 'dumb', 'idiot', 'hate', 'kill', 'die', 'death',
+      'butt', 'poop', 'fart', 'pee', 'sex', 'sexy', 'drug', 'weed', 'beer', 'drunk',
+      // Common attempts to bypass filters
+      'sh1t', 'sh!t', 'fuk', 'fck', 'wtf', 'stfu', 'fml', 'kms'
+    ];
+
+    function containsProfanity(text) {
+      const lowerText = text.toLowerCase();
+      // Remove spaces, numbers, and special characters for bypass detection
+      const cleanText = lowerText.replace(/[^a-z]/g, '');
+      
+      return inappropriateWords.some(word => {
+        const cleanWord = word.replace(/[^a-z]/g, '');
+        return lowerText.includes(word) || cleanText.includes(cleanWord);
+      });
+    }
+
+    function validateSkinName(name) {
+      // Check if empty
+      if (!name || name.trim().length === 0) {
+        return { valid: false, message: 'Please enter a name for your skin!' };
+      }
+      
+      // Check length
+      if (name.trim().length < 3) {
+        return { valid: false, message: 'Name must be at least 3 characters long!' };
+      }
+      
+      // Check for profanity
+      if (containsProfanity(name)) {
+        return { valid: false, message: 'Please choose a different name - keep it friendly!' };
+      }
+      
+      // Check for common real name patterns (basic safety check)
+      const realNamePatterns = [
+        /^(mr|mrs|ms|dr)\.?\s/i,  // Titles
+        /\s(jr|sr|ii|iii|iv)\.?$/i,  // Suffixes
+      ];
+      
+      if (realNamePatterns.some(pattern => pattern.test(name))) {
+        return { valid: false, message: 'Remember: Don\'t use your real name! Use a creative nickname.' };
+      }
+      
+      // Clean the name (alphanumeric, spaces, underscores, hyphens only)
+      const cleanName = name.replace(/[^a-zA-Z0-9\s_-]/g, '');
+      if (cleanName !== name) {
+        return { valid: false, message: 'Name can only contain letters, numbers, spaces, _ and -' };
+      }
+      
+      return { valid: true, cleanName: cleanName.trim() };
+    }
 
 
     function initThreeJS() {
@@ -3389,12 +3488,18 @@ function hexToRgb(hex) {
       document.getElementById('body-part-select').addEventListener('change', function(e) {
         saveCurrentFace();
         currentBodyPart = e.target.value;
+        // Clear editor history to save memory
+        editorHistoryStack = [];
+        editorHistoryIndex = -1;
         loadCurrentFace();
       });
       
       document.getElementById('face-select').addEventListener('change', function(e) {
         saveCurrentFace();
         currentFace = e.target.value;
+        // Clear editor history to save memory
+        editorHistoryStack = [];
+        editorHistoryIndex = -1;
         loadCurrentFace();
       });
       
@@ -4344,6 +4449,30 @@ document.addEventListener('fullscreenchange', function() {
 
    document.getElementById('download-btn').addEventListener('click', async function() {
   try {
+    // Get and validate the skin name
+    const nameInput = document.getElementById('skin-name-input');
+    const userInputName = nameInput.value;
+    const validation = validateSkinName(userInputName);
+    
+    // Show error if validation fails
+    const errorDiv = document.getElementById('name-error');
+    const errorMessage = document.getElementById('error-message');
+    
+    if (!validation.valid) {
+      errorDiv.style.display = 'block';
+      errorMessage.textContent = validation.message;
+      nameInput.style.borderColor = '#e53e3e';
+      nameInput.focus();
+      speak(validation.message);
+      return;
+    }
+    
+    // Hide error and reset border
+    errorDiv.style.display = 'none';
+    nameInput.style.borderColor = '#48bb78';
+    
+    const skinName = validation.cleanName;
+    
     if (!window.JSZip) {
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
@@ -4353,8 +4482,6 @@ document.addEventListener('fullscreenchange', function() {
 
 
     const zip = new JSZip();
-    const timestamp = new Date().toISOString().slice(0, 10);
-    const skinName = `MyMinecraftSkin_${timestamp}`;
     
     const skinDataUrl = skinCanvas.toDataURL('image/png');
     const skinBase64 = skinDataUrl.split(',')[1];
@@ -4483,6 +4610,25 @@ document.addEventListener('fullscreenchange', function() {
       link.href = skinCanvas.toDataURL('image/png');
       link.click();
       speak('Draft saved to your computer');
+    });
+    
+    // Real-time name validation feedback
+    const nameInput = document.getElementById('skin-name-input');
+    const errorDiv = document.getElementById('name-error');
+    
+    nameInput.addEventListener('input', function() {
+      // Hide error as user types
+      errorDiv.style.display = 'none';
+      nameInput.style.borderColor = '#e2e8f0';
+    });
+    
+    nameInput.addEventListener('blur', function() {
+      const validation = validateSkinName(this.value);
+      if (this.value.trim().length > 0 && !validation.valid) {
+        errorDiv.style.display = 'block';
+        document.getElementById('error-message').textContent = validation.message;
+        nameInput.style.borderColor = '#e53e3e';
+      }
     });
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d14ecf461ff5fc',t:'MTc2MjkwMDk5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
