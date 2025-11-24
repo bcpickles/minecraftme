@@ -2403,28 +2403,32 @@ document.getElementById('reset-view-btn').addEventListener('click', function() {
       const armWidth = avatarState.modelType === 'slim' ? 3 : 4;
       const armOffset = avatarState.modelType === 'slim' ? 5.5 : 6;
       
+      // Model's "right arm" is at negative X (viewer's LEFT) - should use LEFT arm texture (32-48)
       const rightArmGeo = new THREE.BoxGeometry(armWidth, 12, 4);
       const rightArm = new THREE.Mesh(rightArmGeo, material);
       rightArm.position.set(-armOffset, 0, 0);
-      setUVs(rightArmGeo, 40, 20, 4, 12, 48, 20, 4, 12, 44, 16, armWidth, 4, 48, 16, armWidth, 4, 44, 20, armWidth, 12, 52, 20, armWidth, 12);
+      setUVs(rightArmGeo, 32, 52, 4, 12, 40, 52, 4, 12, 36, 48, armWidth, 4, 40, 48, armWidth, 4, 36, 52, armWidth, 12, 44, 52, armWidth, 12);
       group.add(rightArm);
       
+      // Model's "left arm" is at positive X (viewer's RIGHT) - should use RIGHT arm texture (40-56)
       const leftArmGeo = new THREE.BoxGeometry(armWidth, 12, 4);
       const leftArm = new THREE.Mesh(leftArmGeo, material);
       leftArm.position.set(armOffset, 0, 0);
-      setUVs(leftArmGeo, 32, 52, 4, 12, 40, 52, 4, 12, 36, 48, armWidth, 4, 40, 48, armWidth, 4, 36, 52, armWidth, 12, 44, 52, armWidth, 12);
+      setUVs(leftArmGeo, 40, 20, 4, 12, 48, 20, 4, 12, 44, 16, armWidth, 4, 48, 16, armWidth, 4, 44, 20, armWidth, 12, 52, 20, armWidth, 12);
       group.add(leftArm);
       
+      // Model's "right leg" is at negative X (viewer's LEFT) - should use LEFT leg texture (16-32)
       const rightLegGeo = new THREE.BoxGeometry(4, 12, 4);
       const rightLeg = new THREE.Mesh(rightLegGeo, material);
       rightLeg.position.set(-2, -12, 0);
-      setUVs(rightLegGeo, 0, 20, 4, 12, 8, 20, 4, 12, 4, 16, 4, 4, 8, 16, 4, 4, 4, 20, 4, 12, 12, 20, 4, 12);
+      setUVs(rightLegGeo, 16, 52, 4, 12, 24, 52, 4, 12, 20, 48, 4, 4, 24, 48, 4, 4, 20, 52, 4, 12, 28, 52, 4, 12);
       group.add(rightLeg);
       
+      // Model's "left leg" is at positive X (viewer's RIGHT) - should use RIGHT leg texture (0-16)
       const leftLegGeo = new THREE.BoxGeometry(4, 12, 4);
       const leftLeg = new THREE.Mesh(leftLegGeo, material);
       leftLeg.position.set(2, -12, 0);
-      setUVs(leftLegGeo, 16, 52, 4, 12, 24, 52, 4, 12, 20, 48, 4, 4, 24, 48, 4, 4, 20, 52, 4, 12, 28, 52, 4, 12);
+      setUVs(leftLegGeo, 0, 20, 4, 12, 8, 20, 4, 12, 4, 16, 4, 4, 8, 16, 4, 4, 4, 20, 4, 12, 12, 20, 4, 12);
       group.add(leftLeg);
       
       skinMesh = group;
@@ -2462,17 +2466,17 @@ document.getElementById('reset-view-btn').addEventListener('click', function() {
     function setHeadUVs(geometry) {
       const uvs = geometry.attributes.uv.array;
       
-      // Right side - normal mapping (texture is pre-flipped)
-      uvs[0] = 0/64; uvs[1] = 1 - 8/64;
-      uvs[2] = 8/64; uvs[3] = 1 - 8/64;
-      uvs[4] = 0/64; uvs[5] = 1 - 16/64;
-      uvs[6] = 8/64; uvs[7] = 1 - 16/64;
+      // Face 0: RIGHT side of model (viewer's right) - uses LEFT texture (X: 16-24)
+      uvs[0] = 16/64; uvs[1] = 1 - 8/64;
+      uvs[2] = 24/64; uvs[3] = 1 - 8/64;
+      uvs[4] = 16/64; uvs[5] = 1 - 16/64;
+      uvs[6] = 24/64; uvs[7] = 1 - 16/64;
       
-      // Left side - normal mapping (texture is pre-flipped)
-      uvs[8] = 16/64; uvs[9] = 1 - 8/64;
-      uvs[10] = 24/64; uvs[11] = 1 - 8/64;
-      uvs[12] = 16/64; uvs[13] = 1 - 16/64;
-      uvs[14] = 24/64; uvs[15] = 1 - 16/64;
+      // Face 1: LEFT side of model (viewer's left) - uses RIGHT texture (X: 0-8)
+      uvs[8] = 0/64; uvs[9] = 1 - 8/64;
+      uvs[10] = 8/64; uvs[11] = 1 - 8/64;
+      uvs[12] = 0/64; uvs[13] = 1 - 16/64;
+      uvs[14] = 8/64; uvs[15] = 1 - 16/64;
       
       // Top
       uvs[16] = 8/64; uvs[17] = 1 - 0/64;
@@ -2821,10 +2825,10 @@ function hexToRgb(hex) {
       
       if (avatarState.bottomStyle === 'joggers') {
         skinContext.fillStyle = bottomPalette.highlight;
-        // Right leg stripe
-        skinContext.fillRect(9, 20, 2, bottomLength);
-        // Left leg stripe
-        skinContext.fillRect(17, 52, 2, bottomLength);
+        // Right leg stripe (texture now at X: 0-16, stripe on outer side)
+        skinContext.fillRect(1, 20, 2, bottomLength);
+        // Left leg stripe (texture now at X: 16-32, stripe on outer side)
+        skinContext.fillRect(25, 52, 2, bottomLength);
       }
       
       const footwearPalette = generateTonalPalette(avatarState.footwearColor);
@@ -2935,31 +2939,32 @@ function hexToRgb(hex) {
       else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
       
       if (avatarState.hairStyle === 'long') {
-        // RIGHT side (x: 0-8) - FLIPPED so Minecraft displays it correctly
-        drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, 8, palette, texturePattern);
-        // LEFT side (x: 16-24) - FLIPPED so Minecraft displays it correctly
-        drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, 8, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
+        drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
       } else {
-        // RIGHT side short hair - FLIPPED so Minecraft displays it correctly
-        drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
+        // RIGHT side (X: 0-8) - X:0 is FRONT, X:7 is BACK
+        drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
         if (bangsRows > 0) {
-          drawBodyPartWithTextureFlipped(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+          // Taper from FRONT (X:0, full width 8) toward BACK (X:7, narrow)
+          drawBodyPartWithTexture(ctx, 0, 8 + bangsRows, 8, 1, palette, texturePattern);      // full 8 pixels at X:0
+          drawBodyPartWithTexture(ctx, 0, 8 + bangsRows + 1, 7, 1, palette, texturePattern);  // 7 pixels
+          drawBodyPartWithTexture(ctx, 0, 8 + bangsRows + 2, 6, 1, palette, texturePattern);  // 6 pixels
+          drawBodyPartWithTexture(ctx, 0, 8 + bangsRows + 3, 5, 1, palette, texturePattern);  // 5 pixels
+          drawBodyPartWithTexture(ctx, 0, 8 + bangsRows + 4, 4, 1, palette, texturePattern);  // 4 pixels
+          drawBodyPartWithTexture(ctx, 0, 8 + bangsRows + 5, 3, 1, palette, texturePattern);  // 3 pixels
         }
         
-        // LEFT side short hair - FLIPPED so Minecraft displays it correctly
-        drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
+        // LEFT side (X: 16-24) - X:16 is BACK, X:23 is FRONT (opposite of right side!)
+        drawBodyPartWithTexture(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
         if (bangsRows > 0) {
-          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
-          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+          // Taper from FRONT (X:23, full width 8) toward BACK (X:16, narrow)
+          // Start at X:16 with width 8 to reach X:23
+          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 8, 1, palette, texturePattern);      // full 8 pixels
+          drawBodyPartWithTexture(ctx, 17, 8 + bangsRows + 1, 7, 1, palette, texturePattern);  // 7 pixels starting at X:17
+          drawBodyPartWithTexture(ctx, 18, 8 + bangsRows + 2, 6, 1, palette, texturePattern);  // 6 pixels starting at X:18
+          drawBodyPartWithTexture(ctx, 19, 8 + bangsRows + 3, 5, 1, palette, texturePattern);  // 5 pixels starting at X:19
+          drawBodyPartWithTexture(ctx, 20, 8 + bangsRows + 4, 4, 1, palette, texturePattern);  // 4 pixels starting at X:20
+          drawBodyPartWithTexture(ctx, 21, 8 + bangsRows + 5, 3, 1, palette, texturePattern);  // 3 pixels starting at X:21
         }
       }
       
