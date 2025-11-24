@@ -2746,61 +2746,79 @@ function hexToRgb(hex) {
       
       const bottomPalette = generateTonalPalette(avatarState.bottomColor);
       
+      // Determine bottom length based on style
+      let bottomLength = 12; // default full length
       if (avatarState.bottomStyle === 'shorts') {
-        drawBodyPart(skinContext, 4, 20, 4, 6, bottomPalette);
-        drawBodyPart(skinContext, 12, 20, 4, 6, bottomPalette);
-        drawBodyPart(skinContext, 0, 20, 4, 6, bottomPalette);
-        drawBodyPart(skinContext, 8, 20, 4, 6, bottomPalette);
-        drawBodyPart(skinContext, 4, 16, 4, 4, bottomPalette);
-        drawBodyPart(skinContext, 4, 26, 4, 6, skinPalette);
-        drawBodyPart(skinContext, 12, 26, 4, 6, skinPalette);
-        drawBodyPart(skinContext, 0, 26, 4, 6, skinPalette);
-        drawBodyPart(skinContext, 8, 26, 4, 6, skinPalette);
-        drawBodyPart(skinContext, 8, 16, 4, 4, skinPalette);
-        
-        drawBodyPart(skinContext, 20, 52, 4, 6, bottomPalette);
-        drawBodyPart(skinContext, 28, 52, 4, 6, bottomPalette);
-        drawBodyPart(skinContext, 16, 52, 4, 6, bottomPalette);
-        drawBodyPart(skinContext, 24, 52, 4, 6, bottomPalette);
-        drawBodyPart(skinContext, 20, 48, 4, 4, bottomPalette);
-        drawBodyPart(skinContext, 20, 58, 4, 6, skinPalette);
-        drawBodyPart(skinContext, 28, 58, 4, 6, skinPalette);
-        drawBodyPart(skinContext, 16, 58, 4, 6, skinPalette);
-        drawBodyPart(skinContext, 24, 58, 4, 6, skinPalette);
-        drawBodyPart(skinContext, 24, 48, 4, 4, skinPalette);
-      } else {
-        drawBodyPart(skinContext, 4, 20, 4, 12, bottomPalette);
-        drawBodyPart(skinContext, 12, 20, 4, 12, bottomPalette);
-        drawBodyPart(skinContext, 0, 20, 4, 12, bottomPalette);
-        drawBodyPart(skinContext, 8, 20, 4, 12, bottomPalette);
-        drawBodyPart(skinContext, 4, 16, 4, 4, bottomPalette);
+        bottomLength = 6; // short shorts
+      }
+      
+      // Draw right leg bottoms
+      drawBodyPart(skinContext, 4, 20, 4, bottomLength, bottomPalette);
+      drawBodyPart(skinContext, 12, 20, 4, bottomLength, bottomPalette);
+      drawBodyPart(skinContext, 0, 20, 4, bottomLength, bottomPalette);
+      drawBodyPart(skinContext, 8, 20, 4, bottomLength, bottomPalette);
+      drawBodyPart(skinContext, 4, 16, 4, 4, bottomPalette);
+      
+      // Draw left leg bottoms
+      drawBodyPart(skinContext, 20, 52, 4, bottomLength, bottomPalette);
+      drawBodyPart(skinContext, 28, 52, 4, bottomLength, bottomPalette);
+      drawBodyPart(skinContext, 16, 52, 4, bottomLength, bottomPalette);
+      drawBodyPart(skinContext, 24, 52, 4, bottomLength, bottomPalette);
+      drawBodyPart(skinContext, 20, 48, 4, 4, bottomPalette);
+      
+      // Add waistband for pants
+      if (avatarState.bottomStyle !== 'shorts') {
         drawBodyPart(skinContext, 8, 16, 4, 4, bottomPalette);
-        
-        drawBodyPart(skinContext, 20, 52, 4, 12, bottomPalette);
-        drawBodyPart(skinContext, 28, 52, 4, 12, bottomPalette);
-        drawBodyPart(skinContext, 16, 52, 4, 12, bottomPalette);
-        drawBodyPart(skinContext, 24, 52, 4, 12, bottomPalette);
-        drawBodyPart(skinContext, 20, 48, 4, 4, bottomPalette);
         drawBodyPart(skinContext, 24, 48, 4, 4, bottomPalette);
+      }
+      
+      // Draw exposed skin below bottoms
+      if (bottomLength < 12) {
+        const skinStart = 20 + bottomLength;
+        const skinLength = 12 - bottomLength;
         
-        if (avatarState.bottomStyle === 'cargo') {
-          skinContext.fillStyle = bottomPalette.shadow;
-          skinContext.fillRect(0, 23, 4, 1);
-          skinContext.fillRect(0, 24, 1, 4);
-          skinContext.fillRect(3, 24, 1, 4);
-          skinContext.fillRect(0, 27, 4, 1);
-          
-          skinContext.fillRect(16, 55, 4, 1);
-          skinContext.fillRect(16, 56, 1, 4);
-          skinContext.fillRect(19, 56, 1, 4);
-          skinContext.fillRect(16, 59, 4, 1);
+        // Right leg skin
+        drawBodyPart(skinContext, 4, skinStart, 4, skinLength, skinPalette);
+        drawBodyPart(skinContext, 12, skinStart, 4, skinLength, skinPalette);
+        drawBodyPart(skinContext, 0, skinStart, 4, skinLength, skinPalette);
+        drawBodyPart(skinContext, 8, skinStart, 4, skinLength, skinPalette);
+        if (avatarState.bottomStyle === 'shorts') {
+          drawBodyPart(skinContext, 8, 16, 4, 4, skinPalette);
         }
         
-        if (avatarState.bottomStyle === 'joggers') {
-          skinContext.fillStyle = bottomPalette.highlight;
-          skinContext.fillRect(9, 20, 2, 12);
-          skinContext.fillRect(17, 52, 2, 12);
+        // Left leg skin
+        const leftSkinStart = 52 + bottomLength;
+        drawBodyPart(skinContext, 20, leftSkinStart, 4, skinLength, skinPalette);
+        drawBodyPart(skinContext, 28, leftSkinStart, 4, skinLength, skinPalette);
+        drawBodyPart(skinContext, 16, leftSkinStart, 4, skinLength, skinPalette);
+        drawBodyPart(skinContext, 24, leftSkinStart, 4, skinLength, skinPalette);
+        if (avatarState.bottomStyle === 'shorts') {
+          drawBodyPart(skinContext, 24, 48, 4, 4, skinPalette);
         }
+      }
+      
+      // Add style-specific details
+      if (avatarState.bottomStyle === 'cargo') {
+        skinContext.fillStyle = bottomPalette.shadow;
+        // Right leg cargo pocket
+        skinContext.fillRect(0, 23, 4, 1);
+        skinContext.fillRect(0, 24, 1, 4);
+        skinContext.fillRect(3, 24, 1, 4);
+        skinContext.fillRect(0, 27, 4, 1);
+        
+        // Left leg cargo pocket
+        skinContext.fillRect(16, 55, 4, 1);
+        skinContext.fillRect(16, 56, 1, 4);
+        skinContext.fillRect(19, 56, 1, 4);
+        skinContext.fillRect(16, 59, 4, 1);
+      }
+      
+      if (avatarState.bottomStyle === 'joggers') {
+        skinContext.fillStyle = bottomPalette.highlight;
+        // Right leg stripe
+        skinContext.fillRect(9, 20, 2, bottomLength);
+        // Left leg stripe
+        skinContext.fillRect(17, 52, 2, bottomLength);
       }
       
       const footwearPalette = generateTonalPalette(avatarState.footwearColor);
@@ -2882,9 +2900,12 @@ function hexToRgb(hex) {
       // Apply texture-based shading pattern
       const texturePattern = getHairTexturePattern(avatarState.hairTexture);
       
+      // Top of head (not flipped)
       drawBodyPartWithTexture(ctx, 8, 0, 8, 8, palette, texturePattern);
+      // Bottom of head (not flipped)
       drawBodyPartWithTexture(ctx, 24, 8, 8, 8, palette, texturePattern);
       
+      // Front face bangs (not flipped)
       if (avatarState.bangsStyle === 'short') {
         drawBodyPartWithTexture(ctx, 8, 8, 8, 2, palette, texturePattern);
       } else if (avatarState.bangsStyle === 'long') {
@@ -2908,31 +2929,36 @@ function hexToRgb(hex) {
       else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
       
       if (avatarState.hairStyle === 'long') {
-        drawBodyPartWithTexture(ctx, 0, 8, 8, 8, palette, texturePattern);
-        drawBodyPartWithTexture(ctx, 16, 8, 8, 8, palette, texturePattern);
+        // RIGHT side (x: 0-8) - FLIPPED for correct Minecraft mapping
+        drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, 8, palette, texturePattern);
+        // LEFT side (x: 16-24) - FLIPPED for correct Minecraft mapping
+        drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, 8, palette, texturePattern);
       } else {
-        drawBodyPartWithTexture(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
+        // RIGHT side short hair - FLIPPED
+        drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
         if (bangsRows > 0) {
-          drawBodyPartWithTexture(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 2, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 3, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 4, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 5, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
         }
         
-        drawBodyPartWithTexture(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
+        // LEFT side short hair - FLIPPED
+        drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
         if (bangsRows > 0) {
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
-          drawBodyPartWithTexture(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 1, 6, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 2, 5, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 3, 4, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 4, 3, 1, palette, texturePattern);
+          drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
         }
       }
       
       if (avatarState.hairStyle === 'long') {
+        // Back hair (not flipped)
         drawBodyPartWithTexture(ctx, 32, 20, 8, 10, palette, texturePattern);
       }
     }
@@ -2986,6 +3012,21 @@ function hexToRgb(hex) {
           const shade = texturePattern(px, py);
           ctx.fillStyle = palette[shade];
           ctx.fillRect(x + px, y + py, 1, 1);
+        }
+      }
+    }
+
+
+
+
+    function drawBodyPartWithTextureFlipped(ctx, x, y, w, h, palette, texturePattern) {
+      // Draw horizontally flipped for correct Minecraft skin mapping
+      for (let py = 0; py < h; py++) {
+        for (let px = 0; px < w; px++) {
+          const shade = texturePattern(px, py);
+          ctx.fillStyle = palette[shade];
+          // Flip horizontally: draw from right to left
+          ctx.fillRect(x + (w - 1 - px), y + py, 1, 1);
         }
       }
     }
