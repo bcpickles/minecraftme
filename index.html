@@ -4605,8 +4605,27 @@ document.addEventListener('fullscreenchange', function() {
     // Save My Draft - Download PNG
     document.getElementById('save-draft-btn').addEventListener('click', function() {
       const link = document.createElement('a');
-      const timestamp = new Date().toISOString().slice(0, 10);
-      link.download = `my-minecraft-skin-draft-${timestamp}.png`;
+      const nameInput = document.getElementById('skin-name-input');
+      const userInputName = nameInput.value.trim();
+      
+      // Use custom name if provided and valid, otherwise use timestamp
+      let fileName;
+      if (userInputName.length > 0) {
+        const validation = validateSkinName(userInputName);
+        if (validation.valid) {
+          fileName = `${validation.cleanName}-draft.png`;
+        } else {
+          // If name is invalid, use a default
+          const timestamp = new Date().toISOString().slice(0, 10);
+          fileName = `my-minecraft-skin-draft-${timestamp}.png`;
+        }
+      } else {
+        // No name provided, use timestamp
+        const timestamp = new Date().toISOString().slice(0, 10);
+        fileName = `my-minecraft-skin-draft-${timestamp}.png`;
+      }
+      
+      link.download = fileName;
       link.href = skinCanvas.toDataURL('image/png');
       link.click();
       speak('Draft saved to your computer');
