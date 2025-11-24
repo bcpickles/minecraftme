@@ -2462,31 +2462,37 @@ document.getElementById('reset-view-btn').addEventListener('click', function() {
     function setHeadUVs(geometry) {
       const uvs = geometry.attributes.uv.array;
       
+      // Right side - normal mapping (texture is pre-flipped)
       uvs[0] = 0/64; uvs[1] = 1 - 8/64;
       uvs[2] = 8/64; uvs[3] = 1 - 8/64;
       uvs[4] = 0/64; uvs[5] = 1 - 16/64;
       uvs[6] = 8/64; uvs[7] = 1 - 16/64;
       
+      // Left side - normal mapping (texture is pre-flipped)
       uvs[8] = 16/64; uvs[9] = 1 - 8/64;
       uvs[10] = 24/64; uvs[11] = 1 - 8/64;
       uvs[12] = 16/64; uvs[13] = 1 - 16/64;
       uvs[14] = 24/64; uvs[15] = 1 - 16/64;
       
+      // Top
       uvs[16] = 8/64; uvs[17] = 1 - 0/64;
       uvs[18] = 16/64; uvs[19] = 1 - 0/64;
       uvs[20] = 8/64; uvs[21] = 1 - 8/64;
       uvs[22] = 16/64; uvs[23] = 1 - 8/64;
       
+      // Bottom
       uvs[24] = 16/64; uvs[25] = 1 - 0/64;
       uvs[26] = 24/64; uvs[27] = 1 - 0/64;
       uvs[28] = 16/64; uvs[29] = 1 - 8/64;
       uvs[30] = 24/64; uvs[31] = 1 - 8/64;
       
+      // Front
       uvs[32] = 8/64; uvs[33] = 1 - 8/64;
       uvs[34] = 16/64; uvs[35] = 1 - 8/64;
       uvs[36] = 8/64; uvs[37] = 1 - 16/64;
       uvs[38] = 16/64; uvs[39] = 1 - 16/64;
       
+      // Back
       uvs[40] = 24/64; uvs[41] = 1 - 8/64;
       uvs[42] = 32/64; uvs[43] = 1 - 8/64;
       uvs[44] = 24/64; uvs[45] = 1 - 16/64;
@@ -2929,12 +2935,12 @@ function hexToRgb(hex) {
       else if (avatarState.bangsStyle === 'asymmetric') bangsRows = 4;
       
       if (avatarState.hairStyle === 'long') {
-        // RIGHT side (x: 0-8) - FLIPPED for correct Minecraft mapping
+        // RIGHT side (x: 0-8) - FLIPPED so Minecraft displays it correctly
         drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, 8, palette, texturePattern);
-        // LEFT side (x: 16-24) - FLIPPED for correct Minecraft mapping
+        // LEFT side (x: 16-24) - FLIPPED so Minecraft displays it correctly
         drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, 8, palette, texturePattern);
       } else {
-        // RIGHT side short hair - FLIPPED
+        // RIGHT side short hair - FLIPPED so Minecraft displays it correctly
         drawBodyPartWithTextureFlipped(ctx, 0, 8, 8, bangsRows, palette, texturePattern);
         if (bangsRows > 0) {
           drawBodyPartWithTextureFlipped(ctx, 1, 8 + bangsRows, 7, 1, palette, texturePattern);
@@ -2945,7 +2951,7 @@ function hexToRgb(hex) {
           drawBodyPartWithTextureFlipped(ctx, 6, 8 + bangsRows + 5, 2, 1, palette, texturePattern);
         }
         
-        // LEFT side short hair - FLIPPED
+        // LEFT side short hair - FLIPPED so Minecraft displays it correctly
         drawBodyPartWithTextureFlipped(ctx, 16, 8, 8, bangsRows, palette, texturePattern);
         if (bangsRows > 0) {
           drawBodyPartWithTextureFlipped(ctx, 16, 8 + bangsRows, 7, 1, palette, texturePattern);
