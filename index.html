@@ -3509,15 +3509,19 @@ function hexToRgb(hex) {
 
 
     function saveCurrentFace() {
-      const face = bodyPartFaces[currentBodyPart][currentFace];
-      const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
-      const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
-      
-      // Extract only the face region from the centered position
-      const imageData = editorContext.getImageData(offsetX, offsetY, face.w, face.h);
-      skinContext.putImageData(imageData, face.x, face.y);
-      skinTexture.needsUpdate = true;
-      updateEditorPreview();
+      try {
+        const face = bodyPartFaces[currentBodyPart][currentFace];
+        const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
+        const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
+        
+        // Extract only the face region from the centered position
+        const imageData = editorContext.getImageData(offsetX, offsetY, face.w, face.h);
+        skinContext.putImageData(imageData, face.x, face.y);
+        skinTexture.needsUpdate = true;
+        updateEditorPreview();
+      } catch (error) {
+        console.error('Error saving face:', error);
+      }
     }
 
 
@@ -3847,60 +3851,83 @@ document.getElementById('clear-face').addEventListener('click', function() {
     function stopDrawing() {
       if (isDrawing) {
         isDrawing = false;
+        // Save the final state when drawing stops
+        saveCurrentFace();
       }
     }
 
 
 
 
+    let lastSaveTime = 0;
+    const SAVE_THROTTLE_MS = 100; // Only save every 100ms during continuous drawing
+    
     function draw(e) {
-      if (!isDrawing && currentTool !== 'eyedropper') return;
+      if (!isDrawing && currentTool !== 'eyedropper' && currentTool !== 'fill') return;
       
-      const face = bodyPartFaces[currentBodyPart][currentFace];
-      const rect = editorCanvas.getBoundingClientRect();
-      
-      const GRID_WIDTH = parseInt(editorCanvas.dataset.gridWidth) || 8;
-      const GRID_HEIGHT = parseInt(editorCanvas.dataset.gridHeight) || 12;
-      const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
-      const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
-      
-      // Calculate position in the grid (0-7 for width, 0-11 for height)
-      const scaleX = GRID_WIDTH / rect.width;
-      const scaleY = GRID_HEIGHT / rect.height;
-      const gridX = Math.floor((e.clientX - rect.left) * scaleX);
-      const gridY = Math.floor((e.clientY - rect.top) * scaleY);
-      
-      // Calculate position relative to the face (accounting for offset)
-      const faceX = gridX - offsetX;
-      const faceY = gridY - offsetY;
-      
-      // Check if we're within the face bounds
-      if (faceX < 0 || faceX >= face.w || faceY < 0 || faceY >= face.h) return;
-      
-      // Actual canvas position (grid coordinates)
-      const canvasX = offsetX + faceX;
-      const canvasY = offsetY + faceY;
-      
-      if (currentTool === 'brush') {
-        editorContext.fillStyle = brushColor;
-        editorContext.fillRect(canvasX, canvasY, 1, 1);
-        saveCurrentFace();
-      } else if (currentTool === 'noise') {
-        // Use varied color for texture/shading effect
-        const variedColor = getNoiseColor(brushColor);
-        editorContext.fillStyle = variedColor;
-        editorContext.fillRect(canvasX, canvasY, 1, 1);
-        saveCurrentFace();
-      } else if (currentTool === 'eraser') {
-        editorContext.clearRect(canvasX, canvasY, 1, 1);
-        saveCurrentFace();
-      } else if (currentTool === 'eyedropper') {
-        const pixel = editorContext.getImageData(canvasX, canvasY, 1, 1).data;
-        brushColor = rgbToHex(pixel[0], pixel[1], pixel[2]);
-        document.getElementById('brush-color').value = brushColor;
-      } else if (currentTool === 'fill') {
-        floodFill(faceX, faceY, brushColor, face);
-        saveCurrentFace();
+      try {
+        const face = bodyPartFaces[currentBodyPart][currentFace];
+        const rect = editorCanvas.getBoundingClientRect();
+        
+        const GRID_WIDTH = parseInt(editorCanvas.dataset.gridWidth) || 8;
+        const GRID_HEIGHT = parseInt(editorCanvas.dataset.gridHeight) || 12;
+        const offsetX = parseInt(editorCanvas.dataset.offsetX) || 0;
+        const offsetY = parseInt(editorCanvas.dataset.offsetY) || 0;
+        
+        // Calculate position in the grid (0-7 for width, 0-11 for height)
+        const scaleX = GRID_WIDTH / rect.width;
+        const scaleY = GRID_HEIGHT / rect.height;
+        const gridX = Math.floor((e.clientX - rect.left) * scaleX);
+        const gridY = Math.floor((e.clientY - rect.top) * scaleY);
+        
+        // Calculate position relative to the face (accounting for offset)
+        const faceX = gridX - offsetX;
+        const faceY = gridY - offsetY;
+        
+        // Check if we're within the face bounds
+        if (faceX < 0 || faceX >= face.w || faceY < 0 || faceY >= face.h) return;
+        
+        // Actual canvas position (grid coordinates)
+        const canvasX = offsetX + faceX;
+        const canvasY = offsetY + faceY;
+        
+        const now = Date.now();
+        const shouldSave = (now - lastSaveTime) > SAVE_THROTTLE_MS;
+        
+        if (currentTool === 'brush') {
+          editorContext.fillStyle = brushColor;
+          editorContext.fillRect(canvasX, canvasY, 1, 1);
+          if (shouldSave) {
+            saveCurrentFace();
+            lastSaveTime = now;
+          }
+        } else if (currentTool === 'noise') {
+          // Use varied color for texture/shading effect
+          const variedColor = getNoiseColor(brushColor);
+          editorContext.fillStyle = variedColor;
+          editorContext.fillRect(canvasX, canvasY, 1, 1);
+          if (shouldSave) {
+            saveCurrentFace();
+            lastSaveTime = now;
+          }
+        } else if (currentTool === 'eraser') {
+          editorContext.clearRect(canvasX, canvasY, 1, 1);
+          if (shouldSave) {
+            saveCurrentFace();
+            lastSaveTime = now;
+          }
+        } else if (currentTool === 'eyedropper') {
+          const pixel = editorContext.getImageData(canvasX, canvasY, 1, 1).data;
+          brushColor = rgbToHex(pixel[0], pixel[1], pixel[2]);
+          document.getElementById('brush-color').value = brushColor;
+        } else if (currentTool === 'fill') {
+          floodFill(faceX, faceY, brushColor, face);
+          saveCurrentFace();
+          lastSaveTime = now;
+        }
+      } catch (error) {
+        console.error('Error in draw function:', error);
+        isDrawing = false; // Stop drawing on error to prevent further issues
       }
     }
 
@@ -3918,20 +3945,35 @@ document.getElementById('clear-face').addEventListener('click', function() {
       const targetColor = getPixelColor(data, startX, startY, face.w);
       const fillRgb = hexToRgb(fillColor);
       
+      // Don't fill if already the target color
       if (colorsMatch(targetColor, fillRgb)) return;
       
+      // Use a visited set to prevent revisiting pixels
+      const visited = new Set();
       const stack = [[startX, startY]];
+      const maxIterations = face.w * face.h * 2; // Safety limit
+      let iterations = 0;
       
-      while (stack.length > 0) {
+      while (stack.length > 0 && iterations < maxIterations) {
+        iterations++;
         const [x, y] = stack.pop();
         
+        // Check bounds
         if (x < 0 || x >= face.w || y < 0 || y >= face.h) continue;
         
+        // Check if already visited
+        const key = `${x},${y}`;
+        if (visited.has(key)) continue;
+        visited.add(key);
+        
+        // Check if this pixel matches the target color
         const currentColor = getPixelColor(data, x, y, face.w);
         if (!colorsMatch(currentColor, targetColor)) continue;
         
+        // Fill this pixel
         setPixelColor(data, x, y, fillRgb, face.w);
         
+        // Add neighbors to stack
         stack.push([x + 1, y]);
         stack.push([x - 1, y]);
         stack.push([x, y + 1]);
@@ -3940,6 +3982,11 @@ document.getElementById('clear-face').addEventListener('click', function() {
       
       // Put the data back at the offset position
       editorContext.putImageData(imageData, offsetX, offsetY);
+      
+      // Warn if we hit the iteration limit (shouldn't happen with visited set)
+      if (iterations >= maxIterations) {
+        console.warn('Flood fill reached iteration limit - possible issue');
+      }
     }
 
 
